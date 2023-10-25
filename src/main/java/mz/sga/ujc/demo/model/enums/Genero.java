@@ -9,22 +9,22 @@ package mz.sga.ujc.demo.model.enums;
  *
  * @author Fenias Cossa
  */
-public enum Gender {
+public enum Genero {
     
    Masculino("Masculino"),
    Femenino("Femenino");
-   private String gender;
+   private String genero;
 
-    private Gender(String gender) {
-        this.gender = gender;
+    private Genero(String genero) {
+        this.genero = genero;
     }
 
-    public String getGender() {
-        return gender;
+    public String getGenenro() {
+        return genero;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
    
 }

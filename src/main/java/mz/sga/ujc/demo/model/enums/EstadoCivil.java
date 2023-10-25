@@ -9,22 +9,22 @@ package mz.sga.ujc.demo.model.enums;
  *
  * @author Fenias Cossa
  */
-public enum MaritalStatus {
+public enum EstadoCivil {
     
     Solteiro("Solteiro"),
     Casado("Casado");
-    private String maritalStatus;
+    private String estadoCivil;
 
-    private MaritalStatus(String maritalStatus) {
-        this.maritalStatus = maritalStatus;
+    private EstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 
-    public String getMaritalStatus() {
-        return maritalStatus;
+    public String getEstadoCivil() {
+        return estadoCivil;
     }
 
-    public void setMaritalStatus(String maritalStatus) {
-        this.maritalStatus = maritalStatus;
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
     
 }

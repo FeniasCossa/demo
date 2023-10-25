@@ -1,10 +1,11 @@
 
 package mz.sga.ujc.demo.model.parametrization;
 
-import javax.persistence.CascadeType;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import mz.sga.ujc.demo.model.AbstractEntity;
+import mz.sga.ujc.demo.model.candidatura.Candidato;
 
 /**
  *
@@ -24,13 +26,18 @@ import mz.sga.ujc.demo.model.AbstractEntity;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "district")
-public class District extends AbstractEntity<Integer>{
+@Table(name="provincia")
+public class Provincia extends AbstractEntity<Integer>{
     
     @Column(name="name")
     private String name;
-    
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Province province;
-    
+
+    @OneToMany(mappedBy = "reside_provincia")
+    private List<Candidato> candidatos;
+
+    @OneToMany(mappedBy = "provincia")
+    private List<Escola> escolas;
+
+    @OneToMany(mappedBy = "provincia")
+    private List<Distrito> distritos;
 }

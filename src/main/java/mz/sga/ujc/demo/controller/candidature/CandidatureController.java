@@ -19,6 +19,6 @@ public class CandidatureController {
 
     @RequestMapping(path = "/register", method = RequestMethod.GET)
     public String getForm1() {
-        return "/candidature/register/register";
+        return "candidature/register/register";
     }
 }
