@@ -22,15 +22,6 @@ import mz.sga.ujc.demo.model.AbstractEntity;
 @Table(name = "perfil")
 public class Perfil extends AbstractEntity<Integer>{
     
-    public Perfil(String nome, String descricao) {
-        this.nome=nome;
-        this.descricao=descricao;
-    }
-
     private String nome;
     private String descricao;
-
-    @OneToMany(mappedBy = "perfil")
-    private List<Conta> contas;
-
 }

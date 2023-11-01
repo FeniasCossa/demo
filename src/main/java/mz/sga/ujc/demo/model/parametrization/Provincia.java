@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,15 +30,9 @@ import mz.sga.ujc.demo.model.candidatura.Candidato;
 @Table(name="provincia")
 public class Provincia extends AbstractEntity<Integer>{
     
-    @Column(name="name")
-    private String name;
-
-    @OneToMany(mappedBy = "reside_provincia")
-    private List<Candidato> candidatos;
+    @Column(name="nome")
+    private String nome;
 
     @OneToMany(mappedBy = "provincia")
     private List<Escola> escolas;
-
-    @OneToMany(mappedBy = "provincia")
-    private List<Distrito> distritos;
 }

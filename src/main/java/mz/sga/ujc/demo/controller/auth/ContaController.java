@@ -34,7 +34,7 @@ public class ContaController {
         }
         contaService.persist(conta);
         attributes.addFlashAttribute("success", "grave o seu condigo para usares para fazer login");
-        return "redirect:/candidatura/register";
+        return "redirect:/candidato/register";
     }
     
 }

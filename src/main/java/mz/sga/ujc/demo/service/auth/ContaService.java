@@ -1,6 +1,7 @@
 package mz.sga.ujc.demo.service.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,12 +16,14 @@ public class ContaService {
 
     @Autowired
     private PerfilService service;  
- 
+
     public void persist(Conta conta){
-        conta.setPerfil(service.findPerfilById(1));
-        conta.setCodigo(conta.generateCodigo());
-        System.out.println("sera que voce chega aqui?");
         if(burcarContaPorNuit(conta.getNuit())==null){
+            conta.setCodigo(Conta.generateCodigo());
+            conta.setPerfil(service.findPerfilById(1));
+            BCryptPasswordEncoder criPasswordEncoder=new BCryptPasswordEncoder();
+            String senhaCriptografada = criPasswordEncoder.encode(conta.getSenha());
+            conta.setSenha(senhaCriptografada);
             repository.save(conta);
         }else{
             repository.save(conta);
