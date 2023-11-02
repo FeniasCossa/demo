@@ -1,6 +1,6 @@
-function atualizouSelect(value){
-        $('.distritos').hide();
-        $('.prov_' + this.value).show();
+function atualizouSelect(seletedValue){
+        $('.id').hide();
+        $('.prov_' + seletedValue).show();
         console.log("Estou aqui");
-        console.log(value);
+        console.log(seletedValue);     
 }

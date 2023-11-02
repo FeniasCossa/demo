@@ -97,7 +97,7 @@
                                                 <label for="validationTooltip04" class="form-label">Selecione
                                                     Provincia</label>
                                                 <select  class="form-select" id="validationTooltip04"
-                                                    id="provincia" onchange="atualizouSelect(this.value)">
+                                                    onchange="atualizouSelect(this.value)">
                                                     <option value="">Choose...</option>
                                                     <option th:each="p : ${provincias}" th:value="${p.id}"
                                                         th:text="${p.nome}">Maputo</option>
@@ -110,7 +110,7 @@
                                                     class="form-select" id="validationTooltip04">
                                                     <option value="">Choose...</option>
                                                     <option th:each="d : ${distritos}" th:value="${d.id}"
-                                                        th:class="|prov_${d.id.provincia_id} distritos|"
+                                                        th:class="|prov_${d.id.provincia_id} id|"
                                                         th:text="${d.nome}">Maputo</option>
                                                 </select>
                                             </div>
@@ -164,7 +164,7 @@
 
         <!-- App js -->
         <script th:src="@{/assets/js/app.js}"></script>
-        <script type="text/javascript" src="/js/index.js"></script>
+        <script type="text/javascript" th:src="@{/js/index.js}"></script>
 
         <script th:inline="javascript">
 
