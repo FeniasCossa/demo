@@ -15,4 +15,8 @@ public class CandidatoService {
     public void saveCandidato(Candidato Candidato){
         repository.save(Candidato);
     }
+
+    public void getCandidato(Integer codigo){
+        repository.getReferenceById(codigo);
+    }
 }

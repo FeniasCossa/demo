@@ -12,7 +12,5 @@ public class PerfilService {
     @Autowired
     private PerfilRepository repository;
 
-    public Perfil findPerfilById(Integer id){
-        return repository.getReferenceById(id);
-    }
+    
 }

@@ -6,10 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
+import org.hibernate.annotations.CreationTimestamp;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,9 +26,9 @@ public class Disciplina_Curso {
     @EmbeddedId
     private Disciplina_CursoPk id;
 
-    @DateTimeFormat(iso = ISO.DATE)
-    @Column(name = "data_criacao", columnDefinition = "DATE")
-    private Date data_criacao;
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private Date createdAt;
     
     private Float peso_disciplina;
 

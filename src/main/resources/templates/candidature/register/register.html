@@ -35,12 +35,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0">PRE-REGISTO</h4>
-
+                                <h4 class="mb-sm-0">PRÉ-REGISTO</h4>
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="/">home</a></li>
-                                        <li class="breadcrumb-item active">pre-registo</li>
+                                        <li class="breadcrumb-item active">pré-registo</li>
                                     </ol>
                                 </div>
 
@@ -53,71 +52,104 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title mb-0">Criacao de conta</h4>
+                                <div class="card-header align-items-center justify-content-between">
+                                    <h4 class="card-title mb-0">Criação de conta </h4>
+                                    <div th:replace="fragments/alert"></div>
                                 </div>
                                 <div class="card-body">
                                     <div class="live-preview">
                                         <form class="row g-3 needs-validation" method="post" action="/candidato/save"
                                             th:object="${candidato}" novalidate>
                                             <div class="text-center pt-3 pb-4 mb-1">
-                                                <h5>Dados de acesso</h5>
+                                                <h5>Informação Pessoal</h5>
                                             </div>
                                             <div class="col-md-4 position-relative">
-                                                <label for="validationTooltip05" class="form-label">Primeiro
-                                                    nome</label>
-                                                <input type="text" class="form-control" id="validationTooltip05"
-                                                    >
+                                                <label for="validationTooltip05" class="form-label">Primeiro nome</label>
+                                                <input th:field="*{nome}" type="text" class="form-control" id="validationTooltip05" required>
                                             </div>
                                             <div class="col-md-4 position-relative">
                                                 <label for="validationTooltip02" class="form-label">Apelido</label>
-                                                <input type="text" class="form-control" id="validationTooltip02"
-                                                   >
+                                                <input th:field="*{apelido}" type="text" class="form-control" id="validationTooltip02" required>
                                             </div>
                                             <div class="col-md-4 position-relative">
-                                                <label for="validationTooltipUsername" class="form-label">Numero de
-                                                    telefone</label>
+                                                <label for="validationTooltipUsername" class="form-label">Data de nascimento</label>
                                                 <div class="input-group has-validation">
                                                     <span class="input-group-text"
-                                                        id="validationTooltipUsernamePrepend">+258</span>
-                                                    <input type="text" class="form-control"
-                                                        id="validationTooltipUsername"
-                                                        aria-describedby="validationTooltipUsernamePrepend" >
+                                                        id="validationTooltipUsernamePrepend"><i
+                                                            class="ri-calendar-2-line"></i></span>
+                                                    <input th:field="*{dataNascimento}" type="date" class="form-control" required>
                                                 </div>
                                             </div>
+                                            
                                             <div class="col-md-3 position-relative">
-                                                <label for="validationTooltip04" class="form-label">Estado civil</label>
-                                                <select class="form-select" id="validationTooltip04" required>
+                                                <label for="validationTooltip04" class="form-label">Genero</label>
+                                                <select th:field="*{genero}" class="form-select" id="validationTooltip04" required>
                                                     <option selected disabled value="">Choose...</option>
-                                                    <option value="Masculino">Masculino</option>
-                                                    <option value="Feminino">Feminino</option>
+                                                    <option th:each="value : ${T(mz.sga.ujc.demo.model.enums.Genero).values()}"
+                                                     th:value="${value}" th:text="${value}">Masculino</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3 position-relative">
-                                                <label for="validationTooltip04" class="form-label">Selecione
-                                                    Provincia</label>
-                                                <select  class="form-select" id="validationTooltip04"
-                                                    onchange="atualizouSelect(this.value)">
+                                                <label for="validationTooltip04" class="form-label">Estado civil</label>
+                                                <select class="form-select" id="validationTooltip04" required th:field="*{estadoCivil}">
                                                     <option value="">Choose...</option>
-                                                    <option th:each="p : ${provincias}" th:value="${p.id}"
+                                                    <option value="Solteiro">Solteiro</option>
+                                                    <option value="Casado">Casado</option>
+                                                </select>
+                                            </div>
+                                            <!-- Atributos da conta-->
+                                            <input type="hidden"  name="codigo" th:value="${conta.codigo}">
+                                            <input type="hidden" name="conta" th:value="${conta}">
+
+                                            <!-- Naturalidade -->
+                                            <div class="col-md-3 position-relative">
+                                                <label for="validationTooltip04" class="form-label">Naturalidade:</label>
+                                                <select th:field="*{natural_provincia}"  class="form-select" id="validationTooltip04">
+                                                        <option th:each="p : ${provincias}" th:value="${p.id}"
+                                                        th:text="${p.nome}">Maputo</option>
+                                                </select>
+                                            </div>
+                                            <!-- Residencia-->
+                                            <div class="col-md-3 position-relative">
+                                                <label for="validationTooltip04" class="form-label">Selecione Provincia</label>
+                                                <select th:field="*{provincia}"  class="form-select" id="validationTooltip04" onchange="atualizouSelect(this.value)">
+                                                        <option th:each="p : ${provincias}" th:value="${p.id}"
                                                         th:text="${p.nome}">Maputo</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3 position-relative">
-                                                <label for="validationTooltip04" class="form-label">Selecione
-                                                    Distrito</label>
-                                                <select th:field="*{residencia}" 
-                                                    class="form-select" id="validationTooltip04">
-                                                    <option value="">Choose...</option>
-                                                    <option th:each="d : ${distritos}" th:value="${d.id}"
+                                                <label for="validationTooltip04" class="form-label">Selecione Distrito</label>
+                                                <select th:field="*{distrito}" class="form-select" id="validationTooltip04">
+                                                    <option th:each="d : ${distritos}" th:value="${d.id.id}"
                                                         th:class="|prov_${d.id.provincia_id} id|"
                                                         th:text="${d.nome}">Maputo</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 position-relative">
-                                                <label for="validationTooltip05" class="form-label">Numero de BI</label>
-                                                <input type="text" class="form-control" id="validationTooltip05"
+                                            <div class="col-md-4 position-relative">
+                                                <label for="nomePai" class="form-label">Nome do Pai</label>
+                                                <input type="text" class="form-control" id="validationTooltip05" th:field="*{nomePai}"
                                                     required>
+                                            </div>
+                                            <div class="col-md-4 position-relative">
+                                                <label for="nomeMae" class="form-label">Nome da Mae</label>
+                                                <input type="text" class="form-control" id="validationTooltip05" th:field="*{nomeMae}" required>
+                                            </div>
+                                            <div class="col-md-4 position-relative">
+                                                <label for="validationTooltipUsername" class="form-label">Numero de telefone: Principal</label>
+                                                <div class="input-group has-validation">
+                                                    <span class="input-group-text"  id="validationTooltipUsernamePrepend">+258</span>
+                                                    <input type="number" name="telefonePrincipal" class="form-control" disabled
+                                                        id="validationTooltipUsername" th:value="${conta.telefone}"
+                                                        aria-describedby="validationTooltipUsernamePrepend" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 position-relative">
+                                                <label for="validationTooltipUsername" class="form-label">Numero de telefone: Alternativo</label>
+                                                <div class="input-group has-validation">
+                                                    <span class="input-group-text"  id="validationTooltipUsernamePrepend">+258</span>
+                                                    <input type="number" class="form-control" th:field="*{telefoneAlternativo}"
+                                                        id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend">
+                                                </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="text-end">
@@ -157,18 +189,12 @@
         <script th:src="@{/assets/js/plugins.js}"></script>
         <!-- form wizard init -->
         <script th:src="@{/assets/js/pages/form-wizard.init.js}"></script>
-
         <script th:src="@{/assets/js/pages/form-validation.init.js}"></script>
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         <!-- App js -->
         <script th:src="@{/assets/js/app.js}"></script>
         <script type="text/javascript" th:src="@{/js/index.js}"></script>
-
-        <script th:inline="javascript">
-
-        </script>
 </body>
 
 </html>

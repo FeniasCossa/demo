@@ -7,8 +7,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,7 +31,13 @@ public class Pagamento {
     private double valor;
     private String estado;
 
-    @DateTimeFormat(iso = ISO.DATE)
-    @Column(name="data_pagamento", columnDefinition="DATE")
+
+
+    @CreationTimestamp
+    @Column(name="data_pagamento")
     private Date data_pagamento;
+
+    
+   
+
 }

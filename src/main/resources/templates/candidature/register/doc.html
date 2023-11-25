@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt pt" data-layout="horizontal" data-layout-style="detached" data-sidebar="light"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <title>PRE-REG | UJC - Universidade Joaquim Chissano</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/img/ujc.png">
+    <!-- Layout config Js -->
+    <script src="/assets/js/layout.js"></script>
+    <!-- Bootstrap Css -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <header th:replace="fragments/general.html :: header"></header>
+        <div class="content">
+            <div class="page-content">
+                <div class="container-lg">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">PRE-REGISTO</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="/">home</a></li>
+                                        <li class="breadcrumb-item active">pre-registo</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <!--Start form -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title mb-0">Criacao de conta</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="live-preview">
+                                        <form class="row g-3 needs-validation" th:action="@{/document/save}"
+                                            method="post" novalidate>
+                                            <div class="text-center pt-3 pb-4 mb-1">
+                                                <h5>Dados de acesso</h5>
+                                            </div>
+                                            <div class="row">
+                                                <div class="text-center">Documentos</div>
+                                                <input type="hidden" name="candidato" th:value="${candidato.codigo}">
+                                                <div class="col-md-4 position-relative">
+                                                    <label for="validationTooltip04" class="form-label">Tipo do documento</label>
+                                                    <select name="tipo" class="form-select" id="validationTooltip04"  required>
+                                                        <option value="">Selecione...</option>
+                                                        <option value="BI">Bilhete de identidade</option>
+                                                        <option value="Passaporte">Passaporte</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4 position-relative">
+                                                    <label for="validationTooltipUsername"
+                                                        class="form-label">Numero</label>
+                                                    <div class="input-group has-validation">
+                                                        <span class="input-group-text"
+                                                            id="validationTooltipUsernamePrepend">Nr</span>
+                                                        <input type="number" class="form-control"
+                                                            id="validationTooltipUsername"
+                                                            aria-describedby="validationTooltipUsernamePrepend"
+                                                            name="numero" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 position-relative">
+                                                    <label for="validationTooltipUsername"
+                                                        class="form-label">Validade</label>
+                                                    <div class="input-group has-validation">
+                                                        <span class="input-group-text"
+                                                            id="validationTooltipUsernamePrepend"><i
+                                                                class=" ri-calendar-2-line"></i></span>
+                                                        <input type="date" class="form-control" name="validade" 
+                                                            required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="text-center pt-4"><i class="mdi mdi-book-open-page-variant-outline"></i> Abilitações literarias - Escola</div>
+                                                <div class="col-md-4 position-relative">
+                                                    <label for="validationTooltip04" class="form-label">Provincia de Frequencia</label>
+                                                    <div class="input-group has-validation">
+                                                        <span class="input-group-text" id="validationTooltipUsernamePrepend">
+                                                            <i class="mdi mdi-map-marker-radius-outline"></i></span>
+                                                        <select name="provincia" class="form-select"
+                                                            id="validationTooltip04" required>
+                                                            <option value="">Selecione...</option>
+                                                            <option th:each="p : ${provincias}" th:value="${p.id}"
+                                                                th:text="${p.nome}">Maputo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 position-relative">
+                                                    <label for="validationTooltipUsername" class="form-label">Nome da Escola</label>
+                                                    <div class="input-group has-validation">
+                                                        <span class="input-group-text" id="validationTooltipUsernamePrepend">
+                                                            <i class="mdi mdi-school-outline"></i></span>
+                                                        <input type="text" class="form-control" id="validationTooltipUsername"
+                                                            aria-describedby="validationTooltipUsernamePrepend"
+                                                            name="nome" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 position-relative">
+                                                    <label for="validationTooltipUsername" class="form-label">Ano de conclusão</label>
+                                                    <div class="input-group has-validation">
+                                                        <span class="input-group-text"
+                                                            id="validationTooltipUsernamePrepend"><i
+                                                                class="mdi mdi-numeric"></i></span>
+                                                        <input type="number" class="form-control" name="anoConclusao"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="text-end">
+                                                    <button class="btn btn-primary" type="submit">Avançar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+                    </div>
+                    <!--End form enter-->
+                </div>
+                <!-- End Page-content -->
+                <footer class="footer" th:replace="fragments/general.html :: footer"></footer>
+            </div>
+            <!-- end main content-->
+        </div>
+        <!-- END layout-wrapper -->
+
+
+
+        <!--start back-to-top-->
+        <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+            <i class="ri-arrow-up-line"></i>
+        </button>
+        <!--end back-to-top-->
+        <!-- JAVASCRIPT --><!--end back-to-top-->
+        <!-- JAVASCRIPT -->
+        <script>
+            function validarSenha() {
+                console.log('mnjekwjejks sjnns')
+                let senha = document.getElementsByName('senha').values;
+                let confirmSenha = document.getElementsByName('confimarSenha').values;
+                if (senha != confirmSenha) {
+                    alert("SENHAS DIFERENTES!\\nFAVOR DIGITAR SENHAS IGUAIS");
+                }
+            }
+        </script>
+        <script th:src="@{/assets/libs/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/assets/libs/simplebar/simplebar.min.js}"></script>
+        <script th:src="@{/assets/libs/node-waves/waves.min.js}"></script>
+        <script th:src="@{/assets/libs/feather-icons/feather.min.js}"></script>
+        <script th:src="@{/assets/js/pages/plugins/lord-icon-2.1.0.js}"></script>
+        <script th:src="@{/assets/js/plugins.js}"></script>
+        <!-- form wizard init -->
+        <script th:src="@{/assets/js/pages/form-wizard.init.js}"></script>
+        <script th:src="@{/assets/js/pages/form-validation.init.js}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- App js -->
+        <script th:src="@{/assets/js/app.js}"></script>
+        <script type="text/javascript" th:src="@{/js/index.js}"></script>
+</body>
+
+</html>

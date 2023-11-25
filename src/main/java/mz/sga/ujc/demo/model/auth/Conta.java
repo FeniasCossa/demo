@@ -5,11 +5,19 @@
  */
 package mz.sga.ujc.demo.model.auth;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,11 +40,11 @@ import mz.sga.ujc.demo.model.AbstractEntity;
 @Table(name = "conta")
 public class Conta extends AbstractEntity<Integer>{
     
+    @Column(unique = true)
+    private Integer codigo;
+
     @Column(name="nuit", unique=true)
     private int nuit;
-
-    @Column(unique = true)
-    private  int codigo;
 
     private String senha;
     
@@ -46,12 +54,17 @@ public class Conta extends AbstractEntity<Integer>{
     @Column(name = "telefone")
     private int telefone;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "perfil_id")
     private Perfil perfil;
 
-    private static int autogenereteCodigo=1000001;
-    public static int generateCodigo() {
-        return ++autogenereteCodigo;
-    }
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
 }
