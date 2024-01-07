@@ -19,7 +19,6 @@ import mz.sga.ujc.demo.repository.candidatura.DocumentoRepository;
 import mz.sga.ujc.demo.repository.parametrization.EscolaRepostitory;
 import mz.sga.ujc.demo.service.paramentrization.ProvinciaService;
 
-
 @Controller
 @RequestMapping("/document")
 public class DocumentoController {
@@ -38,25 +37,27 @@ public class DocumentoController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView formDocumente(@RequestParam("id") Integer id, ModelMap model) {
-        ModelAndView mv= new ModelAndView();
+    public ModelAndView formDocumente(@RequestParam("id") Integer id) {
+        ModelAndView mv = new ModelAndView();
         mv.setViewName("candidature/register/doc");
         mv.addObject("candidato", candidatoRepository.getReferenceById(id));
         mv.addObject("provincias", provinciaService.listaProvincias());
-        System.out.println(candidatoRepository.getReferenceById(id));
         return mv;
     }
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)
-    public ModelAndView saveDocument(@Valid Escola escola, @Valid Documento documento, BindingResult result) {
+    public ModelAndView save(@Valid Escola escola, @Valid Documento documento, BindingResult result, ModelMap model) {
         ModelAndView mv = new ModelAndView();
         if (result.hasErrors()) {
+            mv.addObject("id", documento.getCandidato());
             mv.setViewName("redirect:/document");
-        } else {
-            documentoRepository.save(documento);
-            escolaRepostitory.save(escola);
-            mv.setViewName("redirect:/candidato/getData");
+            return mv;
         }
+        mv.addObject("id", documento.getCandidato());
+        mv.addObject("es", escola.getCandidato());
+        mv.setViewName("redirect:/candidato/getData");
+        documentoRepository.save(documento);
+        escolaRepostitory.save(escola);
         return mv;
     }
 

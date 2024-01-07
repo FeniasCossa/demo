@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mz.sga.ujc.demo.model.auth.Conta;
-import mz.sga.ujc.demo.model.auth.Perfil;
 import mz.sga.ujc.demo.repository.auth.ContaRepository;
 import mz.sga.ujc.demo.repository.auth.PerfilRepository;
 
@@ -14,20 +13,18 @@ import mz.sga.ujc.demo.repository.auth.PerfilRepository;
 public class ContaService {
     
     @Autowired
-    private ContaRepository repository;
+    private ContaRepository contaRepository;
 
     @Autowired
     private PerfilRepository perfilService;  
-
-
 
     public void persist(Conta conta){
         if(getContaByNuit(conta.getNuit())==null){
             conta.setPerfil(perfilService.getReferenceById(1));
             conta.setSenha(criptText(conta.getSenha()));
-            repository.save(conta);
+            contaRepository.save(conta);
         }else{
-            repository.save(conta);
+            contaRepository.save(conta);
         }
     }
 
@@ -39,7 +36,13 @@ public class ContaService {
 
     @Transactional(readOnly = true)
     public Conta getContaByNuit(Integer id){
-        return  repository.getReferenceByNuit(id);
+        return  contaRepository.getReferenceByNuit(id);
+    }
+    public Conta getContaByCodigo(Object codigo){
+        return contaRepository.getReferenceByCodigo((int)codigo);
+    }
+    public Conta getContaById(Object id){
+        return contaRepository.getReferenceById((Integer)id);
     }
 }
     

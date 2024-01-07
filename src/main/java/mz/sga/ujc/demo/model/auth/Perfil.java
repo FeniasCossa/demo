@@ -1,10 +1,6 @@
 package mz.sga.ujc.demo.model.auth;
 
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;

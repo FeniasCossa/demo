@@ -19,4 +19,6 @@ public class CandidatoService {
     public void getCandidato(Integer codigo){
         repository.getReferenceById(codigo);
     }
+
+
 }

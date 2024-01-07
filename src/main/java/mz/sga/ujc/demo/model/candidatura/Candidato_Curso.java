@@ -1,5 +1,6 @@
 package mz.sga.ujc.demo.model.candidatura;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -7,6 +8,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -29,7 +31,7 @@ public class Candidato_Curso {
     @EmbeddedId
     private Candidato_CursoPk id;
     
-    @DateTimeFormat(iso = ISO.DATE)
-    @Column(name = "data_registo", columnDefinition = "DATE")
-    private Date data_registo;
+    @CreationTimestamp
+    @Column(name = "data_registo")
+    private LocalDateTime data_registo;
 }

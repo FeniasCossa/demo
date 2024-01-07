@@ -24,8 +24,8 @@ import mz.sga.ujc.demo.model.candidatura.Candidato;
 @Table(name = "escola")
 public class Escola extends AbstractEntity<Integer>{
     
-     @ManyToOne
-    @JoinColumn(name="candidato_id",unique = true)
+    @ManyToOne
+    @JoinColumn(name="candidato_id")
     private Candidato candidato;
 
     private String nome;

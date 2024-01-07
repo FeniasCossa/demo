@@ -10,11 +10,13 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -44,11 +46,15 @@ public class Conta extends AbstractEntity<Integer>{
     private Integer codigo;
 
     @Column(name="nuit", unique=true)
+    @NotNull(message = "O nuit pode ser nulo")
+    @Min(value = 10000000, message = "O nuit deve ter nove digitos")
     private int nuit;
 
     private String senha;
     
     @Column(unique = true)
+    @Size(min = 11, max = 70)
+    @Email(message = "insira um email valido")
     private String email;
 
     @Column(name = "telefone")

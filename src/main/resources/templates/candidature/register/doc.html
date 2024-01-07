@@ -41,6 +41,9 @@
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="/">home</a></li>
                                         <li class="breadcrumb-item active">pre-registo</li>
+                                        <li class="breadcrumb-item active">dados de acesso</li>
+                                        <li class="breadcrumb-item active">informação pessoal</li>
+                                        <li class="breadcrumb-item active">Documentos</li>
                                     </ol>
                                 </div>
                             </div>
@@ -53,14 +56,14 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title mb-0">Criacao de conta</h4>
+                                    <h4 class="card-title mb-0">Criação de conta</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="live-preview">
                                         <form class="row g-3 needs-validation" th:action="@{/document/save}"
                                             method="post" novalidate>
                                             <div class="text-center pt-3 pb-4 mb-1">
-                                                <h5>Dados de acesso</h5>
+                                                <h5>Documentos e Dados de escola</h5>
                                             </div>
                                             <div class="row">
                                                 <div class="text-center">Documentos</div>
@@ -75,11 +78,11 @@
                                                 </div>
                                                 <div class="col-md-4 position-relative">
                                                     <label for="validationTooltipUsername"
-                                                        class="form-label">Numero</label>
+                                                        class="form-label">Nr de documento</label>
                                                     <div class="input-group has-validation">
                                                         <span class="input-group-text"
-                                                            id="validationTooltipUsernamePrepend">Nr</span>
-                                                        <input type="number" class="form-control"
+                                                            id="validationTooltipUsernamePrepend">123</span>
+                                                        <input type="text" class="form-control"
                                                             id="validationTooltipUsername"
                                                             aria-describedby="validationTooltipUsernamePrepend"
                                                             name="numero" required>
@@ -98,7 +101,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="text-center pt-4"><i class="mdi mdi-book-open-page-variant-outline"></i> Abilitações literarias - Escola</div>
+                                                <div class="text-center pt-4 pb-2"><i class="mdi mdi-book-open-page-variant-outline"></i> Abilitações literarias - Escola</div>
                                                 <div class="col-md-4 position-relative">
                                                     <label for="validationTooltip04" class="form-label">Provincia de Frequencia</label>
                                                     <div class="input-group has-validation">

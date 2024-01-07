@@ -19,8 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mz.sga.ujc.demo.model.candidatura.Candidato;
-import mz.sga.ujc.demo.repository.auth.ContaRepository;
+import mz.sga.ujc.demo.repository.candidatura.CandidatoRepository;
+import mz.sga.ujc.demo.repository.candidatura.DocumentoRepository;
 import mz.sga.ujc.demo.repository.parametrization.DistritoRepository;
+import mz.sga.ujc.demo.service.auth.ContaService;
 import mz.sga.ujc.demo.service.candidatuta.CandidatoService;
 import mz.sga.ujc.demo.service.paramentrization.ProvinciaService;
 
@@ -33,16 +35,17 @@ import mz.sga.ujc.demo.service.paramentrization.ProvinciaService;
 public class CandidatureController {
 
     @Autowired
-    private ContaRepository contaRepository;
-
+    private ContaService contaService;
     @Autowired
     private CandidatoService candidatoService;
-
     @Autowired
     private ProvinciaService provinciaService;
-
     @Autowired
     private DistritoRepository distritoRepository;
+    @Autowired
+    private CandidatoRepository candidatoRepository;
+    @Autowired
+    private DocumentoRepository documentoRepository;
 
     @RequestMapping(path = "/register", method = RequestMethod.GET)
     @ResponseBody
@@ -51,7 +54,7 @@ public class CandidatureController {
         mv.setViewName("candidature/register/register");
         model.addAttribute("provincias", provinciaService.listaProvincias());
         model.addAttribute("distritos", distritoRepository.findAll());
-        model.addAttribute("conta", contaRepository.getReferenceById(id));
+        model.addAttribute("conta", contaService.getContaById(id));
         return mv;
     }
 
@@ -59,19 +62,25 @@ public class CandidatureController {
     public ModelAndView save(@Valid Candidato candidato, BindingResult result, RedirectAttributes attributes) {
         ModelAndView mv = new ModelAndView();
         if (result.hasErrors()) {
-            mv.addObject("conta", contaRepository.getReferenceByCodigo(candidato.getCodigo()));
+            mv.addObject("id", contaService.getContaByCodigo(candidato.getCodigo()));
             mv.setViewName("redirect:/candidato/register");
-        } else {
-            mv.addObject("id", candidato);
-            candidatoService.saveCandidato(candidato);
-            mv.setViewName("redirect:/document");
+            return mv;
         }
+        mv.addObject("id", candidato);
+        candidatoService.saveCandidato(candidato);
+        mv.setViewName("redirect:/document");
         return mv;
+
     }
 
     @RequestMapping(path = "/getData", method = RequestMethod.GET)
-    public String getData(){
-        return "candidature/list/data";
+    @ResponseBody
+    public ModelAndView getData(@RequestParam("id") Integer id) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("candidato", candidatoRepository.getReferenceById(id));
+        // mv.addObject("conta", contaService.getContaById(id));
+        mv.setViewName("candidature/list/data");
+        return mv;
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)

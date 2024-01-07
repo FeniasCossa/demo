@@ -11,13 +11,13 @@ public interface ContaRepository extends JpaRepository<Conta, Integer> {
 
     Conta getReferenceByNuit(Integer nuit);
     
-    @Query("select max(codigo) from Conta")
-    Conta getMaxCodigo();
+    @Query("select c from Conta c where c.nuit = nuit")
+    Boolean ExistsContaByNuit(Integer Nuit);
 
     @Query("select max(codigo) from Conta")
     int getCodigo();
 
-    Conta getContaByTelefone(int telefone);
+    Conta getContaByTelefone(Integer telefone);
 
     Conta getReferenceByCodigo(int codigo);
 }

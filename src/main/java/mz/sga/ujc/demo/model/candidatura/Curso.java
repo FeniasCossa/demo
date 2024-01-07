@@ -17,7 +17,7 @@ import mz.sga.ujc.demo.model.AbstractEntity;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "conta")
+@Table(name = "curso")
 public class Curso extends AbstractEntity<Integer>{
     
     @Column(name = "nome")

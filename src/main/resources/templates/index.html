@@ -1,48 +1,116 @@
 <!DOCTYPE html>
-<html lang="pt-pt">
-<!-- <head th:replace="candidature/fragments/general.html :: headerfiles"></head> -->
+<html lang="en" data-layout="horizontal" data-layout-style="detached" data-sidebar="light"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:fragment="headerfiles">
-    <title>PRE-REGISTRO | SISTEMA DE GESTAO ACADEMICA</title>
-    <meta charset="UTF-8">
+<!-- Mirrored from themesbrand.com/velzon/html/interactive/nft-landing.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jun 2022 11:29:15 GMT -->
+<head>
+
+    <meta charset="utf-8" />
+    <title>PRE-REG | UJC</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
     <link rel="shortcut icon" href="/img/ujc.png">
+
+    <!--Swiper slider css-->
+    <link href="assets/libs/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Layout config Js -->
+    <script src="assets/js/layout.js"></script>
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+
 </head>
 
-<body>
-    <!-- <header th:replace="candidature/fragments/general.html :: header"></header> -->
-    <div th:fragment="header">
-        <nav class="navbar navbar-light bg-light p-4">
-            <a class="navbar-brand" href="#">
-                <img src="img/ujc.png" width="50" height="50" class="d-inline-block align-top" alt="">
-                <span class="navbar-text p-2 text-center">
-                    Pre-Registo
-                </span>
-            </a>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example">
 
+    <!-- Begin page -->
+    <div class="layout-wrapper landing">
+        <nav class="navbar navbar-expand-lg navbar-landing navbar-light fixed-top is-sticky" id="navbar">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/ujc.png" class="card-logo card-logo-dark" alt="logo dark" height="50">
+                    <img src="img/ujc.png" class="card-logo card-logo-light" alt="logo light" height="50">
+                </a>
+                <button class="navbar-toggler py-0 fs-20 text-body" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto mt-2 mt-lg-0" id="navbar-example">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/account/create">Criar Conta</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#faq">Perguntas Frequentes</a>
+                        </li>
+                    </ul>
+                    <div class="">
+                        <a href="/candidato/login" class="btn btn-success">Fazer login <i class="ri-arrow-right-line align-middle ms-1"></i></a>
+                    </div>
+                </div>
+
+            </div>
         </nav>
-    </div>
+            <div class="bg-overlay bg-overlay-pattern"></div>
+        <!-- end navbar -->
+        <!-- start hero section -->
+        <section class="section nft-hero" id="hero">
+            <div class="bg-overlay"></div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-sm-10">
+                        <div class="text-center">
+                            <h1 class="display-6 fw-medium mb-4 lh-base text-white">PRÉ - INSCRIÇÃO PARA ADMISSÃO AOS CURSOS DE GRADUAÇÃO | 2024</h1>
+                            <p class="lead text-white-50 lh-base mb-4 pb-2">Junte-se a nós em uma instituição de ensino de excelência. Vagas limitadas. faça a sua pré-inscrição agora e assegure seu lugar para um futuro brilhante.</p>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md">
-                Por favor, <a href="/account/create">clique aqui </a> se ainda não fez o pré-registro clica aqui
-            </div>
-            <div class="col-md">
-                Se ja fez o pre-registro <a href="/candidato/login">clica aqui</a> para fazer login na sua conta e pode ver
-                a sua candidatura
-            </div>
-            <div class="col-md">
-                <a href="#">clica aqui</a> para ver o edital da faculdade universidade Joaquim chissano.
-            </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+                            <div class="hstack gap-2 justify-content-center">
+                                <a href="/documentos/edital/ujc/Edital.pdf" class="btn btn-primary">Baixar Edital<i class="ri-arrow-down-line align-middle ms-1"></i></a>
+                                <a href="/account/create" class="btn btn-danger">Faça já a sua pré-inscríção<i class="ri-arrow-right-line align-middle ms-1"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <p class="lead text-white-50 lh-base mb-2 pb-1">perdeu a sua senha e não sabe como aceder a conta? clica no botão abaixo</p>
 
+                            <div class="hstack gap-2 justify-content-center">
+                                <a href="/documentos/edital/ujc/Edital.pdf" class="btn btn-primary">Recoperar dados de acesso.<i class="ri-arrow-right-line align-middle ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section><!-- end hero section -->
+
+          
+    </div>
+    <!-- end layout wrapper -->
+
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+    <script src="assets/libs/feather-icons/feather.min.js"></script>
+    <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+    <script src="assets/js/plugins.js"></script>
+
+    <!--Swiper slider js-->
+    <script src="assets/libs/swiper/swiper-bundle.min.js"></script>
+
+    <script src="assets/js/pages/nft-landing.init.js"></script>
 </body>
 
+
+<!-- Mirrored from themesbrand.com/velzon/html/interactive/nft-landing.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jun 2022 11:29:19 GMT -->
 </html>

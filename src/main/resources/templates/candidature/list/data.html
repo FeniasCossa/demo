@@ -1,11 +1,201 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html lang="en" data-layout="horizontal" data-layout-style="detached" data-sidebar="light"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <title>PRE-REG | UJC - Universidade Joaquim Chissano</title>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/img/ujc.png">
+    <!-- Layout config Js -->
+    <script src="/assets/js/layout.js"></script>
+    <!-- Bootstrap Css -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-    <h1>Mother Fuck</h1>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <div class="content">
+            <div class="page-content">
+                <div class="container-lg">
+                    <!--Start form -->
+                    <div class="mt-0 row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header align-items-center d-flex flex-column">
+                                    <span class="logo-sm">
+                                        <img src="/img/ujc.png" alt="" height="80">
+                                    </span>
+                                    <h4 class="card-title mb-0 flex-grow-1 pt-2">Confirmação dos dados</h4>
+                                </div><!-- end card header -->
+
+                                <div class="card-body">
+                                    <p class="text-muted">confirme <code>a informação da sua conta</code>. depois de
+                                        confirmar não poderá alterar.</p>
+                                    <div class="live-preview">
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover align-middle table-nowrap mb-0">
+                                                        <tbody>
+                                                            <div class="col-xl-6" th:each="c : ${candidato}">
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Nome completo :</th>
+                                                                    <td class="text-muted" th:text="|${c.nome} ${c.apelido}|">Fenias Sebastiao Cossa</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Data de nascimento :
+                                                                    </th>
+                                                                    <td class="text-muted" th:text="${c.dataNascimento}">12/13/2000</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Genero:</th>
+                                                                    <td class="text-muted" th:text="${c.genero}">Masculino</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Estado Civil :</th>
+                                                                    <td class="text-muted" th:text="${c.estadoCivil}">Solteiro</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Naturalidade :</th>
+                                                                    <td class="text-muted">Moçambique, Maputo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Residência :</th>
+                                                                    <td class="text-muted">Moçambique, Maputo, Manhica
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Nome do Pai :</th>
+                                                                    <td class="text-muted">Sebastiao Fenias Cossa</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Nome da Mãe :</th>
+                                                                    <td class="text-muted">Arminda da piedade vasco
+                                                                        Nganhane
+                                                                    </td>
+                                                                </tr>
+                                                            </div>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover align-middle table-nowrap mb-0">
+                                                        <tbody>
+                                                            <div class="col-xl-6">
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Tipo de documento :
+                                                                    </th>
+                                                                    <td class="text-muted">Bilhete de Identidade</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Numero do documento :
+                                                                    </th>
+                                                                    <td class="text-muted">1020204830283I</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Contacto principal :
+                                                                    </th>
+                                                                    <td class="text-muted">845435593</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Contacto Alternativo :
+                                                                    </th>
+                                                                    <td class="text-muted">870519311</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Email :</th>
+                                                                    <td class="text-muted">fenisasebastiao636@gmail.com
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Provincia Escola :</th>
+                                                                    <td class="text-muted">Maputo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Nome da Escola :</th>
+                                                                    <td class="text-muted">Escola Secundaria da Manhica
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Ano de conclusao :</th>
+                                                                    <td class="text-muted">2016</td>
+                                                                </tr>
+                                                            </div>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-start gap-3 mt-4">
+                                                <form action="" method="get">
+                                                    <input type="hidden" name="candidato" th:value="es.Candidato">
+                                                
+                                                <button type="button"
+                                                    class="btn btn-link text-decoration-none btn-label previestab"><i
+                                                        class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>
+                                                    Voltar</button>
+                                                </form>
+                                                <a type="button" href="/course/"
+                                                    class="btn btn-success btn-label right ms-auto nexttab nexttab"><i
+                                                        class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Avançar</a>
+                                            </div>
+                                            <!--end col-->
+                                        </div>
+                                        <!--end row-->
+                                    </div>
+
+                                </div><!-- end card-body -->
+                            </div><!-- end card -->
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!--end row-->
+
+
+                    <!--End form enter-->
+                </div>
+                <!-- End Page-content -->
+            </div>
+            <!-- end main content-->
+        </div>
+        <!-- END layout-wrapper -->
+
+
+
+        <!--start back-to-top-->
+        <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+            <i class="ri-arrow-up-line"></i>
+        </button>
+        <!--end back-to-top-->
+        <!-- JAVASCRIPT --><!--end back-to-top-->
+        <!-- JAVASCRIPT -->
+
+        <script th:src="@{/assets/libs/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        <script th:src="@{/assets/libs/simplebar/simplebar.min.js}"></script>
+        <script th:src="@{/assets/libs/node-waves/waves.min.js}"></script>
+        <script th:src="@{/assets/libs/feather-icons/feather.min.js}"></script>
+        <script th:src="@{/assets/js/pages/plugins/lord-icon-2.1.0.js}"></script>
+        <script th:src="@{/assets/js/plugins.js}"></script>
+        <!-- form wizard init -->
+        <script th:src="@{/assets/js/pages/form-wizard.init.js}"></script>
+        <script th:src="@{/assets/js/pages/form-validation.init.js}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- App js -->
+        <script th:src="@{/assets/js/app.js}"></script>
+        <script type="text/javascript" th:src="@{/js/index.js}"></script>
 </body>
+
 </html>

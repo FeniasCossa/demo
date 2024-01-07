@@ -17,8 +17,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import mz.sga.ujc.demo.model.enums.EstadoCivil;
-import mz.sga.ujc.demo.model.enums.Genero;
 
 @Getter
 @Setter
@@ -39,17 +37,17 @@ public class Candidato {
     private String apelido;
 
     @Column(name = "genero")
-    private Genero genero;
+    private String genero;
 
     @Column(name = "natural_provincia")
     private String natural_provincia;
 
     @DateTimeFormat(iso = ISO.DATE)
-    @Column(name = "data_nascimento", columnDefinition = "DATE")
+    @Column(name = "data_nascimento", columnDefinition = "date")
     private Date dataNascimento;
 
     @Column(name = "estado_civil")
-    private EstadoCivil estadoCivil;
+    private String estadoCivil;
 
     @Column(name = "distrito_id")
     private int distrito;
