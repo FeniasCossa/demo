@@ -40,7 +40,7 @@ public class Candidato {
     private String genero;
 
     @Column(name = "natural_provincia")
-    private String natural_provincia;
+    private String naturalProvincia;
 
     @DateTimeFormat(iso = ISO.DATE)
     @Column(name = "data_nascimento", columnDefinition = "date")

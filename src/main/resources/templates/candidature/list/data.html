@@ -48,42 +48,40 @@
                                                 <div class="table-responsive">
                                                     <table class="table table-hover align-middle table-nowrap mb-0">
                                                         <tbody>
-                                                            <div class="col-xl-6" th:each="c : ${candidato}">
+                                                            <div class="col-xl-6">
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Nome completo :</th>
-                                                                    <td class="text-muted" th:text="|${c.nome} ${c.apelido}|">Fenias Sebastiao Cossa</td>
+                                                                    <td class="text-muted" th:text="|${candidato.nome} ${candidato.apelido}|">Fenias Sebastiao Cossa</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Data de nascimento :
                                                                     </th>
-                                                                    <td class="text-muted" th:text="${c.dataNascimento}">12/13/2000</td>
+                                                                    <td class="text-muted" th:text="${#dates.format(candidato.dataNascimento, 'dd/MM/yyyy')}">12/13/2000</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Genero:</th>
-                                                                    <td class="text-muted" th:text="${c.genero}">Masculino</td>
+                                                                    <td class="text-muted" th:text="${candidato.genero}">Masculino</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Estado Civil :</th>
-                                                                    <td class="text-muted" th:text="${c.estadoCivil}">Solteiro</td>
+                                                                    <td class="text-muted" th:text="${candidato.estadoCivil}">Solteiro</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Naturalidade :</th>
-                                                                    <td class="text-muted">Moçambique, Maputo</td>
+                                                                    <td class="text-muted" th:text="|Moçambique, ${candidato.naturalProvincia}|">Moçambique, Maputo</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Residência :</th>
-                                                                    <td class="text-muted">Moçambique, Maputo, Manhica
+                                                                    <td class="text-muted" th:text="|Moçambique, ${provincia.nome}, ${distrito.nome}|">Moçambique, Maputo, Manhica
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Nome do Pai :</th>
-                                                                    <td class="text-muted">Sebastiao Fenias Cossa</td>
+                                                                    <td class="text-muted" th:text="${candidato.nomePai}">Sebastiao Fenias Cossa</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Nome da Mãe :</th>
-                                                                    <td class="text-muted">Arminda da piedade vasco
-                                                                        Nganhane
-                                                                    </td>
+                                                                    <td class="text-muted" th:text="${candidato.nomeMae}">Arminda da piedade vasco Nganhane</td>
                                                                 </tr>
                                                             </div>
                                                         </tbody>
@@ -98,40 +96,40 @@
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Tipo de documento :
                                                                     </th>
-                                                                    <td class="text-muted">Bilhete de Identidade</td>
+                                                                    <td class="text-muted" th:text="${documento.tipo}">Bilhete de Ident i dade</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Numero do documento :
                                                                     </th>
-                                                                    <td class="text-muted">1020204830283I</td>
+                                                                    <td class="text-muted" th:text="${documento.numero}">1020204830283I</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Contacto principal :
                                                                     </th>
-                                                                    <td class="text-muted">845435593</td>
+                                                                    <td class="text-muted" th:text="${conta.telefone}">845435593</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Contacto Alternativo :
                                                                     </th>
-                                                                    <td class="text-muted">870519311</td>
+                                                                    <td class="text-muted" th:text="${candidato.telefoneAlternativo}">870519311</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Email :</th>
-                                                                    <td class="text-muted">fenisasebastiao636@gmail.com
+                                                                    <td class="text-muted" th:text="${conta.email}">fenisasebastiao636@gmail.com
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Provincia Escola :</th>
-                                                                    <td class="text-muted">Maputo</td>
+                                                                    <td class="text-muted" th:text="${escola.provincia.nome}">Maputo</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Nome da Escola :</th>
-                                                                    <td class="text-muted">Escola Secundaria da Manhica
+                                                                    <td class="text-muted" th:text="${escola.nome}">Esco Manhica
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Ano de conclusao :</th>
-                                                                    <td class="text-muted">2016</td>
+                                                                    <td class="text-muted" th:text="${escola.anoConclusao}">2   16</td>
                                                                 </tr>
                                                             </div>
                                                         </tbody>
@@ -139,17 +137,13 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex align-items-start gap-3 mt-4">
-                                                <form action="" method="get">
-                                                    <input type="hidden" name="candidato" th:value="es.Candidato">
-                                                
-                                                <button type="button"
-                                                    class="btn btn-link text-decoration-none btn-label previestab"><i
-                                                        class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i>
-                                                    Voltar</button>
-                                                </form>
-                                                <a type="button" href="/course/"
-                                                    class="btn btn-success btn-label right ms-auto nexttab nexttab"><i
-                                                        class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Avançar</a>
+                                                <button type="button" href="/account/alter/" class="btn btn-light btn-label previestab">
+                                                    <i class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
+                                                    </i>Voltar para dados da conta</button>
+                                                 <a type="button" href="/course/"
+                                                    class="btn btn-success btn-label right ms-auto nexttab nexttab">
+                                                    <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2">
+                                                    </i>Avançar</a>
                                             </div>
                                             <!--end col-->
                                         </div>

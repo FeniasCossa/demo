@@ -18,10 +18,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.model.candidatura.Candidato;
+import mz.sga.ujc.demo.model.candidatura.Documento;
+import mz.sga.ujc.demo.model.parametrization.Distrito;
+import mz.sga.ujc.demo.model.parametrization.Escola;
+import mz.sga.ujc.demo.model.parametrization.Provincia;
+import mz.sga.ujc.demo.model.restricoes.DistritoPK;
+import mz.sga.ujc.demo.repository.auth.ContaRepository;
 import mz.sga.ujc.demo.repository.candidatura.CandidatoRepository;
 import mz.sga.ujc.demo.repository.candidatura.DocumentoRepository;
 import mz.sga.ujc.demo.repository.parametrization.DistritoRepository;
+import mz.sga.ujc.demo.repository.parametrization.EscolaRepostitory;
+import mz.sga.ujc.demo.repository.parametrization.ProvinciaRepository;
 import mz.sga.ujc.demo.service.auth.ContaService;
 import mz.sga.ujc.demo.service.candidatuta.CandidatoService;
 import mz.sga.ujc.demo.service.paramentrization.ProvinciaService;
@@ -46,6 +55,12 @@ public class CandidatureController {
     private CandidatoRepository candidatoRepository;
     @Autowired
     private DocumentoRepository documentoRepository;
+    @Autowired
+    private ProvinciaRepository provinciaRepository;
+    @Autowired
+    private ContaRepository contaRepository;
+    @Autowired
+    private EscolaRepostitory escolaRepostitory;
 
     @RequestMapping(path = "/register", method = RequestMethod.GET)
     @ResponseBody
@@ -74,13 +89,23 @@ public class CandidatureController {
     }
 
     @RequestMapping(path = "/getData", method = RequestMethod.GET)
-    @ResponseBody
-    public ModelAndView getData(@RequestParam("id") Integer id) {
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("candidato", candidatoRepository.getReferenceById(id));
-        // mv.addObject("conta", contaService.getContaById(id));
+    public ModelAndView getData(@RequestParam("candidato") Integer id) {
+        ModelAndView mv= new ModelAndView();
+        Candidato candidato = candidatoRepository.getReferenceById(id);
+        Documento documento=documentoRepository.getDocumentoByCandidato(candidato);
+        Provincia provincia = provinciaRepository.getReferenceById(candidato.getProvincia());
+        Distrito distrito = distritoRepository.getReferenceById(new DistritoPK(candidato.getDistrito(),candidato.getProvincia()));
+        Conta conta = contaRepository.getReferenceByCodigo(id);
+        Escola escola = escolaRepostitory.getReferenceByCandidato(candidato);
+        mv.addObject("candidato", candidato);
+        mv.addObject("documento", documento);
+        mv.addObject("provincia", provincia);
+        mv.addObject("distrito", distrito);
+        mv.addObject("conta", conta);
+        mv.addObject("escola", escola);
         mv.setViewName("candidature/list/data");
         return mv;
+        
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)

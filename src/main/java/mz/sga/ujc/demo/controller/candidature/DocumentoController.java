@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.model.candidatura.Documento;
 import mz.sga.ujc.demo.model.parametrization.Escola;
 import mz.sga.ujc.demo.repository.candidatura.CandidatoRepository;
@@ -46,19 +48,29 @@ public class DocumentoController {
     }
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@Valid Escola escola, @Valid Documento documento, BindingResult result, ModelMap model) {
+    public ModelAndView save(@Valid Escola escola, @Valid Documento documento, BindingResult result, RedirectAttributes attributes, ModelMap model) {
         ModelAndView mv = new ModelAndView();
         if (result.hasErrors()) {
             mv.addObject("id", documento.getCandidato());
             mv.setViewName("redirect:/document");
             return mv;
         }
-        mv.addObject("id", documento.getCandidato());
-        mv.addObject("es", escola.getCandidato());
         mv.setViewName("redirect:/candidato/getData");
         documentoRepository.save(documento);
         escolaRepostitory.save(escola);
+        attributes.addFlashAttribute("candidato",candidatoRepository.getReferenceById(documento.getCandidato().getCodigo()));
+        
+        mv.addObject(getCandidato());
+        mv.addObject("candidato", candidatoRepository.getReferenceById(documento.getCandidato().getCodigo()));
         return mv;
+    }
+
+    public Candidato cand= new Candidato();
+    public void setCandidato(Candidato candidato){
+        this.cand=candidato;
+    }
+    public Candidato getCandidato(){
+        return cand;
     }
 
 }
