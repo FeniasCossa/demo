@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="horizontal" data-layout-style="detached" data-sidebar="light"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <title>HOME | UJC - Universidade Joaquim Chissano</title>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/img/ujc.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="navbar">
+		<div class="logo"><a href="#">ACAD<span>EMY</span></a></div>
+		<ul class="nav">
+			<li><a href="/index">Home</a></li>
+			<li><a href="/alunos-adicionados">Alunos</a></li>
+			<li><a href="#model">Pesquisar</a></li>
+			<li><a href="#"><ion-icon name="person-outline"></ion-icon></li>
+		</ul>
+		<div class="menu-btn" id="menu-btn">
+			<ion-icon onclick="openNav()" name="menu-outline"></ion-icon>
+		</div>
+	</div>
+	<section class="menu" style="background-image: url('./img/bg-index.jpg');">
+		<div class="max-width">
+			<h2 class="title" style="color: #fff">Sistema de gestao de alunos</h2>
+			<div class="menu-content">
+				<a class="card" href="/inserirAlunos" style="color: #fff">
+					<div class="box">
+						<ion-icon name="person-add-outline"></ion-icon>
+						<div class="text">Cadastro de Estudantes</div>
+						<p>Adicione alunos no sistema</p>
+					</div>
+				</a>
+				<a class="card" href="/alunos-adicionados" style="color: #fff">
+					<div class="box">
+						<ion-icon name="people-outline"></ion-icon>
+						<div class="text">Alunos Cadastrados</div>
+						<p>faca uma busca de todos seus alunos</p>
+					</div>
+				</a>
+				<a class="card" href="#" style="color: #fff">
+					<div class="box">
+						<ion-icon name="book-outline"></ion-icon>
+						<div class="text">Cursos</div>
+						<p>Veja os cursos disponiveis</p>
+					</div>
+				</a>
+				<a class="card" href="filtro-alunos" style="color: #fff">
+					<div class="box">
+						<ion-icon name="stats-chart-outline"></ion-icon>
+						<div class="text">Estado dos alunos</div>
+						<p>Veja a situacao dos alunos</p>
+					</div>
+				</a>
+			</div>
+
+		</div>
+	</section>
+
+	<footer th:fragment="rodape">
+		<div class="rodape">
+			<span>Todos os direitos reservados - 2022 &copy; Fenias Cossa</span>
+		</div>
+	</footer>
+<script>
+    /* Open the sidenav */
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "100%";
+		}
+		/* Close/hide the sidenav */
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+		}
+</script>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+</body>
+
+</html>

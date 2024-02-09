@@ -19,5 +19,5 @@ public interface ContaRepository extends JpaRepository<Conta, Integer> {
 
     Conta getContaByTelefone(Integer telefone);
 
-    Conta getReferenceByCodigo(int codigo);
+    Conta getReferenceByCodigo(Integer codigo);
 }

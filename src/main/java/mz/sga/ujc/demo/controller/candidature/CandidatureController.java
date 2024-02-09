@@ -90,11 +90,12 @@ public class CandidatureController {
 
     @RequestMapping(path = "/getData", method = RequestMethod.GET)
     public ModelAndView getData(@RequestParam("candidato") Integer id) {
-        ModelAndView mv= new ModelAndView();
+        ModelAndView mv = new ModelAndView();
         Candidato candidato = candidatoRepository.getReferenceById(id);
-        Documento documento=documentoRepository.getDocumentoByCandidato(candidato);
+        Documento documento = documentoRepository.getDocumentoByCandidato(candidato);
         Provincia provincia = provinciaRepository.getReferenceById(candidato.getProvincia());
-        Distrito distrito = distritoRepository.getReferenceById(new DistritoPK(candidato.getDistrito(),candidato.getProvincia()));
+        Distrito distrito = distritoRepository
+                .getReferenceById(new DistritoPK(candidato.getDistrito(), candidato.getProvincia()));
         Conta conta = contaRepository.getReferenceByCodigo(id);
         Escola escola = escolaRepostitory.getReferenceByCandidato(candidato);
         mv.addObject("candidato", candidato);
@@ -105,12 +106,17 @@ public class CandidatureController {
         mv.addObject("escola", escola);
         mv.setViewName("candidature/list/data");
         return mv;
-        
+
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "candidature/login";
+    public ModelAndView login(BindingResult result) {
+        ModelAndView mv = new ModelAndView();
+        if (result.hasErrors())
+            mv.setViewName("candidature/login");
+        else
+            mv.setViewName("redirect: /home");
+        return mv;
     }
 
 }

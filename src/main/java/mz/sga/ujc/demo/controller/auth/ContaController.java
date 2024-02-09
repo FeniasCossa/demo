@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +25,8 @@ public class ContaController {
     private ContaService contaService;
 
     @RequestMapping(path = "/create", method = RequestMethod.GET)
-    public String createAccount() {
+    public String createAccount(ModelMap model) {
+        model.addAttribute("conta", new Conta());
         return "account/create";
     }
 
@@ -71,6 +71,18 @@ public class ContaController {
         attributes.addFlashAttribute("telefonePrincipal", conta.getTelefone());
         return mv;
     }
+
+    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    public ModelAndView login(Conta conta) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("account/login");
+        mv.addObject("conta", new Conta());
+        return mv;
+    }
+
+
+
+
     public void autoGenerateCodigo (Conta conta) {
         conta.setCodigo(getRandomInt(1000000, 1999999));
     }

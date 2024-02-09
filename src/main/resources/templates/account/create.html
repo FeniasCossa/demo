@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="live-preview">
-                                        <form class="row g-3 needs-validation" th:object="${conta}" th:action="${conta==null} ? @{/account/save} : @{/account/update}"
+                                        <form class="row g-3 needs-validation" th:object="${conta}" th:action="@{/account/save}"
                                              method="post" novalidate>
                                             <div class="text-center pt-3 pb-4 mb-1">
                                                 <h5>Dados de acesso</h5>
@@ -65,7 +65,7 @@
                                             <div class="col-md-6 position-relative">
                                                 <label for="validationTooltip01" class="form-label">Nuit</label>
                                                 <input type="number" class="form-control" id="validationTooltip01"
-                                                    th:field="*{nuit}" required>
+                                                    name="nuit" required>
                                             </div>
                                             <div class="col-md-6 position-relative">
                                                 <label for="validationTooltipUsername" class="form-label">Numero do
@@ -76,7 +76,7 @@
                                                     <input type="number" class="form-control"
                                                         id="validationTooltipUsername"
                                                         aria-describedby="validationTooltipUsernamePrepend"
-                                                        th:field="*{telefone}" required>
+                                                        name="telefone" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 position-relative">
@@ -85,7 +85,7 @@
                                                     <span class="input-group-text"
                                                         id="validationTooltipUsernamePrepend"><i
                                                             class="ri-mail-unread-line"></i></span>
-                                                    <input type="email" class="form-control" th:field="*{email}" required>
+                                                    <input type="email" class="form-control" name="email" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 position-relative">
@@ -96,7 +96,7 @@
                                                             class="ri-phone-lock-line"></i></span>
                                                     <input type="password" class="form-control"
                                                         id="validationTooltipUsername"
-                                                        aria-describedby="validationTooltipUsernamePrepend" th:field="*{senha}"
+                                                        aria-describedby="validationTooltipUsernamePrepend" name="senha"
                                                         required>
                                                 </div>
                                             </div>
