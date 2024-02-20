@@ -12,7 +12,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import mz.sga.ujc.demo.model.restricoes.Disciplina_CursoPk;
+import mz.sga.ujc.demo.model.restricoes.DisciplinaCursoPk;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @Setter
@@ -21,15 +22,20 @@ import mz.sga.ujc.demo.model.restricoes.Disciplina_CursoPk;
 @ToString
 @Entity
 @Table(name = "disciplina_curso")
-public class Disciplina_Curso {
+public class DisciplinaCurso {
     
     @EmbeddedId
-    private Disciplina_CursoPk id;
+    private DisciplinaCursoPk id;
+
+    @Column(name = "peso_disciplina",nullable = false)
+    private Float pesoDisciplina;
 
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "created_at", columnDefinition = "datetime", nullable = false,insertable = true, updatable = false)
     private Date createdAt;
-    
-    private Float peso_disciplina;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at", columnDefinition = "datetime")
+    private Date updatedAt;
 
 }

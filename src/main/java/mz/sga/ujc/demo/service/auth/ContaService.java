@@ -35,14 +35,14 @@ public class ContaService {
     }
 
     @Transactional(readOnly = true)
-    public Conta getContaByNuit(Integer id){
+    public Conta getContaByNuit(String id){
         return  contaRepository.getReferenceByNuit(id);
     }
     public Conta getContaByCodigo(Object codigo){
         return contaRepository.getReferenceByCodigo((int)codigo);
     }
-    public Conta getContaById(Object id){
-        return contaRepository.getReferenceById((Integer)id);
+    public Conta getContaById(String id){
+        return contaRepository.getReferenceById(id);
     }
 }
     

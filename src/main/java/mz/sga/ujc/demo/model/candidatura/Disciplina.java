@@ -2,6 +2,7 @@ package mz.sga.ujc.demo.model.candidatura;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +23,8 @@ public class Disciplina extends AbstractEntity<Integer>{
     
     private String nome;
 
+    @ManyToOne
     @JoinColumn(name = "taxa_id")
     private Taxa taxa;
+
 }

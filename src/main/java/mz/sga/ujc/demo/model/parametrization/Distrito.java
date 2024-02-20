@@ -29,10 +29,6 @@ public class Distrito{
     @EmbeddedId
     private DistritoPK id;
 
-    public Distrito(DistritoPK id){
-        this.id=id;
-    }
-
     @Column(name="nome")
     private String nome;    
 }

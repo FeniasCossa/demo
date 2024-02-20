@@ -109,11 +109,6 @@
                                                                     <td class="text-muted" th:text="${conta.telefone}">845435593</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Contacto Alternativo :
-                                                                    </th>
-                                                                    <td class="text-muted" th:text="${candidato.telefoneAlternativo}">870519311</td>
-                                                                </tr>
-                                                                <tr>
                                                                     <th class="ps-0" scope="row">Email :</th>
                                                                     <td class="text-muted" th:text="${conta.email}">fenisasebastiao636@gmail.com
                                                                     </td>
@@ -129,7 +124,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Ano de conclusao :</th>
-                                                                    <td class="text-muted" th:text="${escola.anoConclusao}">2   16</td>
+                                                                    <td class="text-muted" th:text="${escola.anoConclusao}">2016</td>
                                                                 </tr>
                                                             </div>
                                                         </tbody>
@@ -140,7 +135,7 @@
                                                 <button type="button" href="/account/alter/" class="btn btn-light btn-label previestab">
                                                     <i class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
                                                     </i>Voltar para dados da conta</button>
-                                                 <a type="button" href="/course/"
+                                                 <a type="button" th:href="|@{/course/regist}?id=${conta.getCodigo()}|"
                                                     class="btn btn-success btn-label right ms-auto nexttab nexttab">
                                                     <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2">
                                                     </i>Avançar</a>

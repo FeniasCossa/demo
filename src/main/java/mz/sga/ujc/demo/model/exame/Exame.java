@@ -2,10 +2,7 @@ package mz.sga.ujc.demo.model.exame;
 
 import java.time.LocalTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -26,7 +23,8 @@ import mz.sga.ujc.demo.model.candidatura.Disciplina;
 @Entity
 @Table(name = "exame")
 public class Exame extends AbstractEntity<Integer>{
-    
+
+    @ManyToOne
     @JoinColumn(name = "disciplina_id")
     private Disciplina disciplina;
 

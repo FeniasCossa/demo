@@ -39,7 +39,7 @@
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="/candidato/register?id=10000030">pre-registo</a></li>
+                                        <li class="breadcrumb-item">pre-registo</li>
                                         <li class="breadcrumb-item active">curso e local de realização</li>
                                     </ol>
                                 </div>
@@ -57,25 +57,24 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="live-preview">
-                                        <form class="row g-3 needs-validation" th:action="@{/course/save}"
+                                        <form class="row g-3 needs-validation" th:action="@{/course/save}" th:object="${candidatoCurso}"
                                             method="post" novalidate>
                                             <div class="text-center pt-3 pb-4 mb-1">
                                                 <h5>Escolha do curso e local da realização do exame</h5>
                                             </div>
+                                            <input type="hidden" th:value="${codigo}"  name="id.candidato">
                                             <div class="row">
                                                 <div class="text-center">Cursos</div>
                                                 <div class="col-md-4 position-relative">
                                                     <label for="validationTooltip04" class="form-label">Escolha o curso</label>
-                                                    <select name="tipo" class="form-select" id="validationTooltip04"  required>
+                                                    <select th:field="*{id.curso}" class="form-select" id="validationTooltip04"  required>
                                                         <option value="">Selecione...</option>
-                                                        <option value="Engenharia de Tecnologia e sistemas de informacao">Engenharia de Tecnologia e sistemas de informacao</option>
-                                                        <option value="Administração publica">Administração publica</option>
-                                                        <option value="Relaçoes Internacionais e diplomacia">Relaçoes Internacionais e diplomacia</option>
+                                                        <option th:each="c : ${cursos}" th:value="${c.id}"th:text="${c.nome}"></option>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4 position-relative">
                                                     <label for="validationTooltip04" class="form-label">Escolha do Turno</label>
-                                                    <select name="tipo" class="form-select" id="validationTooltip04"  required>
+                                                    <select th:field="*{perido}" class="form-select" id="validationTooltip04"  required>
                                                         <option value="">Selecione...</option>
                                                         <option value="Laboral">Laboral</option>
                                                         <option value="Pos-laboral">Pos-laboral</option>
@@ -86,7 +85,7 @@
                                                     <div class="input-group has-validation">
                                                         <span class="input-group-text" id="validationTooltipUsernamePrepend">
                                                             <i class="mdi mdi-map-marker-radius-outline"></i></span>
-                                                        <select name="provincia" class="form-select"
+                                                        <select th:field="*{id.provincia}" name="provincia" class="form-select"
                                                             id="validationTooltip04" required>
                                                             <option value="">Selecione...</option>
                                                             <option th:each="p : ${provincias}" th:value="${p.id}"
@@ -124,24 +123,22 @@
                                             <table class="table table-nowrap mb-0">
                                                 <thead class="table-light">
                                                     <tr>
-                                                        <th scope="col">Universidade</th>
                                                         <th scope="col">Curso</th>
                                                         <th scope="col">Disciplinas</th>
-                                                        <th scope="col">Local de realizacao</th>
+                                                        <th scope="col">Valor</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td  class="fw-medium">Universidade Joaquim Chissano</td>
-                                                        <td>Engenharia de tecnologia e sistemas de informacao</td>
+                                                        <td class="fw-medium">Engenharia de tecnologia e sistemas de informacao</td>
                                                         <td>Matematica <br> Portugues</td>
-                                                        <td>Cidade de Maputo</td>
+                                                        <td>700.00MT</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-                                    
+
                                 </div><!-- end card-body -->
                             </div><!-- end card -->
                         </div><!-- end col -->

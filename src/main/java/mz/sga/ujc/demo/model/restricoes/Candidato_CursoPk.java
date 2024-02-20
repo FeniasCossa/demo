@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import lombok.Setter;
 import lombok.ToString;
 import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.model.candidatura.Curso;
+import mz.sga.ujc.demo.model.parametrization.Provincia;
 
 @Getter
 @Setter
@@ -31,4 +33,8 @@ public class Candidato_CursoPk implements Serializable{
     @ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;
+
+    @OneToOne
+    @JoinColumn(name = "provincia_id")
+    private Provincia provincia;
 }

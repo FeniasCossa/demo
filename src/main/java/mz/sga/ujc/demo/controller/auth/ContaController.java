@@ -34,7 +34,6 @@ public class ContaController {
     public ModelAndView save(@Valid Conta conta, BindingResult result, RedirectAttributes attributes, ModelMap model) {
         ModelAndView mv=new ModelAndView();
         if (result.hasErrors()) {
-            attributes.addFlashAttribute("fail", "Por favor preencha os dados coretamente");
             mv.setViewName("account/create");
             return mv;
         }     
@@ -48,10 +47,10 @@ public class ContaController {
     }
 
     @GetMapping("/alter")
-	public ModelAndView alterar(@RequestParam("conta") Conta conta, Model model) {
+	public ModelAndView alterar(@RequestParam("conta") Integer id, Model model) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("account/edit");
-		Conta conta1 = contaService.getContaByCodigo(conta.getId());
+		Conta conta1 = contaService.getContaByCodigo(id);
         model.addAttribute("conta", conta1);
 		//mv.addObject("conta", new Conta());
 		return mv;

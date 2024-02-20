@@ -4,12 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import mz.sga.ujc.demo.model.parametrization.Provincia;
 
 
 @Getter
@@ -24,7 +27,8 @@ public class DistritoPK implements Serializable{
     
     @Column(name="id")
     private Integer id;
-    
-    @Column(name = "provincia_id")
-    private Integer provincia_id;
+
+    @ManyToOne
+    @JoinColumn(name = "provincia_id")
+    private Provincia provincia;
 }

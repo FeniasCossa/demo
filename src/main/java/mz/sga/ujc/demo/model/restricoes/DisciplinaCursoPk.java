@@ -20,10 +20,9 @@ import mz.sga.ujc.demo.model.candidatura.Disciplina;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-
 // @Embeddable serve para indicar que essa tabela possui uma chave composta.
 @Embeddable
-public class Disciplina_CursoPk implements Serializable{
+public class DisciplinaCursoPk implements Serializable{
     
     @ManyToOne
     @JoinColumn(name="disciplina_id")
@@ -32,4 +31,5 @@ public class Disciplina_CursoPk implements Serializable{
     @ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;
+
 }

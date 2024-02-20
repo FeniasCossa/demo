@@ -1,12 +1,14 @@
 package mz.sga.ujc.demo.model.candidatura;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import mz.sga.ujc.demo.model.auth.Conta;
+import mz.sga.ujc.demo.model.parametrization.Distrito;
+import mz.sga.ujc.demo.model.parametrization.Provincia;
+import mz.sga.ujc.demo.model.restricoes.CandidatoPk;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,10 +27,10 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "candidato")
-public class Candidato {
+public class Candidato{
 
     @Id
-    private int codigo;
+    private Integer codigo;
 
     @Column(name = "primeiro_nome")
     private String nome;
@@ -49,17 +51,12 @@ public class Candidato {
     @Column(name = "estado_civil")
     private String estadoCivil;
 
-    @Column(name = "distrito_id")
-    private int distrito;
-
-    @Column(name = "provincia_id")
-    private int provincia;
-
-    @Column(name = "telefone_principal")
-    private int telefonePrincipal;
-
-    @Column(name = "telefone_alternativo")
-    private int telefoneAlternativo;
+    @ManyToOne
+    @JoinColumns(
+            {@JoinColumn(name = "distrito_id", referencedColumnName = "id"),
+            @JoinColumn(name="provincia_id", referencedColumnName = "provincia_id")}
+    )
+    private Distrito distrito;
 
     @Column(name = "nome_pai")
     private String nomePai;
@@ -72,7 +69,10 @@ public class Candidato {
     private Date createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "updated_at",columnDefinition = "datetime")
     private Date updatedAt;
 
+    @OneToOne
+    @JoinColumn(name = "conta_id")
+    private Conta conta;
 }

@@ -31,10 +31,8 @@ public class Pagamento {
     private double valor;
     private String estado;
 
-
-
     @CreationTimestamp
-    @Column(name="data_pagamento")
+    @Column(name="data_pagamento", columnDefinition = "datetime")
     private Date data_pagamento;
 
     

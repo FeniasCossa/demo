@@ -2,16 +2,14 @@ package mz.sga.ujc.demo.model.restricoes;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.model.auth.Perfil;
 
 @Getter
@@ -24,7 +22,11 @@ import mz.sga.ujc.demo.model.auth.Perfil;
 @Embeddable
 public class CandidatoPk implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "perfil_id")
-    private Perfil perfil;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+
+    @OneToOne
+    @JoinColumn(name = "codigo")
+    private Conta conta;
 }
+

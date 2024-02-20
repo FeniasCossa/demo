@@ -25,17 +25,20 @@ import mz.sga.ujc.demo.service.paramentrization.ProvinciaService;
 @RequestMapping("/document")
 public class DocumentoController {
 
-    @Autowired
-    private CandidatoRepository candidatoRepository;
+    private final CandidatoRepository candidatoRepository;
 
-    @Autowired
-    private ProvinciaService provinciaService;
+    private final ProvinciaService provinciaService;
 
-    @Autowired
-    private DocumentoRepository documentoRepository;
+    private final DocumentoRepository documentoRepository;
 
-    @Autowired
-    private EscolaRepostitory escolaRepostitory;
+    private final EscolaRepostitory escolaRepostitory;
+
+    public DocumentoController(CandidatoRepository candidatoRepository, ProvinciaService provinciaService, DocumentoRepository documentoRepository, EscolaRepostitory escolaRepostitory) {
+        this.candidatoRepository = candidatoRepository;
+        this.provinciaService = provinciaService;
+        this.documentoRepository = documentoRepository;
+        this.escolaRepostitory = escolaRepostitory;
+    }
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     @ResponseBody

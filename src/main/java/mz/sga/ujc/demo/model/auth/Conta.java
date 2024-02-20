@@ -7,12 +7,7 @@ package mz.sga.ujc.demo.model.auth;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -40,15 +35,15 @@ import mz.sga.ujc.demo.model.AbstractEntity;
 @ToString
 @Entity
 @Table(name = "conta")
-public class Conta extends AbstractEntity<Integer>{
-    
-    @Column(unique = true)
-    private Integer codigo;
+public class Conta{
 
-    @Column(name="nuit", unique=true)
+
     @NotNull(message = "O nuit pode ser nulo")
-    @Min(value = 10000000, message = "O nuit deve ter nove digitos")
-    private int nuit;
+    @Size(max = 9, min = 9,message = "O campo nuit so deve ter {max} digitos")
+    @Id
+    private String nuit;
+
+    private Integer codigo;
 
     private String senha;
     
@@ -58,7 +53,8 @@ public class Conta extends AbstractEntity<Integer>{
     private String email;
 
     @Column(name = "telefone")
-    private int telefone;
+    @Size(max = 9, min = 9,message = "O campo telefone só deve ter {max} digitos")
+    private String telefone;
 
 
     @ManyToOne(fetch = FetchType.EAGER)

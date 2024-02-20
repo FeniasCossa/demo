@@ -23,11 +23,14 @@ import mz.sga.ujc.demo.model.restricoes.Candidato_CursoPk;
 @ToString
 @Entity
 @Table(name = "candidato_curso")
-public class Candidato_Curso {
+public class CandidatoCurso {
     
     @EmbeddedId
     private Candidato_CursoPk id;
-    
+
+    @Column(nullable = false)
+    private String periodo;
+
     @CreationTimestamp
     @Column(name = "data_registo")
     private LocalDateTime data_registo;

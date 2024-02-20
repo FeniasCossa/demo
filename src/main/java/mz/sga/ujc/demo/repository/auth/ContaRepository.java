@@ -7,12 +7,9 @@ import org.springframework.stereotype.Repository;
 import mz.sga.ujc.demo.model.auth.Conta;
 
 @Repository
-public interface ContaRepository extends JpaRepository<Conta, Integer> {
+public interface ContaRepository extends JpaRepository<Conta, String> {
 
-    Conta getReferenceByNuit(Integer nuit);
-    
-    @Query("select c from Conta c where c.nuit = nuit")
-    Boolean ExistsContaByNuit(Integer Nuit);
+    Conta getReferenceByNuit(String nuit);
 
     @Query("select max(codigo) from Conta")
     int getCodigo();
