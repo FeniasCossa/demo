@@ -2,10 +2,8 @@ package mz.sga.ujc.demo.model.candidatura;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import org.hibernate.annotations.CreationTimestamp;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,5 +35,8 @@ public class DisciplinaCurso {
     @UpdateTimestamp
     @Column(name = "updated_at", columnDefinition = "datetime")
     private Date updatedAt;
+
+    @Transient
+    private double calc_column;
 
 }

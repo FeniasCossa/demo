@@ -73,6 +73,6 @@ public class Candidato{
     private Date updatedAt;
 
     @OneToOne
-    @JoinColumn(name = "conta_id")
+    @JoinColumn(name = "conta_id", insertable = true)
     private Conta conta;
 }

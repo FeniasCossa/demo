@@ -53,6 +53,7 @@ public class CandidatureController {
     private final ContaRepository contaRepository;
     private final EscolaRepostitory escolaRepostitory;
 
+    @Autowired
     public CandidatureController(ContaService contaService, CandidatoService candidatoService, ProvinciaService provinciaService, DistritoRepository distritoRepository, CandidatoRepository candidatoRepository, DocumentoRepository documentoRepository, ProvinciaRepository provinciaRepository, ContaRepository contaRepository, EscolaRepostitory escolaRepostitory) {
         this.contaService = contaService;
         this.candidatoService = candidatoService;

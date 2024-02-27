@@ -36,7 +36,6 @@
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0">Escolha do curso</h4>
-
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item">pre-registo</li>
@@ -57,24 +56,24 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="live-preview">
-                                        <form class="row g-3 needs-validation" th:action="@{/course/save}" th:object="${candidatoCurso}"
+                                        <form class="row gwh-3 needs-validation" th:action="@{/course/save}" th:object="${candidatoCurso}"
                                             method="post" novalidate>
                                             <div class="text-center pt-3 pb-4 mb-1">
                                                 <h5>Escolha do curso e local da realização do exame</h5>
                                             </div>
                                             <input type="hidden" th:value="${codigo}"  name="id.candidato">
                                             <div class="row">
-                                                <div class="text-center">Cursos</div>
-                                                <div class="col-md-4 position-relative">
+                                                <div class="col-md-5 position-relative">
                                                     <label for="validationTooltip04" class="form-label">Escolha o curso</label>
-                                                    <select th:field="*{id.curso}" class="form-select" id="validationTooltip04"  required>
+                                                    <select th:field="*{id.curso}" class="form-select" id="validationTooltip04"  required
+                                                            th:onchange="atualizouSelectCurso(this.value)">
                                                         <option value="">Selecione...</option>
-                                                        <option th:each="c : ${cursos}" th:value="${c.id}"th:text="${c.nome}"></option>
+                                                        <option th:each="c : ${cursos}" th:value="${c.id}" th:text="${c.nome}"></option>
                                                     </select>
                                                 </div>
-                                                <div class="col-md-4 position-relative">
+                                                <div class="col-md-3 position-relative">
                                                     <label for="validationTooltip04" class="form-label">Escolha do Turno</label>
-                                                    <select th:field="*{perido}" class="form-select" id="validationTooltip04"  required>
+                                                    <select th:field="*{periodo}" class="form-select" id="validationTooltip04"  th:onchange="testes()"  required>
                                                         <option value="">Selecione...</option>
                                                         <option value="Laboral">Laboral</option>
                                                         <option value="Pos-laboral">Pos-laboral</option>
@@ -94,14 +93,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
-                                                <div class="text-end">
+                                            <div class="col-lg-12 pt-2">
+                                                <div class="text-end position-relative" style="right: 3%">
                                                     <button class="btn btn-primary" type="submit">Salvar</button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-
                                 </div>
                             </div>
                         </div> <!-- end col -->
@@ -125,14 +123,15 @@
                                                     <tr>
                                                         <th scope="col">Curso</th>
                                                         <th scope="col">Disciplinas</th>
-                                                        <th scope="col">Valor</th>
+                                                        <th style="position: absolute; right: 3%;" scope="col">Valor</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody th:class="|disc_${d.id.curso.id} id|" th:each="d : ${disciplinasCursos}" style="display: none;">
                                                     <tr>
-                                                        <td class="fw-medium">Engenharia de tecnologia e sistemas de informacao</td>
-                                                        <td>Matematica <br> Portugues</td>
-                                                        <td>700.00MT</td>
+                                                        <td th:text="${d.getId().getCurso().getNome()}">Engenharia de tecnologia e sistemas de informacao</td>
+                                                        <td th:text="${d.getId().getDisciplina().getNome()}">Matematica <br> Portugues</td>
+                                                        <td style="position: absolute; right: 3%;"
+                                                            th:text="${d.getId().getDisciplina().getTaxa().getValor()}">700.00MT</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -141,11 +140,28 @@
 
                                 </div><!-- end card-body -->
                             </div><!-- end card -->
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="live-preview">
+                                            <div class="table-responsive">
+                                                <table class="table table-nowrap mb-0"
+                                                       th:class="|disc_${t.id} id|" th:each="t : ${taxa}" style="display: none;">
+                                                    <thead class="table-light">
+                                                    <tr>
+                                                        <th scope="col" colspan="2">Total a ser Pago : </th>
+                                                        <th scope="col" style="position: absolute; right: 3%;" th:text="${t.getValor()}">0.0</th>
+                                                    </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div><!-- end card-body -->
+                                </div>
+                            </div>
                         </div><!-- end col -->
                     </div>
                     <!--end row-->
-
-
                 </div>
                 <!-- End Page-content -->
                 <footer class="footer" th:replace="fragments/general.html :: footer"></footer>
@@ -170,5 +186,4 @@
         <script th:src="@{/assets/js/app.js}"></script>
         <script type="text/javascript" th:src="@{/js/index.js}"></script>
 </body>
-
 </html>
