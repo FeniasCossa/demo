@@ -36,7 +36,4 @@ public class DisciplinaCurso {
     @Column(name = "updated_at", columnDefinition = "datetime")
     private Date updatedAt;
 
-    @Transient
-    private double calc_column;
-
 }

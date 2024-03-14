@@ -38,30 +38,17 @@
                                     </span>
                                     <h4 class="card-title mb-0 flex-grow-1 pt-2">Comprovativo do pre-registo</h4>
                                 </div><!-- end card header -->
-
                                 <div class="card-body">
                                     <div class="live-preview">
                                         <div class="row">
-                                            <div class="col-xl-3">
+                                            <div class="col-xl-2">
                                                 <div class="table-responsive">
                                                     <table class="table table-hover align-middle table-nowrap mb-0">
                                                         <tbody>
                                                             <tr>
                                                                 <th class="ps-0" scope="row">Codigo :</th>
-                                                                <td class="text-muted">10000085</td>
+                                                                <td class="text-muted" th:text="${fatura.getCodigo()}">10000085</td>
                                                             </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-5">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover align-middle table-nowrap mb-0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <th class="ps-0" scope="row">Nome :</th>
-                                                            <td class="text-muted">Fenias Sebastiao Cossa jtfygjy</td>
-                                                        </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -70,10 +57,34 @@
                                                 <div class="table-responsive">
                                                     <table class="table table-hover align-middle table-nowrap mb-0">
                                                         <tbody>
+                                                        <tr>
+                                                            <th class="ps-0" scope="row">Nome :</th>
+                                                            <td th:text="${fatura.getNome()}" class="text-muted">Fenias Sebastiao Cossa jtfygjy</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover align-middle table-nowrap mb-0">
+                                                        <tbody>
                                                             <tr>
                                                                 <th class="ps-0" scope="row">Genero :</th>
-                                                                <td class="text-muted">Masculino</td>
+                                                                <td class="text-muted" th:text="${fatura.getSexo()}">Masculino</td>
                                                             </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover align-middle table-nowrap mb-0">
+                                                        <tbody>
+                                                        <tr>
+                                                            <th class="ps-0" scope="row">Data :</th>
+                                                            <td class="text-muted" th:text="${fatura.getData_registo()}">Masculino</td>
+                                                        </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -83,9 +94,8 @@
                                         <!--end row-->
                                         <div class="row">
                                             <div class="col-xl-12">
-                                                <p class="text-muted mt-5">confirme
-                                                    <code>a informação da sua conta</code>. depois de
-                                                    confirmar não poderá alterar.</p>
+                                                <p class="text-muted mt-5"> Baixe a factura para efectuar o pagamento,
+                                                    <code>caso perca a factura faça login e recupere-a</code><br>Os pagamento devem ser efectuados no banco BCI </p>
                                                 <div class="live-preview">
                                                     <div class="table-responsive">
                                                         <table class="table table-nowrap mb-0">
@@ -94,23 +104,23 @@
                                                                     <th scope="col">Universidade</th>
                                                                     <th scope="col">Curso</th>
                                                                     <th scope="col">Disciplinas</th>
-                                                                    <th scope="col">Local de realizacao</th>
                                                                     <th scope="col">Entidade</th>
                                                                     <th scope="col">Referencia</th>
                                                                     <th acope="col">Valor</th>
+                                                                    <th scope="col">Estado</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td class="fw-medium">Universidade Joaquim Chissano
+                                                                    <td class="fw-medium" th:text="${fatura.getUniversidade()}">Universidade Joaquim Chissano
                                                                     </td>
-                                                                    <td>Engenharia de tecnologia e sistemas de
+                                                                    <td th:text="${fatura.getCurso()}">Engenharia de tecnologia e sistemas de
                                                                         informacao</td>
-                                                                    <td>Matematica <br> Portugues</td>
-                                                                    <td>Cidade de Maputo</td>
-                                                                    <td>156686886</td>
-                                                                    <td>897167665455566</td>
-                                                                    <td>700</td>
+                                                                    <td th:text="${fatura.getDisciplinas()}">Matematica <br> Portugues</td>
+                                                                    <td th:text="${fatura.getEntidade()}">156686886</td>
+                                                                    <td th:text="${fatura.getReferencia()}">897167665455566</td>
+                                                                    <td th:text="${fatura.getValor()}">700</td>
+                                                                    <td th:text="${fatura.getEstado()}"></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -118,11 +128,9 @@
                                                 </div>
 
                                                 <!--end col-->
-                                                <div class="d-flex align-items-start gap-3 mt-4">
-                                                    <a type="button" href="/course/fatura/pdf"
-                                                        class="btn btn-success btn-label right ms-auto"><i
-                                                            class="mdi mdi-file-pdf-box label-icon align-middle fs-16 ms-2"></i>Baixar
-                                                        fatura</a>
+                                                <div class="hstack gap-2 justify-content-end d-print-none mt-4">
+                                                    <a href="javascript:window.print()" class="btn btn-info"><i class="ri-printer-line align-bottom me-1"></i> Imprimir</a>
+                                                    <a href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i> Baixar a factura</a>
                                                 </div>
                                             </div>
                                             <!--end row-->

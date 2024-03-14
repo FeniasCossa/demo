@@ -32,6 +32,6 @@ public class CandidatoCurso {
     private String periodo;
 
     @CreationTimestamp
-    @Column(name = "data_registo")
+    @Column(name = "data_registo", columnDefinition = "datetime")
     private LocalDateTime data_registo;
 }

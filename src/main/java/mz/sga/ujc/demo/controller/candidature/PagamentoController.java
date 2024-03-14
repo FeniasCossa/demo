@@ -10,8 +10,8 @@ public class PagamentoController {
 
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public String getFactua(){
+    public String getFactua() {
         return "candidature/list/invoice";
     }
-    
+
 }

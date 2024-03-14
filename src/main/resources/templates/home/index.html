@@ -1,92 +1,247 @@
-<!DOCTYPE html>
-<html lang="en" data-layout="horizontal" data-layout-style="detached" data-sidebar="light"
-    xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" data-layout="vertical" data-layout-style="detached" data-sidebar="light" data-topbar="light" data-sidebar-size="lg" data-sidebar-image="none"
+	  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:fragment="head">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
-    <title>HOME | UJC - Universidade Joaquim Chissano</title>
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="/img/ujc.png">
-    <link rel="stylesheet" href="css/style.css">
+<!-- Mirrored from themesbrand.com/velzon/html/interactive/apps-invoices-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jun 2022 11:28:17 GMT -->
+<head>
+
+	<meta charset="utf-8" />
+	<title>Invoice Details | UJC</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+	<meta content="Themesbrand" name="author" />
+	<!-- App favicon -->
+	<link rel="shortcut icon" href="../../../java/mz/sga/ujc/demo/controller/candidature/CursoController.java">
+
+	<!-- Layout config Js -->
+	<script src="assets/js/layout.js"></script>
+	<!-- Bootstrap Css -->
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<!-- Icons Css -->
+	<link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+	<!-- App Css-->
+	<link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+	<!-- custom Css-->
+	<link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+
 </head>
 
 <body>
-    <div class="navbar">
-		<div class="logo"><a href="#">ACAD<span>EMY</span></a></div>
-		<ul class="nav">
-			<li><a href="/index">Home</a></li>
-			<li><a href="/alunos-adicionados">Alunos</a></li>
-			<li><a href="#model">Pesquisar</a></li>
-			<li><a href="#"><ion-icon name="person-outline"></ion-icon></li>
-		</ul>
-		<div class="menu-btn" id="menu-btn">
-			<ion-icon onclick="openNav()" name="menu-outline"></ion-icon>
-		</div>
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+	<!-- top bar-->
+	<div th:replace="home/fragment/topbar.html :: topbar"></div>
+	<!-- menu  -->
+	<div th:replace="home/fragment/menu.html :: menu"></div>
+
+	<!-- Left Sidebar End -->
+	<!-- Vertical Overlay-->
+	<div class="vertical-overlay"></div>
+
+	<!-- ============================================================== -->
+	<!-- Start right Content here -->
+	<!-- ============================================================== -->
+	<div class="main-content">
+
+		<div class="page-content">
+			<div class="container-fluid">
+
+				<!-- start page title -->
+				<div class="row">
+					<div class="col-12">
+						<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+							<h4 class="mb-sm-0">Detalhes da conta</h4>
+
+							<div class="page-title-right">
+								<ol class="breadcrumb m-0">
+									<li class="breadcrumb-item"><a href="javascript: void(0);">Candidato</a></li>
+									<li class="breadcrumb-item active">Detalhes da conta</li>
+								</ol>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<!-- end page title -->
+
+				<div class="row justify-content-center">
+					<div class="col-xxl-9">
+						<div class="card" id="demo">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="card-header border-bottom-dashed p-4">
+										<div class="d-flex">
+											<div class="flex-grow-1">
+												<img src="img/ujc.png" class="card-logo card-logo-dark" alt="logo dark" height="50">
+												<img src="img/ujc.png" class="card-logo card-logo-light" alt="logo light" height="50">
+												<div class="mt-sm-5 mt-4">
+													<h6 class="text-muted text-uppercase fw-semibold">Endereco</h6>
+													<p class="text-muted mb-1" id="address-details">Maputo, Matola</p>
+												</div>
+											</div>
+											<div class="flex-shrink-0 mt-sm-0 mt-3">
+												<h6><span class="text-muted fw-normal">Codigo do candidato No: </span><span id="legal-register-no">1987654</span></h6>
+												<h6><span class="text-muted fw-normal">Email: </span><span id="email">feniascossa@outlook.coom</span></h6>
+												<h6 class="mb-0"><span class="text-muted fw-normal">Telefone: </span><span id="contact-no"> +(258) 84 234 6789</span></h6>
+											</div>
+										</div>
+									</div>
+									<!--end card-header-->
+								</div><!--end col-->
+								<div class="col-lg-12">
+									<div class="card-body p-4">
+										<div class="row g-3">
+											<div class="col-lg-3 col-6">
+												<p class="text-muted mb-2 text-uppercase fw-semibold">Factura No</p>
+												<h5 class="fs-15 mb-0">UJC - <span id="invoice-no">25000355</span></h5>
+											</div>
+											<!--end col-->
+											<div class="col-lg-3 col-6">
+												<p class="text-muted mb-2 text-uppercase fw-semibold">Date</p>
+												<h5 class="fs-15 mb-0"><span id="invoice-date">23 Nov, 2021</span> <small class="text-muted" id="invoice-time">02:36PM</small></h5>
+											</div>
+											<!--end col-->
+											<div class="col-lg-3 col-6">
+												<p class="text-muted mb-2 text-uppercase fw-semibold">Estado de pagamento</p>
+												<span class="badge badge-soft-success fs-11" id="payment-status">Pago</span>
+											</div>
+											<!--end col-->
+											<div class="col-lg-3 col-6">
+												<p class="text-muted mb-2 text-uppercase fw-semibold">Total Pago</p>
+												<h5 class="fs-15 mb-0"><span id="total-amount">600.00</span> Mts</h5>
+											</div>
+											<!--end col-->
+										</div>
+										<!--end row-->
+									</div>
+									<!--end card-body-->
+								</div><!--end col-->
+								<div class="col-lg-12">
+									<div class="card-body p-4 border-top border-top-dashed">
+										<div class="row g-3">
+											<div class="col-6">
+												<h6 class="text-muted text-uppercase fw-semibold mb-3">Endereço da UJC</h6>
+												<p class="fw-medium mb-2" id="billing-name">Campos de Zimpeto</p>
+												<p class="text-muted mb-1" id="billing-address-line-1">Rua de Grande-Maputo</p>
+												<p class="text-muted mb-1"><span>Telefone: +</span><span id="billing-phone-no">(258) 86 456-7890</span></p>
+											</div>
+											<!--end col-->
+											<!--end col-->
+										</div>
+										<!--end row-->
+									</div>
+									<!--end card-body-->
+								</div><!--end col-->
+								<div class="col-lg-12">
+									<div class="card-body p-4">
+										<div class="table-responsive">
+											<table class="table table-borderless text-center table-nowrap align-middle mb-0">
+												<thead>
+												<tr class="table-active">
+													<th scope="col" style="width: 50px;">#</th>
+													<th scope="col">Curso</th>
+													<th scope="col">Disciplina</th>
+													<th scope="col" class="text-end">Valor</th>
+												</tr>
+												</thead>
+												<tbody id="products-list">
+												<tr>
+													<th scope="row">01</th>
+													<td class="text-start">Engenharia de Tecnologias e Sistemas de Informacao</span>
+														<p class="text-muted mb-0">Laboral</p>
+													</td>
+													<td>Matematica, Portugues</td>
+													<td class="text-end">600.00 MTs</td>
+												</tr>
+												</tbody>
+											</table><!--end table-->
+										</div>
+										<div class="border-top border-top-dashed mt-2">
+											<table class="table table-borderless table-nowrap align-middle mb-0 ms-auto" style="width:250px">
+												<tbody>
+												<tr>
+													<td>Total por disciplina</td>
+													<td class="text-end">300.00 MTs</td>
+												</tr>
+												<tr class="border-top border-top-dashed fs-15">
+													<th scope="row">Total Pago</th>
+													<th class="text-end">600.00 MTs</th>
+												</tr>
+												</tbody>
+											</table>
+											<!--end table-->
+										</div>
+										<div class="mt-3">
+											<h6 class="text-muted text-uppercase fw-semibold mb-3">Detalhes de pagamento:</h6>
+											<p class="text-muted mb-1">Metodo de Pagamento: <span class="fw-medium" id="payment-method">Deposito</span></p>
+											<p class="text-muted mb-1">Proprietario: <span class="fw-medium" id="card-holder-name">Anna Adame</span></p>
+											<p class="text-muted">Total Amount: <span class="fw-medium" id=""> </span><span id="card-total-amount">600.00</span></p>
+										</div>
+										<div class="mt-4">
+											<div class="alert alert-info">
+												<p class="mb-0"><span class="fw-semibold">NOTES:</span>
+													<span id="note">All accounts are to be paid within 7 days from receipt of invoice. To be paid by cheque or
+                                                            credit card or direct payment online. If account is not paid within 7
+                                                            days the credits details supplied as confirmation of work undertaken
+                                                            will be charged the agreed quoted fee noted above.
+                                                        </span>
+												</p>
+											</div>
+										</div>
+										<div class="hstack gap-2 justify-content-end d-print-none mt-4">
+											<a href="javascript:window.print()" class="btn btn-info"><i class="ri-printer-line align-bottom me-1"></i> Print</a>
+											<a href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i> Download</a>
+										</div>
+									</div>
+									<!--end card-body-->
+								</div><!--end col-->
+							</div><!--end row-->
+						</div>
+						<!--end card-->
+					</div>
+					<!--end col-->
+				</div>
+				<!--end row-->
+
+			</div><!-- container-fluid -->
+		</div><!-- End Page-content -->
+
+		<footer class="footer" th:replace="fragments/general.html :: footer"></footer>
+	</div><!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+
+
+<!--start back-to-top-->
+<button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+	<i class="ri-arrow-up-line"></i>
+</button>
+<!--end back-to-top-->
+
+<div class="customizer-setting d-none d-md-block">
+	<div class="btn-info btn-rounded shadow-lg btn btn-icon btn-lg p-2" data-bs-toggle="offcanvas" data-bs-target="#theme-settings-offcanvas" aria-controls="theme-settings-offcanvas">
+		<i class='mdi mdi-spin mdi-cog-outline fs-22'></i>
 	</div>
-	<section class="menu" style="background-image: url('./img/bg-index.jpg');">
-		<div class="max-width">
-			<h2 class="title" style="color: #fff">Sistema de gestao de alunos</h2>
-			<div class="menu-content">
-				<a class="card" href="/inserirAlunos" style="color: #fff">
-					<div class="box">
-						<ion-icon name="person-add-outline"></ion-icon>
-						<div class="text">Cadastro de Estudantes</div>
-						<p>Adicione alunos no sistema</p>
-					</div>
-				</a>
-				<a class="card" href="/alunos-adicionados" style="color: #fff">
-					<div class="box">
-						<ion-icon name="people-outline"></ion-icon>
-						<div class="text">Alunos Cadastrados</div>
-						<p>faca uma busca de todos seus alunos</p>
-					</div>
-				</a>
-				<a class="card" href="#" style="color: #fff">
-					<div class="box">
-						<ion-icon name="book-outline"></ion-icon>
-						<div class="text">Cursos</div>
-						<p>Veja os cursos disponiveis</p>
-					</div>
-				</a>
-				<a class="card" href="filtro-alunos" style="color: #fff">
-					<div class="box">
-						<ion-icon name="stats-chart-outline"></ion-icon>
-						<div class="text">Estado dos alunos</div>
-						<p>Veja a situacao dos alunos</p>
-					</div>
-				</a>
-			</div>
+</div>
 
-		</div>
-	</section>
+<!-- JAVASCRIPT -->
+<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/libs/simplebar/simplebar.min.js"></script>
+<script src="assets/libs/node-waves/waves.min.js"></script>
+<script src="assets/libs/feather-icons/feather.min.js"></script>
+<script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+<script src="assets/js/plugins.js"></script>
 
-	<footer th:fragment="rodape">
-		<div class="rodape">
-			<span>Todos os direitos reservados - 2022 &copy; Fenias Cossa</span>
-		</div>
-	</footer>
-<script>
-    /* Open the sidenav */
-		function openNav() {
-			document.getElementById("mySidenav").style.width = "100%";
-		}
-		/* Close/hide the sidenav */
-		function closeNav() {
-			document.getElementById("mySidenav").style.width = "0";
-		}
-</script>
-	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript" src="script.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<script src="assets/js/pages/invoicedetails.js"></script>
+
+<!-- App js -->
+<script src="assets/js/app.js"></script>
 
 </body>
-
+<!-- Mirrored from themesbrand.com/velzon/html/interactive/apps-invoices-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jun 2022 11:28:19 GMT -->
 </html>

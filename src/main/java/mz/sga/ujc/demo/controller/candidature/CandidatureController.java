@@ -5,19 +5,6 @@
  */
 package mz.sga.ujc.demo.controller.candidature;
 
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.model.candidatura.Documento;
@@ -34,9 +21,20 @@ import mz.sga.ujc.demo.repository.parametrization.ProvinciaRepository;
 import mz.sga.ujc.demo.service.auth.ContaService;
 import mz.sga.ujc.demo.service.candidatuta.CandidatoService;
 import mz.sga.ujc.demo.service.paramentrization.ProvinciaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 /**
- *
  * @author Fenias Cossa
  */
 @Controller
@@ -68,8 +66,9 @@ public class CandidatureController {
 
     @RequestMapping(path = "/register", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView getForm1(@RequestParam("id") String id, Candidato candidato, ModelMap model) {
+    public ModelAndView getForm1(@RequestParam("id") String id, ModelMap model) {
         ModelAndView mv = new ModelAndView();
+        mv.addObject("candidato", new Candidato());
         mv.setViewName("candidature/register/register");
         model.addAttribute("provincias", provinciaService.listaProvincias());
         model.addAttribute("distritos", distritoRepository.findAll());
@@ -93,6 +92,7 @@ public class CandidatureController {
     }
 
     @RequestMapping(path = "/getData", method = RequestMethod.GET)
+    @ResponseBody
     public ModelAndView getData(@RequestParam("candidato") Integer id) {
         ModelAndView mv = new ModelAndView();
         Candidato candidato = candidatoRepository.getReferenceById(id);
@@ -100,7 +100,7 @@ public class CandidatureController {
         Provincia provincia = provinciaRepository.getReferenceById(candidato.getDistrito().getId().getProvincia().getId());
         Distrito distrito = distritoRepository
                 .getReferenceById(new DistritoPK(candidato.getDistrito().getId().getId(), candidato.getDistrito().getId().getProvincia()));
-        Conta conta = contaRepository.getReferenceByCodigo(id);
+        Conta conta = contaRepository.getReferenceByCodigo(candidato.getCodigo());
         Escola escola = escolaRepostitory.getReferenceByCandidato(candidato);
         mv.addObject("candidato", candidato);
         mv.addObject("documento", documento);
@@ -111,16 +111,6 @@ public class CandidatureController {
         mv.setViewName("candidature/list/data");
         return mv;
 
-    }
-
-    @RequestMapping(path = "/login", method = RequestMethod.GET)
-    public ModelAndView login(BindingResult result) {
-        ModelAndView mv = new ModelAndView();
-        if (result.hasErrors())
-            mv.setViewName("candidature/login");
-        else
-            mv.setViewName("redirect: /home");
-        return mv;
     }
 
 }

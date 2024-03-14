@@ -24,7 +24,7 @@ public class Disciplina extends AbstractEntity<Integer>{
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "taxa_id")
+    @JoinColumn(name = "taxa_id", nullable = false)
     private Taxa taxa;
 
 }

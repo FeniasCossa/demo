@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,11 +15,13 @@
                                 src="/img/left.svg"
                                 alt="">Voltar a pagina inicial</a></div>
                     <div class="contact">
-                        <div th:replace="fragments/alert"></div>
                         <form action="/login" method="post" th:object="${conta}">
                             <h3>Iniciar sessão</h3>
-                            <input type="text" name="codigo" placeholder="Numero de estudante ou email">
-                            <input type="text" name="senha" placeholder="senha">
+                            <div class="alert alert-danger" role="alert" th:if="${msg}">
+                                <strong th:text="${msg}"></strong>
+                            </div>
+                            <input type="text" th:field="*{codigo}" placeholder="Numero de estudante ou email">
+                            <input type="text" th:field="*{senha}" placeholder="senha">
                             <button class="submit">Entrar</button>
                         </form>
                     </div>

@@ -1,13 +1,12 @@
 package mz.sga.ujc.demo.repository.parametrization;
 
+import mz.sga.ujc.demo.model.candidatura.Candidato;
+import mz.sga.ujc.demo.model.parametrization.Escola;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import mz.sga.ujc.demo.model.candidatura.Candidato;
-import mz.sga.ujc.demo.model.parametrization.Escola;
-
 @Repository
-public interface EscolaRepostitory extends JpaRepository<Escola, Integer>{
-    
+public interface EscolaRepostitory extends JpaRepository<Escola, Integer> {
+
     Escola getReferenceByCandidato(Candidato candidato);
 }

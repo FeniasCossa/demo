@@ -9,14 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- *
  * @author Fenias Cossa
  */
 @Controller
 public class LandingController {
-    
+
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "index";
     }
 }

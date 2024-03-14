@@ -11,6 +11,8 @@ import java.util.Objects;
 @NoArgsConstructor
 public class TaxaTotalCurso {
     private int id;
+    private String curso;
+    private String disciplinas;
     private String valor;
 
     @Override

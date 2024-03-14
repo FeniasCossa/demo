@@ -7,8 +7,6 @@ import javax.persistence.*;
 
 import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.model.parametrization.Distrito;
-import mz.sga.ujc.demo.model.parametrization.Provincia;
-import mz.sga.ujc.demo.model.restricoes.CandidatoPk;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,14 +16,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Entity
+@AllArgsConstructor@Entity
 @Table(name = "candidato")
 public class Candidato{
 
@@ -54,7 +49,7 @@ public class Candidato{
     @ManyToOne
     @JoinColumns(
             {@JoinColumn(name = "distrito_id", referencedColumnName = "id"),
-            @JoinColumn(name="provincia_id", referencedColumnName = "provincia_id")}
+                    @JoinColumn(name = "provincia_id", referencedColumnName = "provincia_id")}
     )
     private Distrito distrito;
 
@@ -65,14 +60,19 @@ public class Candidato{
     private String nomeMae;
 
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "created_at", columnDefinition = "datetime")
     private Date createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at",columnDefinition = "datetime")
+    @Column(name = "updated_at", columnDefinition = "datetime")
     private Date updatedAt;
 
     @OneToOne
     @JoinColumn(name = "conta_id", insertable = true)
     private Conta conta;
+
+    @Override
+    public String toString() {
+        return "Candidato{}";
+    }
 }

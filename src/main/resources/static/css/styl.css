@@ -97,23 +97,25 @@ img {
 }
 
 
-
 .right {
     background: linear-gradient(212.38deg, rgba(60, 57, 242, 0.7) 0%, rgba(175, 70, 189, 0.71) 100%), url(https://static.seattletimes.com/wp-content/uploads/2019/01/web-typing-ergonomics-1020x680.jpg);
     color: #fff;
     position: relative;
 }
-.right .logo{
-width: 100%;
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-between;
+
+.right .logo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
-.right .logo .lg{
+
+.right .logo .lg {
     width: 100px;
     margin: 6px;
 }
+
 .right .right-text {
     height: 80%;
     position: relative;
@@ -152,7 +154,7 @@ justify-content: space-between;
     margin-top: -3px;
 }
 
-@media(max-width: 993px) {
+@media (max-width: 993px) {
 
     .login_box {
         width: 100%;
@@ -178,7 +180,7 @@ justify-content: space-between;
         height: 10%;
         position: relative;
         transform: translate(0%, 45%);
-      }
+    }
 
     .right-text h2 {
         display: block;
