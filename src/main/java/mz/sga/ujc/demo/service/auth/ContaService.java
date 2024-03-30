@@ -12,32 +12,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ContaService {
 
-    @Autowired
-    private ContaRepository contaRepository;
+    private final ContaRepository contaRepository;
+
+    private final PerfilRepository perfilService;
 
     @Autowired
-    private PerfilRepository perfilService;
+    public ContaService(ContaRepository contaRepository, PerfilRepository perfilService) {
+        this.contaRepository = contaRepository;
+        this.perfilService = perfilService;
+    }
 
     public void persist(Conta conta) {
         if (getContaByNuit(conta.getNuit()) == null) {
             conta.setPerfil(perfilService.getReferenceById(1));
             conta.setSenha(criptText(conta.getSenha()));
-            contaRepository.save(conta);
-        } else {
-            contaRepository.save(conta);
         }
-    }
-    public String criptText(String text) {
-        BCryptPasswordEncoder criPasswordEncoder = new BCryptPasswordEncoder();
-        String cript = criPasswordEncoder.encode(text);
-        return cript;
+        contaRepository.save(conta);
     }
 
-    public Conta LoginUser(String codigo, String senha) throws ServiceException {
-        Conta userLogin = contaRepository.buscarLogin(codigo, senha);
-        return userLogin;
+    public String criptText(String text) {
+        BCryptPasswordEncoder criPasswordEncoder = new BCryptPasswordEncoder();
+        return criPasswordEncoder.encode(text);
     }
-    @Transactional(readOnly = true)
+
     public Conta getContaByNuit(String id) {
         return contaRepository.getReferenceByNuit(id);
     }

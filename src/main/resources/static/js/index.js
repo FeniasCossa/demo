@@ -9,4 +9,9 @@ function atualizouSelectCurso(seletedValue) {
     $('.disc_' + seletedValue).show();
     console.log("Esse e o valor selecionado" + seletedValue);
 }
-
+function spinner(){
+    console.log("Ola Mundo");
+    $(window).load(function() {
+        $('#modal').modal('show');
+    });
+}

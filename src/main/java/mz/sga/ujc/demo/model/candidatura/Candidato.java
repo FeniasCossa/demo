@@ -20,7 +20,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor@Entity
+@AllArgsConstructor
+@Entity
 @Table(name = "candidato")
 public class Candidato{
 

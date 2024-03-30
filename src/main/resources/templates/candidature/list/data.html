@@ -132,13 +132,13 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex align-items-start gap-3 mt-4">
-                                                <button type="button" href="/account/alter/" class="btn btn-light btn-label previestab">
+                                                <a type="button" th:href="|@{/account/alter/}${conta.getCodigo()}|" class="btn btn-light btn-label previestab">
                                                     <i class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
-                                                    </i>Voltar para dados da conta</button>
+                                                    </i>Alterar seus dados</a>
                                                  <a type="button" th:href="|@{/course/regist}?id=${conta.getCodigo()}|"
                                                     class="btn btn-success btn-label right ms-auto nexttab nexttab">
                                                     <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2">
-                                                    </i>Avançar</a>
+                                                    </i>confirmar e vançar</a>
                                             </div>
                                             <!--end col-->
                                         </div>
@@ -151,8 +151,6 @@
                         <!-- end col -->
                     </div>
                     <!--end row-->
-
-
                     <!--End form enter-->
                 </div>
                 <!-- End Page-content -->
@@ -160,8 +158,6 @@
             <!-- end main content-->
         </div>
         <!-- END layout-wrapper -->
-
-
 
         <!--start back-to-top-->
         <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
@@ -180,11 +176,10 @@
         <!-- form wizard init -->
         <script th:src="@{/assets/js/pages/form-wizard.init.js}"></script>
         <script th:src="@{/assets/js/pages/form-validation.init.js}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
 
         <!-- App js -->
         <script th:src="@{/assets/js/app.js}"></script>
         <script type="text/javascript" th:src="@{/js/index.js}"></script>
 </body>
-
 </html>

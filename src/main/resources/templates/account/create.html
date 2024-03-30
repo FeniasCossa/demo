@@ -20,6 +20,9 @@
     <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/css/styl.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
@@ -29,7 +32,6 @@
         <div class="content">
             <div class="page-content">
                 <div class="container-lg">
-
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
@@ -106,8 +108,8 @@
                                             
                                             <div class="col-lg-12">
                                                 <div class="text-end">
-                                                    <button class="btn btn-primary" onclick="validarSenha()"
-                                                        type="submit">Avançar</button>
+                                                    <button class="btn btn-primary" id="loading"
+                                                        type="submit" onclick="spinner()">Avançar</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -124,26 +126,9 @@
             <!-- end main content-->
         </div>
         <!-- END layout-wrapper -->
-
-
-
-        <!--start back-to-top-->
-        <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
-            <i class="ri-arrow-up-line"></i>
-        </button>
-        <!--end back-to-top-->
-        <!-- JAVASCRIPT --><!--end back-to-top-->
         <!-- JAVASCRIPT -->
-        <script>
-            function validarSenha() {
-                console.log('mnjekwjejks sjnns')
-                let senha = document.getElementsByName('senha').values;
-                let confirmSenha = document.getElementsByName('confimarSenha').values;
-                if (senha != confirmSenha) {
-                    alert("SENHAS DIFERENTES!\\nFAVOR DIGITAR SENHAS IGUAIS");
-                }
-            }
-        </script>
+        <div th:replace="fragments/general :: modal"></div>
+
         <script th:src="@{/assets/libs/bootstrap/js/bootstrap.bundle.min.js}"></script>
         <script th:src="@{/assets/libs/simplebar/simplebar.min.js}"></script>
         <script th:src="@{/assets/libs/node-waves/waves.min.js}"></script>
@@ -153,7 +138,7 @@
         <!-- form wizard init -->
         <script th:src="@{/assets/js/pages/form-wizard.init.js}"></script>
         <script th:src="@{/assets/js/pages/form-validation.init.js}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
 
         <!-- App js -->
         <script th:src="@{/assets/js/app.js}"></script>
