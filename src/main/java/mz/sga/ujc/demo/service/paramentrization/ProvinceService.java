@@ -8,12 +8,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProvinciaService {
+public class ProvinceService {
 
+    private final ProvinciaRepository repository;
     @Autowired
-    private ProvinciaRepository repository;
+    public ProvinceService(ProvinciaRepository repository) {
+        this.repository = repository;
+    }
 
-    public List<Provincia> listaProvincias() {
+    public List<Provincia> provinceList() {
         return repository.findAll();
     }
 }

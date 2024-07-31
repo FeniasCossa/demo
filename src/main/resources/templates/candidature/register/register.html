@@ -55,11 +55,18 @@
                             <div class="card">
                                 <div class="card-header align-items-center justify-content-between">
                                     <h4 class="card-title mb-0">Criação de conta </h4>
-                                    <div th:replace="fragments/alert"></div>
+                                    <div th:fragment="alerts">
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <i class="oi oi-check"></i>
+                                            <span>
+		  	                                    <strong th:text="|O seu codigo de candidatura é: ${conta.getCodigo()}|"></strong>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="live-preview">
-                                        <form class="row g-3 needs-validation" method="post" action="/candidato/save"
+                                        <form class="row g-3 needs-validation" method="post" th:action="|@{/candidato/save/}${conta.getCodigo()}|"
                                             th:object="${candidato}" novalidate>
                                             <div class="text-center pt-3 pb-4 mb-1">
                                                 <h5>Informação Pessoal</h5>
@@ -106,10 +113,6 @@
                                                     <option value="Casado">Casado</option>
                                                 </select>
                                             </div>
-                                            <!-- Atributos da conta-->
-                                            <input type="hidden" name="codigo" th:value="${conta.codigo}">
-                                            <input type="hidden" name="conta" th:value="${conta}">
-
                                             <!-- Naturalidade -->
                                             <div class="col-md-3 position-relative">
                                                 <label for="validationTooltip04"

@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class DisciplinaCursoService {
+public class SubjectCourseService {
 
     private final DisciplinaCursoRepository disciplinaCursoRepository;
     List<TaxaTotalCurso> listTaxaByCursos;
     List<DisciplinaCurso> listaDisciplinaCurso;
 
     @Autowired
-    public DisciplinaCursoService(DisciplinaCursoRepository disciplinaCursoRepository) {
+    public SubjectCourseService(DisciplinaCursoRepository disciplinaCursoRepository) {
         this.disciplinaCursoRepository = disciplinaCursoRepository;
         this.listTaxaByCursos = new ArrayList<>();
     }
@@ -42,7 +42,7 @@ public class DisciplinaCursoService {
         return listTaxaByCursos;
     }
 
-    public Set<TaxaTotalCurso> DistinctTotalByCurso() {
+    public Set<TaxaTotalCurso> DistinctTotalByCource() {
         return new HashSet<>(calcTotal());
     }
 

@@ -1,17 +1,16 @@
 package mz.sga.ujc.demo.model.exame;
 
+import lombok.*;
+import mz.sga.ujc.demo.model.restricoes.Realizacao_ExamePk;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import mz.sga.ujc.demo.model.restricoes.Realizacao_ExamePk;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -26,6 +25,14 @@ public class Resultado {
     private Realizacao_ExamePk id;
 
     @Column(name = "nota")
-    @Size(min = 0, max = 20, message = "A nota só pode estar no intervalo de {min} a {max}")
+    @Size(max = 20, message = "A nota só pode estar no intervalo de 0 a {max}")
     private float nota;
+
+    @CreationTimestamp
+    @Column(name = "created_at",columnDefinition = "datetime")
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at",columnDefinition = "datetime")
+    private Date updatedAt;
 }

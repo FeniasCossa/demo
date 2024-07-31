@@ -1,21 +1,17 @@
 package mz.sga.ujc.demo.model.candidatura;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.model.parametrization.Distrito;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -62,14 +58,16 @@ public class Candidato{
 
     @CreationTimestamp
     @Column(name = "created_at", columnDefinition = "datetime")
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at", columnDefinition = "datetime")
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date updatedAt;
 
     @OneToOne
-    @JoinColumn(name = "conta_id", insertable = true)
+    @JoinColumn(name = "conta_id")
     private Conta conta;
 
     @Override

@@ -8,13 +8,19 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * @author Fenias Cossa
  */
 
-@Getter@Setter@NoArgsConstructor@AllArgsConstructor@ToString@Entity@Table(name = "conta")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Entity
+@Table(name = "conta")
 public class Conta {
 
 
@@ -42,11 +48,13 @@ public class Conta {
     private Perfil perfil;
 
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "created_at",columnDefinition = "datetime")
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "updated_at",columnDefinition = "datetime")
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date updatedAt;
 
 }

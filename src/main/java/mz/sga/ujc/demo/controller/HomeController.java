@@ -5,11 +5,9 @@ import mz.sga.ujc.demo.repository.auth.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -18,7 +16,6 @@ import javax.validation.Valid;
 public class HomeController {
 
     private final ContaRepository repository;
-
     @Autowired
     public HomeController(ContaRepository repository) {
         this.repository = repository;
@@ -30,7 +27,7 @@ public class HomeController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public ModelAndView signin(@Valid Conta conta, BindingResult result, HttpSession session, RedirectAttributes attributes) {
+    public ModelAndView signin(@Valid Conta conta, HttpSession session) {
         ModelAndView mv = new ModelAndView();
         Conta account = repository.getReferenceByCodigo(conta.getCodigo());
         if (account == null) {

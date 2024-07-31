@@ -3,29 +3,33 @@ package mz.sga.ujc.demo.service.auth;
 import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.repository.auth.ContaRepository;
 import mz.sga.ujc.demo.repository.auth.PerfilRepository;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ContaService {
+public class AccountService {
 
     private final ContaRepository contaRepository;
 
     private final PerfilRepository perfilService;
 
     @Autowired
-    public ContaService(ContaRepository contaRepository, PerfilRepository perfilService) {
+    public AccountService(ContaRepository contaRepository, PerfilRepository perfilService) {
         this.contaRepository = contaRepository;
         this.perfilService = perfilService;
     }
 
-    public void persist(Conta conta) {
-        if (getContaByNuit(conta.getNuit()) == null) {
-            conta.setPerfil(perfilService.getReferenceById(1));
-            conta.setSenha(criptText(conta.getSenha()));
+    public void save(Conta conta) {
+        autoGenerateCodigo(conta);
+        conta.setPerfil(perfilService.getReferenceById(1));
+        conta.setSenha(criptText(conta.getSenha()));
+        contaRepository.save(conta);
+    }
+    public void edit(Conta conta){
+        Conta c = getAccountByNuit(conta.getNuit());
+        if(conta.getSenha().equals(c.getSenha())){
+            conta.setSenha(c.getSenha());
         }
         contaRepository.save(conta);
     }
@@ -35,17 +39,20 @@ public class ContaService {
         return criPasswordEncoder.encode(text);
     }
 
-    public Conta getContaByNuit(String id) {
+    public Conta getAccountByNuit(String id) {
         return contaRepository.getReferenceByNuit(id);
     }
 
-    public Conta getContaByCodigo(Object codigo) {
-        return contaRepository.getReferenceByCodigo((int) codigo);
+    public Conta getAccountByCode(Integer codigo) {
+        return contaRepository.getReferenceByCodigo(codigo);
+    }
+    public void autoGenerateCodigo(Conta conta) {
+        conta.setCodigo(getRandomInt(1000000, 1999999));
+    }
+    public int getRandomInt(int min, int max) {
+        return (int) (Math.random() * (max - min + 1) + min);
     }
 
-    public Conta getContaById(String id) {
-        return contaRepository.getReferenceById(id);
-    }
 }
     
 

@@ -1,19 +1,16 @@
 package mz.sga.ujc.demo.model.exame;
 
-import java.time.LocalTime;
-
-import javax.persistence.*;
-
+import lombok.*;
+import mz.sga.ujc.demo.model.AbstractEntity;
+import mz.sga.ujc.demo.model.candidatura.Disciplina;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import mz.sga.ujc.demo.model.AbstractEntity;
-import mz.sga.ujc.demo.model.candidatura.Disciplina;
+import javax.persistence.*;
+import java.sql.Date;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -31,4 +28,12 @@ public class Exame extends AbstractEntity<Integer>{
     @DateTimeFormat(iso = ISO.TIME)
     @Column(name = "duracao", columnDefinition = "TIME")
     private LocalTime duracao;
+
+    @CreationTimestamp
+    @Column(name = "created_at",columnDefinition = "datetime")
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at",columnDefinition = "datetime")
+    private Date updatedAt;
 }

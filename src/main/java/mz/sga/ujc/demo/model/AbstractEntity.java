@@ -5,17 +5,22 @@
  */
 package mz.sga.ujc.demo.model;
 
-import java.io.Serializable;
-import java.util.Objects;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
  * @author Fenias Cossa
  */
+@Setter
+@Getter
 @MappedSuperclass
 public abstract class AbstractEntity<ID extends Serializable> implements Serializable  {
    
@@ -23,19 +28,11 @@ public abstract class AbstractEntity<ID extends Serializable> implements Seriali
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private ID id;
 
-    public ID getId() {
-        return id;
-    }
-
-    public void setId(ID id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = (prime * result) + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -51,10 +48,7 @@ public abstract class AbstractEntity<ID extends Serializable> implements Seriali
             return false;
         }
         final AbstractEntity<?> other = (AbstractEntity<?>) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
