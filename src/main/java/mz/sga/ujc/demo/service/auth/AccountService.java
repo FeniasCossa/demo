@@ -6,6 +6,10 @@ import mz.sga.ujc.demo.repository.auth.PerfilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Service
 public class AccountService {
@@ -27,11 +31,32 @@ public class AccountService {
         contaRepository.save(conta);
     }
     public void edit(Conta conta){
-        Conta c = getAccountByNuit(conta.getNuit());
-        if(conta.getSenha().equals(c.getSenha())){
-            conta.setSenha(c.getSenha());
+        Conta c = getAccountByCode(conta.getCodigo());
+        c.setTelefone(conta.getTelefone());
+        c.setNuit(conta.getNuit());
+        c.setEmail(conta.getEmail());
+        c.setSenha(criptText(conta.getSenha()));
+        contaRepository.save(c);
+    }
+
+    public ModelAndView Login(@Valid Conta conta, HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        Conta account = getAccountByCode(conta.getCodigo());
+        if (account == null) {
+            mv.addObject("msg", "Codigo ou senha incorrecta");
+            mv.setViewName("/account/login");
+            return mv;
         }
-        contaRepository.save(conta);
+        BCryptPasswordEncoder criPasswordEncoder = new BCryptPasswordEncoder();
+        if(criPasswordEncoder.matches(conta.getSenha(),account.getSenha())){
+            session.setAttribute("userlogado", account);
+            mv.setViewName("redirect:/home/codigo"+account.getCodigo());
+            return mv;
+        }
+        mv.addObject("msg", "Codigo ou senha incorrecta");
+        mv.setViewName("/account/login");
+        return mv;
+
     }
 
     public String criptText(String text) {

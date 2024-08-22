@@ -6,7 +6,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -24,7 +23,6 @@ import java.util.Date;
 public class Conta {
 
 
-    @NotNull(message = "O nuit pode ser nulo")
     @Size(max = 9, min = 9, message = "O campo nuit so deve ter {max} digitos")
     @Id
     private String nuit;

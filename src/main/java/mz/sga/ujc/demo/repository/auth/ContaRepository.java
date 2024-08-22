@@ -9,4 +9,5 @@ public interface ContaRepository extends JpaRepository<Conta, String> {
 
     Conta getReferenceByNuit(String nuit);
     Conta getReferenceByCodigo(Integer codigo);
+    boolean existsByEmail(String email);
 }

@@ -1,5 +1,6 @@
 package mz.sga.ujc.demo.controller.candidature;
 
+import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.model.candidatura.Documento;
 import mz.sga.ujc.demo.model.parametrization.Escola;
 import mz.sga.ujc.demo.repository.candidatura.CandidatoRepository;
@@ -32,7 +33,11 @@ public class DocumentoController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ModelAndView formDocument(@RequestParam("id") Integer id) {
-        ModelAndView mv = new ModelAndView();
+        Candidato candidato=candidatoRepository.getReferenceById(id);
+        if(candidato.getCodigo()==null){
+            return new ModelAndView("redirect:/candidato/register?id="+id);
+        }
+        ModelAndView mv = new ModelAndView("candidature/register/doc");
         mv.addObject("candidato", candidatoRepository.getReferenceById(id));
         mv.addObject("provincias", provinceService.provinceList());
         return mv;

@@ -31,19 +31,23 @@
             </div>
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">Menu</span></li>
-
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="/local">
+                    <a class="nav-link menu-link" th:href="|@{/home/}${userlogado.codigo}|">
+                        <i class="bx bx-home"></i> <span data-key="t-widgets">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" th:href="|@{/local?redindn-00409-w44500-Join=}${userlogado.codigo}|">
                         <i class="bx bxs-school"></i> <span data-key="t-widgets">Instituição e Sala</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="/result">
+                    <a class="nav-link menu-link" th:href="|@{/result?redindn-00409-3390d0-Join=}${userlogado.codigo}|">
                         <i class="bx bx-trophy"></i> <span data-key="t-widgets">Resultados</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="/payment">
+                    <a class="nav-link menu-link" th:href="|@{/payment?redindn-00409-0000-Join=}${userlogado.codigo}|">
                         <i class="ri-bank-card-line"></i> <span data-key="t-widgets">Pagamentos</span>
                     </a>
                 </li>

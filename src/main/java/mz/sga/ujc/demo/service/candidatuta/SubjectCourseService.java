@@ -58,8 +58,11 @@ public class SubjectCourseService {
     }
 
     public Factura getFactura(Pagamento pagamento) {
-        StringBuilder disciplina = new StringBuilder();
+        StringBuilder discipline = new StringBuilder();
         Factura factura = new Factura();
+        if(pagamento == null){
+            return factura;
+        }
         factura.setNome(pagamento.getId().getCandidato().getNome()+ " "+ pagamento.getId().getCandidato().getApelido());
         factura.setCodigo(pagamento.getId().getCandidato().getCodigo());
         factura.setSexo(pagamento.getId().getCandidato().getGenero());
@@ -71,13 +74,11 @@ public class SubjectCourseService {
         factura.setEstado(pagamento.getEstado());
         factura.setData_registo(pagamento.getData_pagamento());
         listaDisciplinaCurso = disciplinaCursoRepository.findAll();
-        for (DisciplinaCurso disciplinaCurso : listaDisciplinaCurso) {
-            if (Objects.equals(disciplinaCurso.getId().getCurso().getId(), pagamento.getId().getCurso().getId())) {
-                disciplina.append(disciplinaCurso.getId().getDisciplina().getNome()).append(" ");
-            }
-        }
-        disciplina.deleteCharAt(disciplina.lastIndexOf(" "));
-        factura.setDisciplinas(disciplina.toString().replace(" ", " e "));
+        for (DisciplinaCurso disciplinaCurso : listaDisciplinaCurso)
+            if (Objects.equals(disciplinaCurso.getId().getCurso().getId(), pagamento.getId().getCurso().getId()))
+                discipline.append(disciplinaCurso.getId().getDisciplina().getNome()).append(", ");
+        discipline.deleteCharAt(discipline.lastIndexOf(", "));
+         factura.setDisciplinas(discipline.toString());
         return factura;
     }
 }

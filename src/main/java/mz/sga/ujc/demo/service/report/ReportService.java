@@ -20,7 +20,7 @@ public class ReportService {
     @Autowired
     ProvinceService provinceService;
 
-    @SuppressWarnings("never used")
+
     public String exportReport(String reportFormat) throws FileNotFoundException, JRException {
         String path="C:\\jasperReport";
         List<Provincia> list = provinceService.provinceList();

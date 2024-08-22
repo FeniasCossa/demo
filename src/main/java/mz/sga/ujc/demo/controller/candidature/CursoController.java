@@ -1,5 +1,6 @@
 package mz.sga.ujc.demo.controller.candidature;
 
+import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.model.candidatura.CandidatoCurso;
 import mz.sga.ujc.demo.model.candidatura.Pagamento;
 import mz.sga.ujc.demo.repository.candidatura.CursoRepository;
@@ -15,7 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -43,16 +43,20 @@ public class CursoController {
     }
 
     @RequestMapping(path = "/regist", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView getCourses(@RequestParam("id") Integer id) {
+        Candidato candidato=candidateService.getCandidateByCode(id);
+        System.out.println(candidato);
+        if(candidato==null){
+            return new ModelAndView("redirect:/candidato/register?id="+id);
+        }
         ModelAndView mv = new ModelAndView("candidature/course/create");
         mv.addObject("candidatoCurso", new CandidatoCurso());
         mv.addObject("provincias", provinceService.provinceList());
-        mv.addObject("codigo", id);
         mv.addObject("cursos", cursoRepository.findAll());
+        mv.addObject("codigo", id);
         mv.addObject("taxa", subjectCourseService.DistinctTotalByCource());
         mv.addObject("disciplinasCursos", disciplinaCursoRepository.findAll());
-        return mv;
+            return mv;
     }
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)

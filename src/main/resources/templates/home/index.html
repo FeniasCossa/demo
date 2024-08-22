@@ -72,23 +72,7 @@
 						<div class="card" id="demo">
 							<div class="row">
 								<div class="col-lg-12">
-									<div class="card-header border-bottom-dashed p-4">
-										<div class="d-flex">
-											<div class="flex-grow-1">
-												<img src="img/ujc.png" class="card-logo card-logo-dark" alt="logo dark" height="50">
-												<img src="img/ujc.png" class="card-logo card-logo-light" alt="logo light" height="50">
-												<div class="mt-sm-5 mt-4">
-													<h6 class="text-muted text-uppercase fw-semibold">Endereco</h6>
-													<p class="text-muted mb-1" id="address-details">Maputo, Matola</p>
-												</div>
-											</div>
-											<div class="flex-shrink-0 mt-sm-0 mt-3">
-												<h6><span class="text-muted fw-normal">Codigo do candidato No: </span><span id="legal-register-no">1987654</span></h6>
-												<h6><span class="text-muted fw-normal">Email: </span><span id="email">feniascossa@outlook.coom</span></h6>
-												<h6 class="mb-0"><span class="text-muted fw-normal">Telefone: </span><span id="contact-no"> +(258) 84 234 6789</span></h6>
-											</div>
-										</div>
-									</div>
+									<div th:replace="fragments/general :: dadosCandidato"></div>
 									<!--end card-header-->
 								</div><!--end col-->
 								<div class="col-lg-12">
@@ -101,17 +85,19 @@
 											<!--end col-->
 											<div class="col-lg-3 col-6">
 												<p class="text-muted mb-2 text-uppercase fw-semibold">Date</p>
-												<h5 class="fs-15 mb-0"><span id="invoice-date">23 Nov, 2021</span> <small class="text-muted" id="invoice-time">02:36PM</small></h5>
+												<h5 class="fs-15 mb-0"><span id="invoice-date" th:text="${#temporals.format(candidatoCurso.getData_registo, 'dd-MM-yyyy')}" >23 Nov, 2021</span>
+													<small class="text-muted" id="invoice-time" th:text="${#temporals.format(candidatoCurso.getData_registo, 'HH:mm')}">02:36PM</small></h5>
 											</div>
 											<!--end col-->
 											<div class="col-lg-3 col-6">
 												<p class="text-muted mb-2 text-uppercase fw-semibold">Estado de pagamento</p>
-												<span class="badge badge-soft-success fs-11" id="payment-status">Pago</span>
+												<span class="badge badge-soft-success fs-11" id="payment-status" th:text="${fatura.estado}">Não Pa go</span>
 											</div>
 											<!--end col-->
 											<div class="col-lg-3 col-6">
 												<p class="text-muted mb-2 text-uppercase fw-semibold">Total Pago</p>
-												<h5 class="fs-15 mb-0"><span id="total-amount">600.00</span> Mts</h5>
+												<h5 class="fs-15 mb-0" th:if="${fatura.estado}!='Nao Pago'"><span id="total-amount" th:text="${fatura.valor}">0.00</span> Mts</h5>
+												<h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'"><span id="total-amount">0.00</span> Mts</h5>
 											</div>
 											<!--end col-->
 										</div>
@@ -150,11 +136,12 @@
 												<tbody id="products-list">
 												<tr>
 													<th scope="row">01</th>
-													<td class="text-start">Engenharia de Tecnologias e Sistemas de Informacao</span>
-														<p class="text-muted mb-0">Laboral</p>
+													<td class="text-start">
+														<span th:text="${candidatoCurso.getId().curso.nome}">Engenharia de Tecnologias e Sistemas de Informacao</span>
+														<p class="text-muted mb-0" th:text="${candidatoCurso.periodo}">Laboral</p>
 													</td>
-													<td>Matematica, Portugues</td>
-													<td class="text-end">600.00 MTs</td>
+													<td th:text="${fatura.getDisciplinas()}">Matematica, Portugues</td>
+													<td class="text-end" th:text="${fatura.valor}">1000.00 MTs</td>
 												</tr>
 												</tbody>
 											</table><!--end table-->
@@ -162,13 +149,9 @@
 										<div class="border-top border-top-dashed mt-2">
 											<table class="table table-borderless table-nowrap align-middle mb-0 ms-auto" style="width:250px">
 												<tbody>
-												<tr>
-													<td>Total por disciplina</td>
-													<td class="text-end">300.00 MTs</td>
-												</tr>
 												<tr class="border-top border-top-dashed fs-15">
 													<th scope="row">Total Pago</th>
-													<th class="text-end">600.00 MTs</th>
+													<th class="text-end" th:text="${fatura.valor}">600.00 MTs</th>
 												</tr>
 												</tbody>
 											</table>
@@ -177,8 +160,8 @@
 										<div class="mt-3">
 											<h6 class="text-muted text-uppercase fw-semibold mb-3">Detalhes de pagamento:</h6>
 											<p class="text-muted mb-1">Metodo de Pagamento: <span class="fw-medium" id="payment-method">Deposito</span></p>
-											<p class="text-muted mb-1">Proprietario: <span class="fw-medium" id="card-holder-name">Fenias Cossa</span></p>
-											<p class="text-muted">Total Amount: <span class="fw-medium" id=""> </span><span id="card-total-amount">600.00</span></p>
+											<p class="text-muted mb-1">Proprietario: <span class="fw-medium" id="card-holder-name"  th:text="|${candidato.nome} ${candidato.apelido}|">Fenias Cossa</span></p>
+											<p class="text-muted">Total Amount: <span class="fw-medium" id=""> </span><span id="card-total-amount" th:text="${fatura.valor}">600.00</span></p>
 										</div>
 										<div class="mt-4">
 											<div class="alert alert-info">

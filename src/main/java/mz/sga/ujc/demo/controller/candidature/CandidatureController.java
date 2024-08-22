@@ -5,10 +5,8 @@
  */
 package mz.sga.ujc.demo.controller.candidature;
 
+import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.model.candidatura.Candidato;
-import mz.sga.ujc.demo.model.parametrization.Distrito;
-import mz.sga.ujc.demo.model.parametrization.Provincia;
-import mz.sga.ujc.demo.model.restricoes.DistritoPK;
 import mz.sga.ujc.demo.repository.auth.ContaRepository;
 import mz.sga.ujc.demo.repository.candidatura.CandidatoRepository;
 import mz.sga.ujc.demo.repository.candidatura.DocumentoRepository;
@@ -38,11 +36,6 @@ public class CandidatureController {
     private final CandidateService candidateService;
     private final ProvinceService provinceService;
     private final DistritoRepository distritoRepository;
-    private final CandidatoRepository candidatoRepository;
-    private final DocumentoRepository documentoRepository;
-    private final ProvinciaRepository provinciaRepository;
-    private final ContaRepository contaRepository;
-    private final EscolaRepostitory escolaRepostitory;
 
     @Autowired
     public CandidatureController(AccountService accountService, CandidateService candidateService, ProvinceService provinceService, DistritoRepository distritoRepository, CandidatoRepository candidatoRepository, DocumentoRepository documentoRepository, ProvinciaRepository provinciaRepository, ContaRepository contaRepository, EscolaRepostitory escolaRepostitory) {
@@ -50,16 +43,14 @@ public class CandidatureController {
         this.candidateService = candidateService;
         this.provinceService = provinceService;
         this.distritoRepository = distritoRepository;
-        this.candidatoRepository = candidatoRepository;
-        this.documentoRepository = documentoRepository;
-        this.provinciaRepository = provinciaRepository;
-        this.contaRepository = contaRepository;
-        this.escolaRepostitory = escolaRepostitory;
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView getForm1(@RequestParam("id") Integer id, ModelMap model) {
+        Conta conta = accountService.getAccountByCode(id);
+        if(conta==null){
+            return  new ModelAndView("redirect:/account/create");
+        }
         ModelAndView mv = new ModelAndView("candidature/register/register","candidato", new Candidato());
         model.addAttribute("provincias", provinceService.provinceList());
         model.addAttribute("distritos", distritoRepository.findAll());
@@ -77,23 +68,8 @@ public class CandidatureController {
    }
 
     @RequestMapping(path = "/getData", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView getData(@RequestParam("candidato") Integer id) {
-        Provincia provincia = provinciaRepository.getReferenceById(
-                candidatoRepository.getReferenceById(id).getDistrito().getId().getProvincia().getId());
-        Distrito distrito = distritoRepository.getReferenceById(
-                new DistritoPK(
-                        candidatoRepository.getReferenceById(id).getDistrito().getId().getId(),
-                        candidatoRepository.getReferenceById(id).getDistrito().getId().getProvincia()
-                ));
-        ModelAndView mv = new ModelAndView("candidature/list/data");
-        mv.addObject("candidato", candidatoRepository.getReferenceById(id));
-        mv.addObject("documento", documentoRepository.getDocumentoByCandidato(candidatoRepository.getReferenceById(id)));
-        mv.addObject("provincia", provincia);
-        mv.addObject("distrito", distrito);
-        mv.addObject("conta", contaRepository.getReferenceByCodigo(candidatoRepository.getReferenceById(id).getCodigo()));
-        mv.addObject("escola", escolaRepostitory.getReferenceByCandidato(candidatoRepository.getReferenceById(id)));
-        return mv;
+        return  candidateService.previewDate(id,new ModelAndView("candidature/list/data"));
     }
 
 }

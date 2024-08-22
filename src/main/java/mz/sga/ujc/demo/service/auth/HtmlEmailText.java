@@ -96,7 +96,6 @@ public class HtmlEmailText {
                 ".blk_parent:first-child, .blk_parent{float:left;}    \n" +
                 ".blk_parent:last-child{float:right;}    \n" +
                 "/*** BMEMBF END ***/    \n" +
-                "    \n" +
                 "table[name=\"bmeMainBody\"], body {background-color:#ffffff;}    \n" +
                 " td[name=\"bmePreHeader\"] {background-color:#ffffff;}    \n" +
                 " td[name=\"bmeHeader\"] {background:#ffffff;background-color:#f5f2d0;}    \n" +
@@ -108,11 +107,9 @@ public class HtmlEmailText {
                 " [name=bmeMainColumnParent] {border-color:transparent;border-width:0px;border-style:none;border-radius:0px;border-collapse:separate;border-spacing:0px;overflow:visible;}    \n" +
                 " [name=bmeMainContentParent] {border-color:transparent;border-width:0px;border-style:none;border-radius:0px;overflow:hidden;}    \n" +
                 " [name=bmeMainContent] {border-color:transparent;border-width:0px;border-style:none;border-radius:0px;border-collapse:separate;border-spacing:0px;overflow:visible;}    \n" +
-                "     \n" +
                 "</style>    \n" +
                 "</head>    \n" +
                 "<body marginheight=0 marginwidth=0 topmargin=0 leftmargin=0 style=\"height: 100% !important; margin: 0; padding: 0; width: 100% !important;min-width: 100%;\">    \n" +
-                "    \n" +
                 "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" name=\"bmeMainBody\" style=\"background-color: rgb(255, 255, 255);\" bgcolor=\"#ffffff\"><tbody><tr><td width=\"100%\" valign=\"top\" align=\"center\">    \n" +
                 "<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" name=\"bmeMainColumnParentTable\" width=\"100%\"><tbody><tr><td name=\"bmeMainColumnParent\" style=\"border: 0px none transparent; border-radius: 0px; border-collapse: separate; border-spacing: 0px; overflow: visible;\">     \n" +
                 "<table name=\"bmeMainColumn\" class=\"bmeMainColumn\" style=\"max-width: 100%; overflow: visible;\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\" width=\"100%\">    <tbody><tr><td width=\"100%\" class=\"blk_container bmeHolder\" name=\"bmePreHeader\" valign=\"top\" align=\"center\" style=\"color: rgb(102, 102, 102); border: 0px none transparent; background-color: rgb(255, 255, 255);\" bgcolor=\"#ffffff\"></td></tr> <tr><td width=\"100%\" class=\"bmeHolder\" valign=\"top\" align=\"center\" name=\"bmeMainContentParent\" style=\"border: 0px none transparent; border-radius: 0px; border-collapse: separate; border-spacing: 0px; overflow: hidden;\">     \n" +
@@ -148,7 +145,6 @@ public class HtmlEmailText {
                 "</table></td></tr></tbody>    \n" +
                 "</table></td></tr></tbody>    \n" +
                 "</table></div>\n" +
-                "\n" +
                 "<div id=\"dv_6\" class=\"blk_wrapper\">    \n" +
                 "<table class=\"blk\" name=\"blk_button\" width=\"600\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><td width=\"20\"></td><td align=\"center\">    \n" +
                 "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" class=\"tblContainer\"><tbody><tr><td height=\"20\"></td></tr><tr><td align=\"center\">    \n" +
@@ -180,7 +176,6 @@ public class HtmlEmailText {
                 "</table></div>\n" +
                 "</td></tr> </tbody>    \n" +
                 "</table> </td></tr>\n" +
-                "\n" +
                 "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" name=\"bmeMainBody\" style=\"background-color: rgb(255, 255, 255);\" bgcolor=\"#ffffff\"><tbody><tr><td width=\"100%\" valign=\"top\" align=\"center\">    \n" +
                 "<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" name=\"bmeMainColumnParentTable\" width=\"100%\"><tbody><tr><td name=\"bmeMainColumnParent\" style=\"border: 0px none transparent; border-radius: 0px; border-collapse: separate; border-spacing: 0px; overflow: visible;\">     \n" +
                 "<table name=\"bmeMainColumn\" class=\"bmeMainColumn\" style=\"max-width: 100%; overflow: visible;\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\" width=\"100%\">    <tbody><tr><td width=\"100%\" class=\"blk_container bmeHolder\" name=\"bmePreHeader\" valign=\"top\" align=\"center\" style=\"color: rgb(102, 102, 102); border: 0px none transparent; background-color: rgb(255, 255, 255);\" bgcolor=\"#ffffff\"></td></tr> <tr><td width=\"100%\" class=\"bmeHolder\" valign=\"top\" align=\"center\" name=\"bmeMainContentParent\" style=\"border: 0px none transparent; border-radius: 0px; border-collapse: separate; border-spacing: 0px; overflow: hidden;\">     \n" +
@@ -192,7 +187,6 @@ public class HtmlEmailText {
                 "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody><tr><td align=\"center\" class=\"bmeImage\" style=\"border-collapse: collapse; padding: 10px 0px; font-size: 15px; color: #0a83f5;\">&copy; UJC. Todos direitos reservados.</td></tr></tbody>    \n" +
                 "</table></td></tr></tbody>    \n" +
                 "</table></div>\n" +
-                "\n" +
                 "</tbody>    \n" +
                 "</table></td></tr></tbody>    \n" +
                 "</table></td></tr></tbody>    \n" +

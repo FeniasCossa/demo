@@ -1,6 +1,7 @@
 package mz.sga.ujc.demo.controller.auth;
 
 import mz.sga.ujc.demo.model.auth.Conta;
+import mz.sga.ujc.demo.repository.auth.ContaRepository;
 import mz.sga.ujc.demo.service.auth.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +15,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
+import static mz.sga.ujc.demo.utils.Constants.EMAILEXISTS;
+
 @Controller
 @RequestMapping("/account")
 public class ContaController {
 
     private final AccountService accountService;
 
+    @Autowired
+    private ContaRepository repository;
     @Autowired
     public ContaController(AccountService accountService) {
         this.accountService = accountService;
@@ -32,8 +37,9 @@ public class ContaController {
     }
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)
-    public String save(@Valid Conta conta, BindingResult result) {
-        if (result.hasErrors()) {
+    public String save(@Valid Conta conta, BindingResult result,ModelMap modelMap) {
+        if (result.hasErrors() || repository.existsByEmail(conta.getEmail())) {
+            modelMap.addAttribute("enailExist", EMAILEXISTS);
             return "account/create";
         }
         accountService.save(conta);
@@ -53,7 +59,7 @@ public class ContaController {
             return new ModelAndView("account/create");
         }
         accountService.edit(conta);
-        return new ModelAndView("redirect:/candidato/register?id"+conta.getCodigo());
+        return new ModelAndView("redirect:/candidato/register?id="+conta.getCodigo());
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)

@@ -59,7 +59,7 @@
                                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                                             <i class="oi oi-check"></i>
                                             <span>
-		  	                                    <strong th:text="|O seu codigo de candidatura é: ${conta.getCodigo()}|"></strong>
+		  	                                    <strong th:text="|O seu codigo de candidatura é: ${conta.codigo}|"></strong>
                                             </span>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
                                                 <label for="validationTooltip04" class="form-label">Género</label>
                                                 <select th:field="*{genero}" class="form-select"
                                                     id="validationTooltip04" required>
-                                                    <option selected disabled value="">Selecione...</option>
+                                                    <option value="">Selecione...</option>
                                                     <option
                                                         th:each="value : ${T(mz.sga.ujc.demo.model.enums.Genero).values()}"
                                                         th:value="${value}" th:text="${value}">Masculino</option>
@@ -139,7 +139,7 @@
                                                 <select th:field="*{distrito.id.id}" class="form-select"
                                                     id="validationTooltip04">
                                                     <option value="0">Selecione ...</option>
-                                                    <option th:each="d : ${distritos}" th:value="${d.id.id}"
+                                                    <option style="display: none;" th:each="d : ${distritos}" th:value="${d.id.id}"
                                                             th:class="|prov_${d.id.provincia.getId()} id|" th:text="${d.nome}">
                                                         Maputo</option>
                                                 </select>
