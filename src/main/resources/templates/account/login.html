@@ -61,7 +61,7 @@
                                                 </div>
                                                 <div class="carousel-inner text-center text-white-50 pb-5">
                                                     <div class="carousel-item active">
-                                                        <p class="fs-15 fst-italic">" Sistema de gestão academica de Universidade Joaquim Chissano "</p>
+                                                        <p class="fs-15 fst-italic">" Sistema de gestão academica de Universidade Joaquim Chissano! "</p>
                                                     </div>
                                                     <div class="carousel-item">
                                                         <p class="fs-15 fst-italic">" Use o seu codigo de candidato para fazer login "</p>
@@ -86,7 +86,7 @@
                                     </div>
 
                                     <div class="mt-4">
-                                        <form th:action="@{/login}" method="post" >
+                                        <form th:action="@{/login}" method="post" th:object="${conta}">
                                             <div class="d-flex justify-content-center">
                                                 <h4 class="text-danger" th:text="${msg}"></h4>
                                             </div>
@@ -97,7 +97,7 @@
 
                                             <div class="mb-3">
                                                 <div class="float-end">
-                                                    <a href="account/recover" class="text-muted">Esqueceu a senha?</a>
+                                                    <a href="/account/recover" class="text-muted">Esqueceu a senha?</a>
                                                 </div>
                                                 <label class="form-label" for="password-input">Senha</label>
                                                 <div class="position-relative auth-pass-inputgroup mb-3">

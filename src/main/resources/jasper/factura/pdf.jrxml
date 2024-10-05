@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pdf" pageWidth="595" pageHeight="570" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3d312d5d-4a90-4203-864f-7616ae4680f2">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="nuit" class="java.lang.String"/>
+	<parameter name="codigo" class="java.lang.Integer"/>
+	<parameter name="telefone" class="java.lang.String"/>
+	<parameter name="createdAt" class="java.util.Date"/>
+	<parameter name="imgJasper" class="java.lang.Object"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<detail>
+		<band height="570" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<image>
+				<reportElement x="232" y="20" width="130" height="100" uuid="58cfe3a0-b774-40b5-85bd-1cfb5d3dfc28"/>
+				<imageExpression><![CDATA[$P{imgJasper}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="120" width="595" height="40" uuid="d7580af7-e88e-40e4-87ea-bddee6a73987"/>
+				<textElement textAlignment="Center">
+					<font size="25"/>
+				</textElement>
+				<text><![CDATA[FACTURA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="40" y="212" width="510" height="2" forecolor="rgba(3, 3, 3, 0.0)" backcolor="#4726ED" uuid="9d95068c-e6e2-4903-ac0f-838c4de5269f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="130" y="170" width="130" height="30" uuid="9cf03aea-ff5a-42c7-988f-45d2996f36f8"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{codigo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="170" width="70" height="30" uuid="518a8813-56a8-4510-8284-c2050164c804"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Codigo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="380" y="170" width="170" height="30" uuid="dec5caed-c882-4e0c-9303-eef6005e5ddb"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nuit: " + $P{nuit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="260" width="122" height="30" uuid="2ecc2599-4a8a-4813-a8a8-0acf62016dea"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[DataPagamento: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="260" width="120" height="30" uuid="6797dea2-04bc-4dd7-8d73-ac69113a8bbc"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createdAt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="300" width="122" height="30" uuid="fda9c4f0-41b0-4816-93d5-ff018601367d"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Telefone: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="300" width="120" height="30" uuid="34724bce-7252-430b-89e2-6e9c017148cb"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{telefone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

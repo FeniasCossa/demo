@@ -18,15 +18,6 @@ public class CandidateController {
         this.candidateService = candidateService;
     }
 
-    @RequestMapping(path = "/fatura", method = RequestMethod.GET)
-    public String getFactura() {
-        return "candidature/list/invoice";
-    }
-
-    @RequestMapping(path = "/payment", method = RequestMethod.GET)
-    public ModelAndView payment(@RequestParam("redindn-00409-0000-Join") Integer id){
-       return candidateService.getData(id,new ModelAndView("candidate/payment"));
-    }
     @RequestMapping(path = "/local", method = RequestMethod.GET)
     public ModelAndView local(@RequestParam("redindn-00409-w44500-Join") Integer id){
        return candidateService.getData(id,new ModelAndView("candidate/local"));
@@ -35,4 +26,5 @@ public class CandidateController {
     public ModelAndView result(@RequestParam("redindn-00409-3390d0-Join") Integer id){
         return candidateService.getData(id,new ModelAndView( "candidate/result"));
     }
+
 }

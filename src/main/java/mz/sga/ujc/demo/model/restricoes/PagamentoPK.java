@@ -1,18 +1,12 @@
 package mz.sga.ujc.demo.model.restricoes;
 
-import java.io.Serializable;
+import lombok.*;
+import mz.sga.ujc.demo.model.candidatura.Candidato;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import mz.sga.ujc.demo.model.candidatura.Candidato;
-import mz.sga.ujc.demo.model.candidatura.Curso;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -29,7 +23,4 @@ public class PagamentoPK implements Serializable{
     @JoinColumn(name = "candidato_id")
     private Candidato candidato;
 
-    @ManyToOne
-    @JoinColumn(name = "curso_id")
-    private Curso curso;
 }

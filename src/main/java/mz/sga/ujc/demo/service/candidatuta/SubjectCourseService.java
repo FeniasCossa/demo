@@ -66,16 +66,16 @@ public class SubjectCourseService {
         factura.setNome(pagamento.getId().getCandidato().getNome()+ " "+ pagamento.getId().getCandidato().getApelido());
         factura.setCodigo(pagamento.getId().getCandidato().getCodigo());
         factura.setSexo(pagamento.getId().getCandidato().getGenero());
-        factura.setCurso(pagamento.getId().getCurso().getNome());
+        factura.setCurso(pagamento.getCurso().getNome());
         factura.setUniversidade("UJC");
         factura.setValor(pagamento.getValor());
         factura.setEntidade("1000918249");
         factura.setReferencia("897167665455566");
         factura.setEstado(pagamento.getEstado());
-        factura.setData_registo(pagamento.getData_pagamento());
+        factura.setData_registo(pagamento.getCreatedAt());
         listaDisciplinaCurso = disciplinaCursoRepository.findAll();
         for (DisciplinaCurso disciplinaCurso : listaDisciplinaCurso)
-            if (Objects.equals(disciplinaCurso.getId().getCurso().getId(), pagamento.getId().getCurso().getId()))
+            if (Objects.equals(disciplinaCurso.getId().getCurso().getId(), pagamento.getCurso().getId()))
                 discipline.append(disciplinaCurso.getId().getDisciplina().getNome()).append(", ");
         discipline.deleteCharAt(discipline.lastIndexOf(", "));
          factura.setDisciplinas(discipline.toString());

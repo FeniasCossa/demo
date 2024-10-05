@@ -13,8 +13,7 @@ import java.util.Date;
  * @author Fenias Cossa
  */
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -40,7 +39,6 @@ public class Conta {
     @Size(max = 9, min = 9, message = "O campo telefone só deve ter {max} digitos")
     private String telefone;
 
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "perfil_id")
     private Perfil perfil;
@@ -54,5 +52,4 @@ public class Conta {
     @Column(name = "updated_at",columnDefinition = "datetime")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date updatedAt;
-
 }

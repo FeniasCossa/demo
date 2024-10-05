@@ -45,7 +45,6 @@ public class CursoController {
     @RequestMapping(path = "/regist", method = RequestMethod.GET)
     public ModelAndView getCourses(@RequestParam("id") Integer id) {
         Candidato candidato=candidateService.getCandidateByCode(id);
-        System.out.println(candidato);
         if(candidato==null){
             return new ModelAndView("redirect:/candidato/register?id="+id);
         }
@@ -74,6 +73,8 @@ public class CursoController {
         if(pagamento == null){
             return new ModelAndView("redirect:/course/regist?id="+ candidateService.getCandidateByCode(id).getCodigo());
         }
-        return new ModelAndView("candidature/list/invoice","fatura", subjectCourseService.getFactura(pagamento));
+        ModelAndView mv= new ModelAndView("candidature/list/invoice","fatura", subjectCourseService.getFactura(pagamento));
+        mv.addObject("pagamento", pagamento);
+        return mv;
     }
 }

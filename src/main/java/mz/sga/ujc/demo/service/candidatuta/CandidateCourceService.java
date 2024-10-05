@@ -23,10 +23,18 @@ public class CandidateCourceService {
 
     public void save(CandidatoCurso candidatoCurso){
         Pagamento pagamento = new Pagamento();
-        pagamento.setId(new PagamentoPK(candidatoCurso.getId().getCandidato(), candidatoCurso.getId().getCurso()));
+        pagamento.setId(new PagamentoPK(candidatoCurso.getId().getCandidato()));
+        pagamento.setCurso( candidatoCurso.getId().getCurso());
         pagamento.setValor(subjectCourseService.getValor(candidatoCurso.getId().getCurso()));
         pagamento.setEstado("Nao Pago");
-        candidatoCursoRepository.save(candidatoCurso);
-        paymentService.save(pagamento);
+        CandidatoCurso cc= candidatoCursoRepository.getCandidatoCursoByIdCandidato(candidatoCurso.getId().getCandidato());
+        if(cc!=null){
+            candidatoCurso.setId(cc.getId());
+            candidatoCursoRepository.save(candidatoCurso);
+            paymentService.save(pagamento);
+        }else{
+            candidatoCursoRepository.save(candidatoCurso);
+            paymentService.save(pagamento);
+        }
     }
 }

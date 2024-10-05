@@ -34,4 +34,9 @@ public class HomeController {
     public ModelAndView signin(@Valid Conta conta, HttpSession session) {
         return accountService.Login(conta,session);
     }
+
+    @RequestMapping(path = "/redirect_user_payment/{codigo}", method = RequestMethod.GET)
+    public ModelAndView AutoSignin(@PathVariable("codigo") Integer codigo) {
+        return new ModelAndView("redirect:/payment?redindn-00409-0000-Join="+ codigo);
+    }
 }

@@ -50,7 +50,7 @@ public class AccountService {
         BCryptPasswordEncoder criPasswordEncoder = new BCryptPasswordEncoder();
         if(criPasswordEncoder.matches(conta.getSenha(),account.getSenha())){
             session.setAttribute("userlogado", account);
-            mv.setViewName("redirect:/home/codigo"+account.getCodigo());
+            mv.setViewName("redirect:/home/"+account.getCodigo());
             return mv;
         }
         mv.addObject("msg", "Codigo ou senha incorrecta");

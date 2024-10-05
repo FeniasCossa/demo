@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import static mz.sga.ujc.demo.utils.Constants.*;
+import static mz.sga.ujc.demo.utils.Utilities.*;
 @Service
 public class EmailService {
 

@@ -20,6 +20,8 @@
     <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- Sweet Alert css-->
+    <link href="/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -47,7 +49,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th class="ps-0" scope="row">Codigo :</th>
-                                                                <td class="text-muted" th:text="${fatura.getCodigo()}">10000085</td>
+                                                                <td class="text-muted" id="codigo" th:text="${fatura.getCodigo()}"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -83,7 +85,7 @@
                                                         <tbody>
                                                         <tr>
                                                             <th class="ps-0" scope="row">Data :</th>
-                                                            <td class="text-muted" th:text="${fatura.getData_registo()}">Masculino</td>
+                                                            <td class="text-muted" id="data" th:text="${fatura.getData_registo()}">Masculino</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -131,7 +133,8 @@
                                                 <div class="hstack gap-2 justify-content-end d-print-none mt-4">
                                                     <a href="javascript:window.print()" class="btn btn-info"><i class="ri-printer-line align-bottom me-1"></i> Imprimir factura</a>
                                                     <a href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i> Baixar factura</a>
-                                                    <a th:href="|@{/redirect_user_payment/}${fatura.getCodigo()}|" class="btn btn-primary"><i class="ri-bank-card-line align-bottom me-1"></i>Efectuar pagamento</a>
+                                                    <button th:value="${pagamento.valor}" type="button" class="btn btn-primary getValue" id="custom-sa-community"><i class="ri-bank-card-line align-bottom me-1"></i>Efectuar pagamento</button>
+                                                    <a th:href="|@{/home/}${fatura.getCodigo()}|" class="btn btn-primary"><i class="ri-home-2-line align-bottom me-1"></i>Pagina Home</a>
                                                 </div>
                                             </div>
                                             <!--end row-->
@@ -164,10 +167,17 @@
             <!-- form wizard init -->
             <script th:src="@{/assets/js/pages/form-wizard.init.js}"></script>
             <script th:src="@{/assets/js/pages/form-validation.init.js}"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
 
             <!-- App js -->
             <script th:src="@{/assets/js/app.js}"></script>
+
+            <!-- Sweet Alerts js -->
+            <script src="/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+            <!-- Sweet alert init js-->
+            <script src="/assets/js/pages/sweetalerts.init.js"></script>
+
             <script type="text/javascript" th:src="@{/js/index.js}"></script>
 </body>
 
