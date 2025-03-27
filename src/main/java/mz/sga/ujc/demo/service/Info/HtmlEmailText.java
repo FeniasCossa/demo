@@ -1,4 +1,4 @@
-package mz.sga.ujc.demo.service.auth;
+package mz.sga.ujc.demo.service.Info;
 
 import org.springframework.stereotype.Service;
 

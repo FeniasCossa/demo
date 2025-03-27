@@ -1,5 +1,6 @@
 package mz.sga.ujc.demo.service.candidatuta;
 
+import mz.sga.ujc.demo.model.admin.Provenence;
 import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.model.candidatura.CandidatoCurso;
@@ -21,6 +22,8 @@ import mz.sga.ujc.demo.service.payment.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Service
 public class CandidateService {
@@ -55,6 +58,14 @@ public class CandidateService {
         candidato.setCodigo(code);
         candidato.setConta(accountService.getAccountByCode(code));
         repository.save(candidato);
+    }
+
+    public List<Provenence> listProvinceAndQuantity() {
+        return candidatoRepository.ListNameAndQuantity();
+    }
+
+    public long CountAll(){
+        return candidatoRepository.count();
     }
 
     public Candidato getCandidateByCode(Integer codigo) {

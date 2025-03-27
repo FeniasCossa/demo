@@ -1,7 +1,7 @@
 package mz.sga.ujc.demo.model.exame;
 
 import lombok.*;
-import mz.sga.ujc.demo.model.restricoes.Realizacao_ExamePk;
+import mz.sga.ujc.demo.model.restricoes.ResultadoPk;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -22,7 +22,7 @@ import java.sql.Date;
 public class Resultado {
     
     @EmbeddedId
-    private Realizacao_ExamePk id;
+    private ResultadoPk id;
 
     @Column(name = "nota")
     @Size(max = 20, message = "A nota só pode estar no intervalo de 0 a {max}")

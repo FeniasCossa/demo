@@ -1,4 +1,4 @@
-package mz.sga.ujc.demo.service.auth;
+package mz.sga.ujc.demo.service.Info;
 
 
 import java.io.BufferedReader;
@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SmsSender {
+public class SmsSender implements Runnable{
 
     private static Logger logger = Logger.getLogger(SmsSender.class.getName());
 
@@ -24,8 +24,12 @@ public class SmsSender {
     private static final String USSD_GW_PING_URL = "http://172.16.100.2:8080/sms/ping";
     private static final String SMS_GW_URL = "http://172.16.100.2:8080/sms/send";
     private URL url, ping_url;
+    private long to;
+    private String text;
 
-    public SmsSender() {
+    public SmsSender(long to, String text) {
+        this.to=to;
+        this.text=text;
         // smsDao = new SMSDAO();
         // TODO Auto-generated constructor stub
         try {
@@ -97,5 +101,10 @@ public class SmsSender {
             e.printStackTrace();
         }
         return responseCode;
+    }
+
+    @Override
+    public void run() {
+        send(to,text);
     }
 }

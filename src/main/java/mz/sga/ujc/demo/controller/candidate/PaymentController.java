@@ -1,9 +1,8 @@
 package mz.sga.ujc.demo.controller.candidate;
 
-import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.model.candidatura.Pagamento;
+import mz.sga.ujc.demo.service.Info.SmsSender;
 import mz.sga.ujc.demo.service.auth.AccountService;
-import mz.sga.ujc.demo.service.auth.SmsSender;
 import mz.sga.ujc.demo.service.candidatuta.CandidateService;
 import mz.sga.ujc.demo.service.payment.PaymentService;
 import org.slf4j.Logger;
@@ -18,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
-import static mz.sga.ujc.demo.utils.Utilities.*;
+import static mz.sga.ujc.demo.utils.Utilities.SUCCESSFULLYPAYMENT;
 
 @Controller
 @RequestMapping("/payment")
@@ -33,7 +32,7 @@ public class PaymentController {
         this.candidateService = candidateService;
         this.paymentService = paymentService;
         this.accountService = accountService;
-        logger.info("Initializing PaymentService ...");
+        logger.info("Initializing PaymentController ...");
     }
 
     @RequestMapping(path = "", method = RequestMethod.GET)
@@ -48,9 +47,12 @@ public class PaymentController {
         }
         logger.info("saving payment detail ... by "+pagamento.getId().getCandidato().getCodigo()+" name: "+pagamento.getId().getCandidato().getNome());
         paymentService.save(pagamento);
-        SmsSender sms= new SmsSender();
-        Conta conta= accountService.getAccountByCode(pagamento.getId().getCandidato().getCodigo());
-        sms.send(Long.parseLong(conta.getTelefone()),SUCCESSFULLYPAYMENT);
+
+        logger.info("sending sms to candidate ... "+ pagamento.getId().getCandidato().getCodigo());
+        SmsSender sms= new SmsSender(Long.parseLong(accountService.getAccountByCode(pagamento.getId().getCandidato().getCodigo()).getTelefone()),SUCCESSFULLYPAYMENT);
+        Thread thread = new Thread(sms);
+        thread.start();
+
         return payment(pagamento.getId().getCandidato().getCodigo());
     }
 }

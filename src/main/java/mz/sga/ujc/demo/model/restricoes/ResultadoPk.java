@@ -3,8 +3,6 @@ package mz.sga.ujc.demo.model.restricoes;
 import lombok.*;
 import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.model.exame.Exame;
-import mz.sga.ujc.demo.model.parametrization.Escola;
-import mz.sga.ujc.demo.model.parametrization.Provincia;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
@@ -19,8 +17,8 @@ import java.io.Serializable;
 
 // @Embeddable serve para indicar que essa tabela possui uma chave composta.
 @Embeddable
-public class Realizacao_ExamePk implements Serializable{
-    
+public class ResultadoPk implements Serializable {
+
     @ManyToOne
     @JoinColumn(name = "exame_id")
     private Exame exame;
@@ -29,11 +27,4 @@ public class Realizacao_ExamePk implements Serializable{
     @JoinColumn(name = "candidato_id")
     private Candidato candidato;
 
-    @ManyToOne
-    @JoinColumn(name = "provincia_id")
-    private Provincia provincia;
-
-    @ManyToOne
-    @JoinColumn(name = "escola_id")
-    private Escola escola;
 }

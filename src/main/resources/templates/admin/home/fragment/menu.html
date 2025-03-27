@@ -1,0 +1,72 @@
+<div class="app-menu navbar-menu" th:fragment="menu">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+        <!-- Dark Logo-->
+        <a href="/" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="/img/ujc.png" alt="" height="22">
+                    </span>
+            <span class="logo-lg">
+                        <img src="/img/ujc.png" alt="" height="17">
+                    </span>
+        </a>
+        <!-- Light Logo-->
+        <a href="/" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="/img/ujc.png" alt="" height="22">
+                    </span>
+            <span class="logo-lg">
+                        <img src="/img/ujc.png" alt="" height="17">
+                    </span>
+        </a>
+        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+            <i class="ri-record-circle-line"></i>
+        </button>
+    </div>
+
+    <div id="scrollbar">
+        <div class="container-fluid">
+
+            <div id="two-column-menu">
+            </div>
+            <ul class="navbar-nav" id="navbar-nav">
+                <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="bx bx-home"></i> <span data-key="t-widgets">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="bx bxs-school"></i> <span data-key="t-widgets">Instituição e Sala</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="bx bx-trophy"></i> <span data-key="t-widgets">Resultados</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="ri-bank-card-line"></i> <span data-key="t-widgets">Pagamentos</span>
+                    </a>
+                </li>
+                <!-- end Dashboard Menu -->
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+    <div class="sidebar-background"></div>
+</div>
+
+<div class="row mb-3 pb-1" th:fragment="greet">
+    <div class="col-12">
+        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+            <div class="flex-grow-1">
+                <h4 class="fs-16 mb-1">Saudações, ADMIN!</h4>
+                <p class="text-muted mb-0">Veja o que está a acontecer com os candidatos hoje.</p>
+            </div>
+        </div><!-- end card header -->
+    </div>
+    <!--end col-->
+</div>

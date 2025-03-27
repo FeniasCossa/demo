@@ -2,10 +2,12 @@ package mz.sga.ujc.demo.model.candidatura;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
 @Getter
 @Setter
+@ToString
 public class Factura {
     private Integer codigo;
     private String nome;
@@ -18,4 +20,7 @@ public class Factura {
     private String referencia;
     private String estado;
     private Date data_registo;
+    private String bank;
+    private String metodo;
+    private Date dataPagamento;
 }

@@ -52,7 +52,7 @@ addEventListener("click",function(){
             '<p class="fs-13 text-muted mb-0">Pretende pagar depois ? ' +
             '<a href="/home/'+c+'" class="fw-semibold text-decoration-underline">aceder a pagina principal </a> ' +
             '</p>',imageHeight:40,confirmButtonClass:"btn btn-primary w-xs mb-2",
-        confirmButtonText:'Sair <i class="ri-arrow-right-line ms-1 align-bottom"></i>',
+        confirmButtonText:'<i class="ri-close-line ms-1 align-bottom"></i> Fechar',
         buttonsStyling:!1,
         showCloseButton:!0})}),
 

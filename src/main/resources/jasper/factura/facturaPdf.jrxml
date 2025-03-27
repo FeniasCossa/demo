@@ -10,7 +10,6 @@
 	<parameter name="referencia" class="java.lang.String"/>
 	<parameter name="valor" class="java.lang.Double"/>
 	<parameter name="banco" class="java.lang.String"/>
-	<parameter name="dataPagamento" class="java.util.Date"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -22,24 +21,24 @@
 				<imageExpression><![CDATA[$P{imgJasper}]]></imageExpression>
 			</image>
 			<rectangle>
-				<reportElement x="38" y="459" width="620" height="1" forecolor="rgba(3, 3, 3, 0.0)" backcolor="#4726ED" uuid="9d95068c-e6e2-4903-ac0f-838c4de5269f">
+				<reportElement x="40" y="430" width="620" height="1" forecolor="rgba(3, 3, 3, 0.0)" backcolor="#4726ED" uuid="9d95068c-e6e2-4903-ac0f-838c4de5269f">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</rectangle>
 			<textField>
-				<reportElement x="41" y="384" width="616" height="30" uuid="9cf03aea-ff5a-42c7-988f-45d2996f36f8"/>
+				<reportElement x="40" y="330" width="616" height="30" uuid="9cf03aea-ff5a-42c7-988f-45d2996f36f8"/>
 				<textElement>
 					<font size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Curso: "+$P{curso}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="351" y="230" width="308" height="30" uuid="6797dea2-04bc-4dd7-8d73-ac69113a8bbc"/>
+				<reportElement x="412" y="218" width="248" height="30" uuid="6797dea2-04bc-4dd7-8d73-ac69113a8bbc"/>
 				<textElement>
 					<font size="16"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Data de pagamento: "+$P{dataPagamento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Emitido em: "+$P{createdAt}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="120" width="700" height="30" uuid="45cb03dd-8b38-4ef3-a41b-11bc4bf0b57d"/>
@@ -56,7 +55,7 @@
 				<text><![CDATA[JOAQUIM CHISSANO]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="40" y="340" width="620" height="1" forecolor="rgba(3, 3, 3, 0.0)" backcolor="#4726ED" uuid="87607064-79e1-4d77-8ca6-34b70604711a">
+				<reportElement x="39" y="286" width="620" height="1" forecolor="rgba(3, 3, 3, 0.0)" backcolor="#4726ED" uuid="87607064-79e1-4d77-8ca6-34b70604711a">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -66,63 +65,43 @@
 				<textElement textAlignment="Center">
 					<font fontName="Impact" size="22"/>
 				</textElement>
-				<text><![CDATA[COMPROVATIVO DE PAGAMENTO]]></text>
+				<text><![CDATA[FACTURA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="40" y="310" width="619" height="30" uuid="64856fd8-78b1-40a6-9d98-fd3b6ebdda8a"/>
+				<reportElement x="39" y="256" width="619" height="30" uuid="64856fd8-78b1-40a6-9d98-fd3b6ebdda8a"/>
 				<textElement textAlignment="Left">
 					<font fontName="Impact" size="22" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Dados do candidato:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="40" y="349" width="360" height="30" uuid="e26fc8c0-90f8-4902-99de-b21487669a3d"/>
+				<reportElement x="39" y="295" width="360" height="30" uuid="e26fc8c0-90f8-4902-99de-b21487669a3d"/>
 				<textElement>
 					<font size="16"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Candidato: "+ $P{nome}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Candidato: "+ $P{nome}
+]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="438" y="349" width="220" height="30" uuid="662834fe-0215-4781-9c51-6bea8a761f9f"/>
+				<reportElement x="437" y="295" width="220" height="30" uuid="662834fe-0215-4781-9c51-6bea8a761f9f"/>
 				<textElement>
 					<font size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Codigo: "+$P{codigo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="39" y="429" width="619" height="30" uuid="04ddd99f-baf8-4396-b207-49fd26392737"/>
+				<reportElement x="41" y="400" width="619" height="30" uuid="04ddd99f-baf8-4396-b207-49fd26392737"/>
 				<textElement textAlignment="Left">
 					<font fontName="Impact" size="22" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Outras Informações]]></text>
+				<text><![CDATA[Informação para pagamento: ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="38" y="469" width="618" height="50" uuid="86fb2eda-6940-4089-9d91-d1610289ed46"/>
-				<textElement textAlignment="Justified">
-					<font size="16"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Use este comprovativo caso seja exigido no dia da realização de exames de admissão para UJC"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="351" y="290" width="308" height="30" uuid="2aacbfd0-e7d9-421d-94f8-7f3d51bf1b25"/>
+				<reportElement x="40" y="440" width="618" height="30" uuid="86fb2eda-6940-4089-9d91-d1610289ed46"/>
 				<textElement>
 					<font size="16"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Pagamento via: "+$P{banco}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="351" y="259" width="308" height="30" uuid="0d5372a8-cc7b-4a97-9762-644b8a3e375e"/>
-				<textElement>
-					<font size="16"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Valor Pago: "+$P{valor}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="40" y="519" width="460" height="30" uuid="68c334ac-4ffd-4dc6-bce6-adb31a2c5914"/>
-				<textElement textAlignment="Justified">
-					<font size="16"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Entidade: "+$P{entidade}+ " e Referencia: "+$P{referencia}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Entidade: "+$P{entidade}+ ",   Referencia: "+$P{referencia}+",  Valor: "+ $P{valor}+",   Banco: " + $P{banco}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

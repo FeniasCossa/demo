@@ -68,6 +68,9 @@ public class SubjectCourseService {
         factura.setSexo(pagamento.getId().getCandidato().getGenero());
         factura.setCurso(pagamento.getCurso().getNome());
         factura.setUniversidade("UJC");
+        factura.setBank("BCI");
+        factura.setMetodo(pagamento.getMetodoPagamento());
+        factura.setDataPagamento(pagamento.getData_pagamento());
         factura.setValor(pagamento.getValor());
         factura.setEntidade("1000918249");
         factura.setReferencia("897167665455566");

@@ -85,7 +85,7 @@
                                                         <tbody>
                                                         <tr>
                                                             <th class="ps-0" scope="row">Data :</th>
-                                                            <td class="text-muted" id="data" th:text="${fatura.getData_registo()}">Masculino</td>
+                                                            <td class="text-muted" id="data" th:text="${#dates.format(fatura.getData_registo(), 'dd-MM-yyyy : HH:mm')}">Masculino</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -131,54 +131,63 @@
 
                                                 <!--end col-->
                                                 <div class="hstack gap-2 justify-content-end d-print-none mt-4">
-                                                    <a href="javascript:window.print()" class="btn btn-info"><i class="ri-printer-line align-bottom me-1"></i> Imprimir factura</a>
-                                                    <a href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i> Baixar factura</a>
-                                                    <button th:value="${pagamento.valor}" type="button" class="btn btn-primary getValue" id="custom-sa-community"><i class="ri-bank-card-line align-bottom me-1"></i>Efectuar pagamento</button>
+                                                    <h5 class="fs-15 mb-0" th:if="${fatura.estado}!='Pago'">
+                                                        <form th:action="|@{/jasper-report/factura/pdf/}${fatura.getCodigo()}|" method="post">
+                                                            <button type="submit" href="javascript:void(0);" class="btn btn-info"><i class="ri-download-2-line align-bottom me-1"></i> Baixar factura</button>
+                                                        </form>
+                                                        <button th:value="${pagamento.valor}" type="button" class="btn btn-primary getValue" id="custom-sa-community">
+                                                            <i class="ri-bank-card-line align-bottom me-1"></i>Efectuar pagamento
+                                                        </button>
+                                                    </h5>
+                                                    <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Pago'">
+                                                        <form th:action="|@{/jasper-report/payment/pdf/}${fatura.getCodigo()}|" method="post">
+                                                            <button class="btn btn-info" type="submit">Baixar Comprovativo de pagamento</button>
+                                                        </form>
+                                                    </h5>
                                                     <a th:href="|@{/home/}${fatura.getCodigo()}|" class="btn btn-primary"><i class="ri-home-2-line align-bottom me-1"></i>Pagina Home</a>
                                                 </div>
                                             </div>
                                             <!--end row-->
                                         </div>
-
                                     </div><!-- end card-body -->
                                 </div><!-- end card -->
                             </div>
                             <!-- end col -->
                         </div>
                         <!--end row-->
-
-
                         <!--End form enter-->
                     </div>
-                    <!-- End Page-content -->
                 </div>
-                <!-- end main content-->
             </div>
-            <!-- END layout-wrapper -->
+            <!-- End Page-content -->
+        </div>
+        <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->
 
-            <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT -->
+    <script th:src="@{/assets/libs/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/assets/libs/simplebar/simplebar.min.js}"></script>
+    <script th:src="@{/assets/libs/node-waves/waves.min.js}"></script>
+    <script th:src="@{/assets/libs/feather-icons/feather.min.js}"></script>
+    <script th:src="@{/assets/js/pages/plugins/lord-icon-2.1.0.js}"></script>
+    <script th:src="@{/assets/js/plugins.js}"></script>
+    <!-- form wizard init -->
+    <script th:src="@{/assets/js/pages/form-wizard.init.js}"></script>
+    <script th:src="@{/assets/js/pages/form-validation.init.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
 
-            <script th:src="@{/assets/libs/bootstrap/js/bootstrap.bundle.min.js}"></script>
-            <script th:src="@{/assets/libs/simplebar/simplebar.min.js}"></script>
-            <script th:src="@{/assets/libs/node-waves/waves.min.js}"></script>
-            <script th:src="@{/assets/libs/feather-icons/feather.min.js}"></script>
-            <script th:src="@{/assets/js/pages/plugins/lord-icon-2.1.0.js}"></script>
-            <script th:src="@{/assets/js/plugins.js}"></script>
-            <!-- form wizard init -->
-            <script th:src="@{/assets/js/pages/form-wizard.init.js}"></script>
-            <script th:src="@{/assets/js/pages/form-validation.init.js}"></script>
-            <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <!-- App js -->
+    <script th:src="@{/assets/js/app.js}"></script>
 
-            <!-- App js -->
-            <script th:src="@{/assets/js/app.js}"></script>
+    <!-- Sweet Alerts js -->
+    <script src="/assets/libs/sweetalert2/sweetalert2.min.js"></script>
 
-            <!-- Sweet Alerts js -->
-            <script src="/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Sweet alert init js-->
+    <script src="/assets/js/pages/sweetalerts.init.js"></script>
 
-            <!-- Sweet alert init js-->
-            <script src="/assets/js/pages/sweetalerts.init.js"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
 
-            <script type="text/javascript" th:src="@{/js/index.js}"></script>
 </body>
 
 </html>

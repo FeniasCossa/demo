@@ -1,7 +1,7 @@
 package mz.sga.ujc.demo.model.exame;
 
 import lombok.*;
-import mz.sga.ujc.demo.model.restricoes.Realizacao_ExamePk;
+import mz.sga.ujc.demo.model.restricoes.RealizacaoExamePk;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,13 +20,11 @@ import java.sql.Date;
 @ToString
 @Entity
 @Table(name = "realizacao_exame")
-public class Realizacao_Exame {
+public class RealizacaoExame {
     
     @EmbeddedId
-    private Realizacao_ExamePk id;
+    private RealizacaoExamePk id;
 
-    @Column(name = "local_realizacao")
-    private String local;
 
     @DateTimeFormat(iso=ISO.DATE)
     @Column(name = "datat_realizacao", columnDefinition = "DATE")

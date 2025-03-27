@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import mz.sga.ujc.demo.model.restricoes.Candidato_CursoPk;
+import mz.sga.ujc.demo.model.restricoes.CandidatoCursoPk;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 public class CandidatoCurso {
     
     @EmbeddedId
-    private Candidato_CursoPk id;
+    private CandidatoCursoPk id;
 
     @Column(nullable = false)
     private String periodo;

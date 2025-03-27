@@ -86,20 +86,20 @@
                                             </div>
                                             <!--end col-->
                                             <div class="col-lg-3 col-6">
-                                                <p class="text-muted mb-2 text-uppercase fw-semibold">Date</p>
-                                                <h5 class="fs-15 mb-0"><span id="invoice-date" th:text="${#temporals.format(candidatoCurso.getData_registo, 'dd-MM-yyyy')}" >23 Nov, 2021</span>
-                                                    <small class="text-muted" id="invoice-time" th:text="${#temporals.format(candidatoCurso.getData_registo, 'HH:mm')}">02:36PM</small></h5>
+                                                <p class="text-muted mb-2 text-uppercase fw-semibold">Data de pagamento</p>
+                                                <h5 class="fs-15 mb-0"><span id="invoice-date" th:text="${#dates.format(fatura.dataPagamento, 'dd-MM-yyyy')}" >23 Nov, 2021</span>
+                                                    <small class="text-muted" id="invoice-time" th:text="${#dates.format(fatura.dataPagamento, 'HH:mm')}">02:36PM</small></h5>
                                             </div>
                                             <!--end col-->
                                             <div class="col-lg-3 col-6">
                                                 <p class="text-muted mb-2 text-uppercase fw-semibold">Estado de pagamento</p>
-                                                <span class="badge badge-soft-success fs-11" id="payment-status" th:text="${fatura.estado}">Não Pa go</span>
+                                                <span class="badge badge-soft-success fs-11" id="payment-status" th:text="${fatura.estado}">Não Pago</span>
                                             </div>
                                             <!--end col-->
                                             <div class="col-lg-3 col-6">
                                                 <p class="text-muted mb-2 text-uppercase fw-semibold">Total Pago</p>
-                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}!='Nao Pago'"><span id="total-amount" th:text="${fatura.valor}">0.00</span> Mts</h5>
                                                 <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'"><span id="total-amount">0.00</span> Mts</h5>
+                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Pago'"><span id="total-paid" th:text="${fatura.valor}">0.00</span> Mts</h5>
                                             </div>
                                             <!--end col-->
                                         </div>
@@ -108,12 +108,12 @@
                                     <!--end card-body-->
                                 </div><!--end col-->
                                 <div class="card-body p-4">
-                                    <form class="row g-3 needs-validation" action="/payment" method="post" novalidate >
+                                    <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'">
+                                    <form class="row g-3 needs-validation" action="/payment/save/" method="post" novalidate >
                                         <!--end col-->
                                         <div class="col-lg-3 col-sm-6">
                                             <label for="validationCustom04">Metodo de pagamento</label>
                                             <div class="input-light">
-                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'">
                                                 <select class="form-control bg-light border-1" data-choices data-choices-search-false id="validationCustom04" required>
                                                     <option value="">Selecione ... </option>
                                                     <option value="Paid">MPESA</option>
@@ -121,16 +121,6 @@
                                                     <option value="Refund">BIM</option>
                                                     <option value="Refund">BCI</option>
                                                 </select>
-                                                </h5>
-                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}!='Nao Pago'">
-                                                    <select disabled class="form-control bg-light border-1" data-choices data-choices-search-false id="validationCustom04" required>
-                                                        <option th:value="${f}">Selecione ... </option>
-                                                        <option value="Paid">MPESA</option>
-                                                        <option value="Unpaid">EMOLA</option>
-                                                        <option value="Refund">BIM</option>
-                                                        <option value="Refund">BCI</option>
-                                                    </select>
-                                                </h5>
                                                 <div class="invalid-feedback">
                                                     Selecione uma opção por favor
                                                 </div>
@@ -150,28 +140,24 @@
                                         <div class="col-lg-3 col-sm-6">
                                             <div>
                                                 <label for="totalamountInput">Total a ser pago</label>
-                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'">
-                                                    <input type="text" th:value="|${fatura.valor} + Mts|" class="form-control bg-light border-0" id="totalamountInput" placeholder="70000.00" readonly />
-                                                </h5>
-                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}!='Nao Pago'">
-                                                    <input type="text" value="0.0 Mts" class="form-control bg-light border-0" id="totalamountInput" placeholder="70000.00" readonly />
-                                                </h5>
+                                                <input type="text" th:value="|${fatura.valor} + Mts|" class="form-control bg-light border-0" id="totalamountInput" placeholder="70000.00" readonly />
                                             </div>
                                         </div>
                                         <!--end col-->
                                         <div class="col-lg-3 col-sm-6">
                                             <div>
                                                 <label>confirme antes de  pagar </label>
-                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'">
-                                                    <button class="btn btn-primary" type="submit">Efetuar o pagamento</button>
-                                                </h5>
-                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}!='Nao Pago'">
-                                                    <button disabled class="btn btn-primary" type="submit">Efetuar o pagamento</button>
-                                                </h5>
+                                                <button class="btn btn-primary" type="submit">Efetuar o pagamento</button>
                                             </div>
                                         </div>
                                         <!--end col-->
                                     </form>
+                                    </h5>
+                                    <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Pago'">
+                                        <form class="row g-3 needs-validation" th:action="|@{/jasper-report/payment/pdf/}${fatura.getCodigo()}|"method="post">
+                                            <button class="btn btn-primary" type="submit">Baixar Comprovativo de pagamento</button>
+                                        </form>
+                                    </h5>
                                     <!--end row end form-->
                                 </div>
                                 <div class="col-lg-12">

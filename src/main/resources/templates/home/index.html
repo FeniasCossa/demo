@@ -9,7 +9,7 @@
 	<title>Invoice Details | UJC</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-	<meta content="Themesbrand" name="author" />
+	<meta content="Themesbrand" name="Fenias Cossa" />
 	<!-- App favicon -->
 	<link rel="shortcut icon" href="/img/ujc.png">
 
@@ -84,7 +84,7 @@
 											</div>
 											<!--end col-->
 											<div class="col-lg-3 col-6">
-												<p class="text-muted mb-2 text-uppercase fw-semibold">Date</p>
+												<p class="text-muted mb-2 text-uppercase fw-semibold">Data de registo</p>
 												<h5 class="fs-15 mb-0"><span id="invoice-date" th:text="${#temporals.format(candidatoCurso.getData_registo, 'dd-MM-yyyy')}" >23 Nov, 2021</span>
 													<small class="text-muted" id="invoice-time" th:text="${#temporals.format(candidatoCurso.getData_registo, 'HH:mm')}">02:36PM</small></h5>
 											</div>
@@ -159,10 +159,11 @@
 										</div>
 										<div class="mt-3">
 											<h6 class="text-muted text-uppercase fw-semibold mb-3">Detalhes de pagamento:</h6>
-											<p class="text-muted mb-1">Metodo de Pagamento: <span class="fw-medium" id="payment-method">Deposito</span></p>
+											<p class="text-muted mb-1">Metodo de Pagamento: Via <span class="fw-medium" id="payment-method" th:text="${fatura.metodo}">Deposito</span></p>
 											<p class="text-muted mb-1">Proprietario: <span class="fw-medium" id="card-holder-name"  th:text="|${candidato.nome} ${candidato.apelido}|">Fenias Cossa</span></p>
 											<p class="text-muted">Total Amount: <span class="fw-medium" id=""> </span><span id="card-total-amount" th:text="${fatura.valor}">600.00</span></p>
 										</div>
+										<h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'">
 										<div class="mt-4">
 											<div class="alert alert-info">
 												<p class="mb-0"><span class="fw-semibold">NOTES:</span>
@@ -174,9 +175,16 @@
 												</p>
 											</div>
 										</div>
+										</h5>
 										<div class="hstack gap-2 justify-content-end d-print-none mt-4">
-											<a href="javascript:window.print()" class="btn btn-info"><i class="ri-printer-line align-bottom me-1"></i> Print</a>
-											<a href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i> Download</a>
+
+											<a href="javascript:window.print()" class="btn btn-info"><i class="ri-printer-line align-bottom me-1"></i> Imprimir</a>
+											<h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'">
+											<button href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i>Baixar Factura</button>
+											</h5>
+											<h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Pago'">
+												<button href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i>Baixar Comprovativo do pagamento</button>
+											</h5>
 										</div>
 									</div>
 									<!--end card-body-->
@@ -214,7 +222,7 @@
 <script src="/assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
 <script src="/assets/js/plugins.js"></script>
 
-<script src="/assets/js/pages/invoicedetails.js"></script>
+<script th:src="@{/assets/js/pages/invoicedetails.js}"></script>
 
 <!-- App js -->
 <script src="/assets/js/app.js"></script>

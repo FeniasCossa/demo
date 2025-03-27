@@ -19,7 +19,7 @@ import java.io.Serializable;
 
 // @Embeddable serve para indicar que essa tabela possui uma chave composta.
 @Embeddable
-public class Candidato_CursoPk implements Serializable{
+public class CandidatoCursoPk implements Serializable{
     
     @ManyToOne
     @JoinColumn(name = "candidato_id")

@@ -3,6 +3,8 @@ package mz.sga.ujc.demo.controller;
 import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.service.auth.AccountService;
 import mz.sga.ujc.demo.service.candidatuta.CandidateService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import javax.validation.Valid;
 @Controller
 public class HomeController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
     private final CandidateService candidateService;
     private final AccountService accountService;
 
@@ -23,15 +26,19 @@ public class HomeController {
     public HomeController(CandidateService candidateService, AccountService accountService) {
         this.candidateService = candidateService;
         this.accountService = accountService;
+        LOGGER.info("Inicializing HomeController ...");
     }
 
     @RequestMapping(path = "/home/{codigo}", method = RequestMethod.GET)
     public ModelAndView home(@PathVariable("codigo") Integer code) {
+        LOGGER.info("Getting info for code - {} to getting Home page ... ",code);
         return candidateService.getData(code,new ModelAndView("home/index"));
     }
 
+
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public ModelAndView signin(@Valid Conta conta, HttpSession session) {
+        LOGGER.info("Authenticating user ... ");
         return accountService.Login(conta,session);
     }
 

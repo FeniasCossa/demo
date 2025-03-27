@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaymentService {
 
-    private static Logger logger = LoggerFactory.getLogger(PaymentService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaymentService.class);
     private final PagamentoRepository pagamentoRepository;
     private final CandidatoCursoRepository candidatoCursoRepository;
     @Autowired
@@ -31,12 +31,13 @@ public class PaymentService {
                 pagamento.setCurso(candidatoCurso.getId().getCurso());
                 pagamento.setEstado("Pago");
                 pagamentoRepository.save(pagamento);
-                logger.info("Payment updated successfully with: {0} by: " + pagamento.getMetodoPagamento(), pagamento.getId().getCandidato().getCodigo() + " -->" + pagamento.getId().getCandidato().getNome());
+                LOGGER.info("Payment updated successfully with: {} by: " + pagamento.getMetodoPagamento(), pagamento.getId().getCandidato().getCodigo() + " -->" + pagamento.getId().getCandidato().getNome());
+            }else {
+                pagamentoRepository.save(pagamento);
+                LOGGER.info("invoice created successfully by: " + pagamento.getId().getCandidato().getCodigo() + " -->" + pagamento.getId().getCandidato().getNome());
             }
-            pagamentoRepository.save(pagamento);
-            logger.info("invoice created successfully by: " + pagamento.getId().getCandidato().getCodigo() + " -->" + pagamento.getId().getCandidato().getNome());
-        }catch (Exception e){
-            logger.warn("Failed to save payment detail");
+            }catch (Exception e){
+            LOGGER.warn("Failed to save payment detail");
             e.printStackTrace();
         }
     }

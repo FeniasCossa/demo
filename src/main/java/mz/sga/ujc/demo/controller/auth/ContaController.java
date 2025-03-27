@@ -3,7 +3,7 @@ package mz.sga.ujc.demo.controller.auth;
 import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.repository.auth.ContaRepository;
 import mz.sga.ujc.demo.service.auth.AccountService;
-import mz.sga.ujc.demo.service.auth.SmsSender;
+import mz.sga.ujc.demo.service.Info.SmsSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,13 +22,13 @@ import static mz.sga.ujc.demo.utils.Utilities.*;
 @RequestMapping("/account")
 public class ContaController {
 
-    private final AccountService accountService;
 
+    private final AccountService accountService;
+    private final ContaRepository repository;
     @Autowired
-    private ContaRepository repository;
-    @Autowired
-    public ContaController(AccountService accountService) {
+    public ContaController(AccountService accountService,ContaRepository repository) {
         this.accountService = accountService;
+        this.repository=repository;
     }
 
     @RequestMapping(path = "/create", method = RequestMethod.GET)
@@ -48,8 +48,9 @@ public class ContaController {
                 return new ModelAndView("account/create","enailExist", NUITEXISTS);
             }else{
                 accountService.save(conta);
-                SmsSender smsSender= new SmsSender();
-                smsSender.send(Long.parseLong(conta.getTelefone()),"Teste pensa: "+conta.getCodigo());
+                SmsSender smsSender = new SmsSender(Long.parseLong(conta.getTelefone()),"Teste pensa: "+conta.getCodigo());
+                Thread thread= new Thread(smsSender);
+                thread.start();
                 String msg = conta.getCodigo() + "_" + conta.getEmail();
                 return new ModelAndView("redirect:/email-send/" + msg);
             }
