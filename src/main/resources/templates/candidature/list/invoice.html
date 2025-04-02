@@ -131,20 +131,20 @@
 
                                                 <!--end col-->
                                                 <div class="hstack gap-2 justify-content-end d-print-none mt-4">
-                                                    <h5 class="fs-15 mb-0" th:if="${fatura.estado}!='Pago'">
-                                                        <form th:action="|@{/jasper-report/factura/pdf/}${fatura.getCodigo()}|" method="post">
+                                                    <h5 class="fs-15 mb-0 d-flex l-2" th:if="${fatura.estado}!='Pago'">
+                                                        <form th:action="|@{/jasper-report/factura/pdf/}${fatura.getCodigo()}|" method="post" class="mx-2">
                                                             <button type="submit" href="javascript:void(0);" class="btn btn-info"><i class="ri-download-2-line align-bottom me-1"></i> Baixar factura</button>
                                                         </form>
                                                         <button th:value="${pagamento.valor}" type="button" class="btn btn-primary getValue" id="custom-sa-community">
                                                             <i class="ri-bank-card-line align-bottom me-1"></i>Efectuar pagamento
                                                         </button>
                                                     </h5>
-                                                    <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Pago'">
+                                                    <h5 class="fs-15 mb-0 l-2" th:if="${fatura.estado}=='Pago'">
                                                         <form th:action="|@{/jasper-report/payment/pdf/}${fatura.getCodigo()}|" method="post">
                                                             <button class="btn btn-info" type="submit">Baixar Comprovativo de pagamento</button>
                                                         </form>
                                                     </h5>
-                                                    <a th:href="|@{/home/}${fatura.getCodigo()}|" class="btn btn-primary"><i class="ri-home-2-line align-bottom me-1"></i>Pagina Home</a>
+                                                    <a th:href="|@{/home/}${fatura.getCodigo()}|" class="l-2 btn btn-primary"><i class="ri-home-2-line align-bottom me-1"></i>Pagina Home</a>
                                                 </div>
                                             </div>
                                             <!--end row-->

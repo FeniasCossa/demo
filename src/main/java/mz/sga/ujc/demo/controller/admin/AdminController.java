@@ -1,7 +1,7 @@
 package mz.sga.ujc.demo.controller.admin;
 
-import mz.sga.ujc.demo.repository.candidatura.PagamentoRepository;
 import mz.sga.ujc.demo.service.candidatuta.CandidateService;
+import mz.sga.ujc.demo.service.payment.PaymentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,11 @@ public class AdminController {
 
 
     private final CandidateService candidateService;
-    private final PagamentoRepository pagamentoRepository;
+    private final PaymentService paymentService;
     @Autowired
-    public AdminController(CandidateService candidateService, PagamentoRepository pagamentoRepository) {
+    public AdminController(CandidateService candidateService, PaymentService paymentService) {
         this.candidateService = candidateService;
-        this.pagamentoRepository = pagamentoRepository;
+        this.paymentService = paymentService;
     }
 
     @RequestMapping(path = "/home/{codigo}", method = RequestMethod.GET)
@@ -32,6 +32,11 @@ public class AdminController {
         ModelAndView mv=new ModelAndView("admin/home/index");
         mv.addObject("count",candidateService.CountAll());
         mv.addObject("provenence",candidateService.listProvinceAndQuantity());
+        mv.addObject("semPagamentos",paymentService.candidatosSemPagamentos());
+        mv.addObject("comPagamentos",paymentService.candidatosComPagamentos());
+        mv.addObject("allpaymant",paymentService.getAllPaymant());
+        mv.addObject("candidateByDate",candidateService.CountAllByDay());
+        System.out.println(candidateService.CountAllByDay());
         return mv;
     }
 }

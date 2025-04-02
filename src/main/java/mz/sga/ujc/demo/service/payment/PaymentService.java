@@ -23,6 +23,15 @@ public class PaymentService {
         this.pagamentoRepository = pagamentoRepository;
         this.candidatoCursoRepository = candidatoCursoRepository;
     }
+    public int candidatosSemPagamentos(){
+        return pagamentoRepository.candidatosSemPagamento();
+    }
+    public int candidatosComPagamentos(){
+        return pagamentoRepository.candidatosComPagamento();
+    }
+    public double getAllPaymant(){
+        return pagamentoRepository.getAllPayment() == null ? 0D : pagamentoRepository.getAllPayment();
+    }
 
     public void save(Pagamento pagamento){
         try {

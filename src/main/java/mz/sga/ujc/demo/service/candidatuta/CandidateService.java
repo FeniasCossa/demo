@@ -1,6 +1,6 @@
 package mz.sga.ujc.demo.service.candidatuta;
 
-import mz.sga.ujc.demo.model.admin.Provenence;
+import mz.sga.ujc.demo.model.admin.Provenance;
 import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.model.candidatura.CandidatoCurso;
@@ -23,7 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.Tuple;
+import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CandidateService {
@@ -60,7 +63,7 @@ public class CandidateService {
         repository.save(candidato);
     }
 
-    public List<Provenence> listProvinceAndQuantity() {
+    public List<Provenance> listProvinceAndQuantity() {
         return candidatoRepository.ListNameAndQuantity();
     }
 
@@ -71,6 +74,20 @@ public class CandidateService {
     public Candidato getCandidateByCode(Integer codigo) {
         return repository.getCandidatoByCodigo(codigo);
     }
+
+    public List<Provenance> CountAllByDay(){
+        return mapTuplesToProvenance(repository.countAllByCreatedAt());
+    }
+
+    public List<Provenance> mapTuplesToProvenance(List<Tuple> tuples) {
+        return tuples.stream().map(tuple -> {
+            Provenance provenance = new Provenance();
+            provenance.setDate(tuple.get("date", Date.class));
+            provenance.setTotalPorDia(tuple.get("totalPorDia", Double.class));
+            return provenance;
+        }).collect(Collectors.toList());
+    }
+
 
     public ModelAndView getData(Integer id, ModelAndView mv){
         Factura factura = subjectCourseService.getFactura(paymentService.getPaymentByCandidate(getCandidateByCode(id)));

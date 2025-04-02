@@ -97,9 +97,8 @@
                                             </div>
                                             <!--end col-->
                                             <div class="col-lg-3 col-6">
-                                                <p class="text-muted mb-2 text-uppercase fw-semibold">Total Pago</p>
-                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'"><span id="total-amount">0.00</span> Mts</h5>
-                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Pago'"><span id="total-paid" th:text="${fatura.valor}">0.00</span> Mts</h5>
+                                                <p class="text-muted mb-2 text-uppercase fw-semibold">Valor</p>
+                                                <h5 class="fs-15 mb-0" ><span id="total-paid" th:text="(${fatura.estado}=='Pago' ? (${fatura.valor}-${fatura.valor}) : ${fatura.valor})">0.00</span> Mts</h5>
                                             </div>
                                             <!--end col-->
                                         </div>
@@ -114,7 +113,7 @@
                                         <div class="col-lg-3 col-sm-6">
                                             <label for="validationCustom04">Metodo de pagamento</label>
                                             <div class="input-light">
-                                                <select class="form-control bg-light border-1" data-choices data-choices-search-false id="validationCustom04" required>
+                                                <select name="metodoPagamento" class="form-control bg-light border-1" data-choices data-choices-search-false id="validationCustom04" required>
                                                     <option value="">Selecione ... </option>
                                                     <option value="Paid">MPESA</option>
                                                     <option value="Unpaid">EMOLA</option>
@@ -130,7 +129,7 @@
                                         <div class="col-lg-3 col-sm-6">
                                             <div>
                                                 <label for="validationCustom03">No de conta ou celular</label>
-                                                <input type="text" class="form-control bg-light border-1" id="validationCustom03" data-provider="flatpickr" data-time="true" placeholder="###-###-###" required>
+                                                <input name="cardNumber" type="text" class="form-control bg-light border-1" id="validationCustom03" data-provider="flatpickr" data-time="true" placeholder="###-###-###" required>
                                                 <div class="invalid-feedback">
                                                     Por favor preencha o campo
                                                 </div>
@@ -143,6 +142,7 @@
                                                 <input type="text" th:value="|${fatura.valor} + Mts|" class="form-control bg-light border-0" id="totalamountInput" placeholder="70000.00" readonly />
                                             </div>
                                         </div>
+                                        <input type="hidden" th:value="${fatura.getCodigo()}" name="id.candidato.codigo"/>
                                         <!--end col-->
                                         <div class="col-lg-3 col-sm-6">
                                             <div>
