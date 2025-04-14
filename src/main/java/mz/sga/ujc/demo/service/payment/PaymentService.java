@@ -35,15 +35,14 @@ public class PaymentService {
 
     public void save(Pagamento pagamento){
         try {
-            if (!(getPaymentByCandidate(pagamento.getId().getCandidato()) == null)) {
-                CandidatoCurso candidatoCurso = candidatoCursoRepository.getCandidatoCursoByIdCandidato(pagamento.getId().getCandidato());
-                pagamento.setCurso(candidatoCurso.getId().getCurso());
-                pagamento.setEstado("Pago");
+            if (!(getPaymentByCandidate(pagamento.getCandidato()) == null)) {
+                CandidatoCurso candidatoCurso = candidatoCursoRepository.getCandidatoCursoByIdCandidatoId(pagamento.getCandidato().getCodigo());
+                pagamento.setCurso(candidatoCurso.getCurso());
                 pagamentoRepository.save(pagamento);
-                LOGGER.info("Payment updated successfully with: {} by: " + pagamento.getMetodoPagamento(), pagamento.getId().getCandidato().getCodigo() + " -->" + pagamento.getId().getCandidato().getNome());
+                LOGGER.info("Payment updated successfully with: {} by: " + pagamento.getMetodoPagamento(), pagamento.getCandidato().getCodigo() + " -->" + pagamento.getCandidato().getNome());
             }else {
                 pagamentoRepository.save(pagamento);
-                LOGGER.info("invoice created successfully by: " + pagamento.getId().getCandidato().getCodigo() + " -->" + pagamento.getId().getCandidato().getNome());
+                LOGGER.info("invoice created successfully by: " + pagamento.getCandidato().getCodigo() + " -->" + pagamento.getCandidato().getNome());
             }
             }catch (Exception e){
             LOGGER.warn("Failed to save payment detail");
@@ -52,6 +51,6 @@ public class PaymentService {
     }
 
     public Pagamento getPaymentByCandidate(Candidato Candidato){
-        return pagamentoRepository.getPagamentoById_Candidato(Candidato);
+        return pagamentoRepository.getPagamentoById_CandidatoId(Candidato.getCodigo());
     }
 }

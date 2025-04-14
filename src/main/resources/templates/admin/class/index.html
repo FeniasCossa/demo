@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-layout="vertical" data-layout-style="detached" data-sidebar="dark" data-topbar="dark"
       data-sidebar-size="lg" data-sidebar-image="none"
-      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:tr="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <title>UJC | RA - Admin & Dashboard </title>
@@ -49,12 +49,11 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                        <h4 class="mb-sm-0">Listjs</h4>
-
+                                        <h4 class="mb-sm-0">Instittuições e Salas</h4>
                                         <div class="page-title-right">
                                             <ol class="breadcrumb m-0">
-                                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                                <li class="breadcrumb-item active">Listjs</li>
+                                                <li class="breadcrumb-item"><a href="javascript: void(0);">Instituições e Salas</a></li>
+                                                <li class="breadcrumb-item active">Lista</li>
                                             </ol>
                                         </div>
 
@@ -62,21 +61,22 @@
                                 </div>
                             </div>
                             <!-- end page title -->
-
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title mb-0">Add, Edit & Remove</h4>
+                                            <h4 class="card-title mb-0">Salas</h4>
                                         </div><!-- end card header -->
 
                                         <div class="card-body">
                                             <div id="customerList">
                                                 <div class="row g-4 mb-3">
-                                                    <div class="col-sm-auto">
-                                                        <div>
-                                                            <button type="button" class="btn btn-info add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add</button>
-                                                            <button class="btn btn-soft-danger" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                                                    <div class="col-sm-auto d-flex">
+                                                        <div style="right: 2px;">
+                                                            <button class="btn btn-soft-danger" onClick="deleteMultiple()">Limpar os itens selecionados <i class="ri-delete-bin-2-line"></i></button>
+                                                        </div>
+                                                        <div style="margin-right: 10px; margin-left: 20px;">
+                                                            <a class="btn btn-soft-primary" href="/admin/registerClass/">Limpar os itens selecionados <i class="ri-add-box-line"></i></a>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm">
@@ -88,7 +88,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <div class="table-responsive table-card mt-3 mb-1">
                                                     <table class="table align-middle table-nowrap" id="customerTable">
                                                         <thead class="table-light">
@@ -98,58 +97,55 @@
                                                                     <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                                                 </div>
                                                             </th>
-                                                            <th class="sort" data-sort="customer_name">Candidao</th>
-                                                            <th class="sort" data-sort="email">Email</th>
-                                                            <th class="sort" data-sort="phone">Telefone</th>
-                                                            <th class="sort" data-sort="date">Data de inscrição</th>
-                                                            <th class="sort" data-sort="status">Estado</th>
-                                                            <th class="sort" data-sort="action">Ação</th>
+                                                            <th class="sort" data-sort="customer_name">id</th>
+                                                            <th class="sort" data-sort="customer_name">Instituicao</th>
+                                                            <th class="sort" data-sort="customer_name">Provincia</th>
+                                                            <th class="sort" data-sort="customer_name">Endereço</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody class="list form-check-all">
-                                                        <tr>
+
+                                                        <tr th:each="instituicao : ${instituicoes.content}">
                                                             <th scope="row">
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
+                                                                    <input class="form-check-input" type="checkbox" name="chk_child"  th:value="${instituicao.id}">
                                                                 </div>
                                                             </th>
-                                                            <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
-                                                            <td class="customer_name">Mary Cousar</td>
-                                                            <td class="email">marycousar@velzon.com</td>
-                                                            <td class="phone">580-464-4694</td>
-                                                            <td class="date">06 Apr, 2021</td>
-                                                            <td class="status"><span class="badge badge-soft-success text-uppercase">Active</span></td>
-                                                            <td>
-                                                                <div class="d-flex gap-2">
-                                                                    <div class="edit">
-                                                                        <button class="btn btn-sm btn-info edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
-                                                                    </div>
-                                                                    <div class="remove">
-                                                                        <button class="btn btn-sm btn-primary remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Remove</button>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
+                                                            <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary" th:text="${instituicao.id}">#VZ2101</a></td>
+                                                            <td class="customer_name" th:text="${instituicao.id}">Mary Cousar</td>
+                                                            <td class="customer_name" th:text="${instituicao.nome}">Mary Cousar</td>
+                                                            <td class="remove" th:text="${instituicao.provincia.nome}">Mary Cousar</td>
+                                                            <td class="remove" th:text="${instituicao.endereco}">Mary Cousar</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
                                                     <div class="noresult" style="display: none">
                                                         <div class="text-center">
                                                             <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
-                                                            <h5 class="mt-2">Sorry! No Result Found</h5>
-                                                            <p class="text-muted mb-0">We've searched more than 150+ Orders We did not find any orders for you search.</p>
+                                                            <h5 class="mt-2">Desculpa! Não encontramos nenhum resultado</h5>
+                                                            <p class="text-muted mb-0">Pesquisamos varios pedidos. Não encontramos nenhum pedido para a sua pesquisa.</p>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="d-flex justify-content-end">
                                                     <div class="pagination-wrap hstack gap-2">
-                                                        <a class="page-item pagination-prev disabled" href="#">
-                                                            Previous
+                                                        <span th:if="${paginaAtual > 0}">
+                                                        <a class="page-item pagination-prev" th:href="@{/admin/class(page=${paginaAtual - 1})}">
+                                                            Anterior
                                                         </a>
-                                                        <ul class="pagination listjs-pagination mb-0"></ul>
-                                                        <a class="page-item pagination-next" href="#">
-                                                            Next
+                                                        </span>
+                                                        <ul ></ul>
+                                                        <span style="font-size: 25px; box-shadow: #1e2125;" th:each="i : ${#numbers.sequence(0, totalPaginas - 1)}">
+                                                            <a  th:href="@{/admin/class(page=${i})}"
+                                                               th:text="${i + 1}"
+                                                               th:classappend="${i == paginaAtual} ? 'active'"> </a>
+                                                        </span>
+                                                        <span th:if="${paginaAtual < totalPaginas - 1}">
+                                                        <a class="page-item pagination-next" th:href="@{/admin/class(page=${paginaAtual + 1})}">
+                                                            Proximo
                                                         </a>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,7 +193,7 @@
 <script src="/assets/libs/list.pagination.js/list.pagination.min.js"></script>
 
 <!-- listjs init -->
-<script src="/assets/js/pages/listjs.init.js"></script>
+<script src="/js/listjs.init.js"></script>
 
 <!-- Sweet Alerts js -->
 <script src="/assets/libs/sweetalert2/sweetalert2.min.js"></script>

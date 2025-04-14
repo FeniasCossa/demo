@@ -21,8 +21,14 @@ public class Pagamento {
     private PagamentoPK id;
 
     @ManyToOne
+    @MapsId("cursoId")
     @JoinColumn(name = "curso_id")
     private Curso curso;
+
+    @OneToOne
+    @MapsId("candidatoId") // o nome deve bater com o campo da EmbeddedId
+    @JoinColumn(name = "candidato_id")
+    private Candidato candidato;
 
     @Column(updatable = false)
     private double valor;

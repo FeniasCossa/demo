@@ -1,6 +1,7 @@
 package mz.sga.ujc.demo.controller;
 
-import mz.sga.ujc.demo.model.candidatura.Pagamento;
+import mz.sga.ujc.demo.model.candidatura.CandidatoCurso;
+import mz.sga.ujc.demo.repository.candidatura.CandidatoCursoRepository;
 import mz.sga.ujc.demo.service.candidatuta.CandidateService;
 import mz.sga.ujc.demo.service.candidatuta.SubjectCourseService;
 import mz.sga.ujc.demo.service.payment.PaymentService;
@@ -25,25 +26,27 @@ public class ReportController {
     private final PaymentService paymentService;
     private final SubjectCourseService subjectCourseService;
     private final CandidateService candidateService;
+    private final CandidatoCursoRepository candidatoCursoRepo;
     @Autowired
-    public ReportController(PdfService pdfService, PaymentService paymentService, SubjectCourseService subjectCourseService, CandidateService candidateService) {
+    public ReportController(PdfService pdfService, PaymentService paymentService, SubjectCourseService subjectCourseService, CandidateService candidateService, CandidatoCursoRepository candidatoCursoRepo) {
         this.pdfService = pdfService;
         this.paymentService = paymentService;
         this.subjectCourseService = subjectCourseService;
         this.candidateService = candidateService;
+        this.candidatoCursoRepo = candidatoCursoRepo;
         logger.info("Initializing ReportController ...");
     }
 
     @PostMapping("/factura/pdf/{codigo}")
     public void gerarFactura(@PathVariable("codigo") Integer id, HttpServletResponse response) throws IOException {
-        Pagamento payment = paymentService.getPaymentByCandidate(candidateService.getCandidateByCode(id));
-        this.pdfService.generateInvoice(subjectCourseService.getFactura(payment),response);
+        CandidatoCurso candidatoCurso= candidatoCursoRepo.getCandidatoCursoByIdCandidatoId(id);
+        this.pdfService.generateInvoice(subjectCourseService.getFactura(candidatoCurso),response);
     }
 
     @PostMapping("/payment/pdf/{codigo}")
     public void gerarComprovativoPagamento(@PathVariable("codigo") Integer id, HttpServletResponse response) throws IOException {
-        Pagamento payment = paymentService.getPaymentByCandidate(candidateService.getCandidateByCode(id));
-        this.pdfService.generatePaymentDetail(subjectCourseService.getFactura(payment),response);
+        CandidatoCurso candidatoCurso= candidatoCursoRepo.getCandidatoCursoByIdCandidatoId(id);
+        this.pdfService.generatePaymentDetail(subjectCourseService.getFactura(candidatoCurso),response);
     }
 }
 

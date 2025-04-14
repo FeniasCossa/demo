@@ -5,11 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mz.sga.ujc.demo.model.auth.Conta;
+import mz.sga.ujc.demo.model.exame.Juri;
 import mz.sga.ujc.demo.model.parametrization.Distrito;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -50,6 +52,10 @@ public class Candidato{
     )
     private Distrito distrito;
 
+
+    @OneToOne(mappedBy = "candidato")
+    private Pagamento pagamento;
+
     @Column(name = "nome_pai")
     private String nomePai;
 
@@ -69,6 +75,12 @@ public class Candidato{
     @OneToOne
     @JoinColumn(name = "conta_id")
     private Conta conta;
+
+    @ManyToOne
+    @JoinColumn(name = "juri_id") // Essa será a FK em Candidato
+    private Juri juri;
+
+
 
     @Override
     public String toString() {

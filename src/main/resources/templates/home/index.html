@@ -85,8 +85,8 @@
 											<!--end col-->
 											<div class="col-lg-3 col-6">
 												<p class="text-muted mb-2 text-uppercase fw-semibold">Data de registo</p>
-												<h5 class="fs-15 mb-0"><span id="invoice-date" th:text="${#temporals.format(candidatoCurso.getData_registo, 'dd-MM-yyyy')}" >23 Nov, 2021</span>
-													<small class="text-muted" id="invoice-time" th:text="${#temporals.format(candidatoCurso.getData_registo, 'HH:mm')}">02:36PM</small></h5>
+												<h5 class="fs-15 mb-0"><span id="invoice-date" th:text="${#dates.format(candidatoCurso.data_registo, 'dd-MM-yyyy')}" >23 Nov, 2021</span>
+													<small class="text-muted" id="invoice-time" th:text="${#dates.format(candidatoCurso.data_registo, 'HH:mm')}">02:36PM</small></h5>
 											</div>
 											<!--end col-->
 											<div class="col-lg-3 col-6">
@@ -137,7 +137,7 @@
 												<tr>
 													<th scope="row">01</th>
 													<td class="text-start">
-														<span th:text="${candidatoCurso.getId().curso.nome}">Engenharia de Tecnologias e Sistemas de Informacao</span>
+														<span th:text="${candidatoCurso.curso.nome}">Engenharia de Tecnologias e Sistemas de Informacao</span>
 														<p class="text-muted mb-0" th:text="${candidatoCurso.periodo}">Laboral</p>
 													</td>
 													<td th:text="${fatura.getDisciplinas()}">Matematica, Portugues</td>
@@ -150,7 +150,7 @@
 											<table class="table table-borderless table-nowrap align-middle mb-0 ms-auto" style="width:250px">
 												<tbody>
 												<tr class="border-top border-top-dashed fs-15">
-													<th scope="row">Total Pago</th>
+													<th scope="row">Total</th>
 													<th class="text-end" th:text="${fatura.valor}">600.00 MTs</th>
 												</tr>
 												</tbody>

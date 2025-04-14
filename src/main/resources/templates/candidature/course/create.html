@@ -61,11 +61,11 @@
                                             <div class="text-center pt-3 pb-4 mb-1">
                                                 <h5>Escolha do curso e local da realização do exame</h5>
                                             </div>
-                                            <input type="hidden" th:value="${codigo}"  name="id.candidato">
+                                            <input type="hidden" th:value="${codigo}"  name="id.candidatoId">
                                             <div class="row">
                                                 <div class="col-md-5 position-relative">
                                                     <label for="validationTooltip04" class="form-label">Escolha o curso</label>
-                                                    <select th:field="*{id.curso}" class="form-select" id="validationTooltip04"  required
+                                                    <select name="id.cursoId" class="form-select" id="validationTooltip04"  required
                                                             onchange="atualizouSelectCurso(this.value)">
                                                         <option value="">Selecione...</option>
                                                         <option th:each="c : ${cursos}" th:value="${c.id}" th:text="${c.nome}"></option>
@@ -73,7 +73,7 @@
                                                 </div>
                                                 <div class="col-md-3 position-relative">
                                                     <label for="validationTooltip04" class="form-label">Escolha do Turno</label>
-                                                    <select th:field="*{periodo}" class="form-select" id="validationTooltip04" required>
+                                                    <select th:field="*{periodo}" name="periodo" class="form-select" id="validationTooltip04" required>
                                                         <option value="">Selecione...</option>
                                                         <option value="Laboral">Laboral</option>
                                                         <option value="Pos-laboral">Pos-laboral</option>
@@ -84,7 +84,7 @@
                                                     <div class="input-group has-validation">
                                                         <span class="input-group-text" id="validationTooltipUsernamePrepend">
                                                             <i class="mdi mdi-map-marker-radius-outline"></i></span>
-                                                        <select th:field="*{id.provincia}" name="provincia" class="form-select"
+                                                        <select name="id.provinciaId" class="form-select"
                                                             id="validationTooltip04" required>
                                                             <option value="">Selecione...</option>
                                                             <option th:each="p : ${provincias}" th:value="${p.id}"
@@ -161,7 +161,7 @@
         <!-- form wizard init -->
         <script th:src="@{/assets/js/pages/form-wizard.init.js}"></script>
         <script th:src="@{/assets/js/pages/form-validation.init.js}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
 
         <!-- App js -->
         <script th:src="@{/assets/js/app.js}"></script>

@@ -62,6 +62,9 @@ public class CandidateService {
         candidato.setConta(accountService.getAccountByCode(code));
         repository.save(candidato);
     }
+    public List<Candidato> listCandidato(){
+        return candidatoRepository.findAll();
+    }
 
     public List<Provenance> listProvinceAndQuantity() {
         return candidatoRepository.ListNameAndQuantity();
@@ -90,9 +93,10 @@ public class CandidateService {
 
 
     public ModelAndView getData(Integer id, ModelAndView mv){
-        Factura factura = subjectCourseService.getFactura(paymentService.getPaymentByCandidate(getCandidateByCode(id)));
-        CandidatoCurso candidatoCurso=candidatoCursoRepository.getCandidatoCursoByIdCandidato(getCandidateByCode(id));
-        if(factura ==null || candidatoCurso==null){
+        CandidatoCurso candidatoCurso=candidatoCursoRepository.getCandidatoCursoByIdCandidatoId(id);
+        Factura factura = subjectCourseService.getFactura(candidatoCurso);
+
+        if(factura == null){
             return new ModelAndView("redirect:/course/regist?id="+id);
         }
         mv.addObject("candidatoCurso", candidatoCurso);

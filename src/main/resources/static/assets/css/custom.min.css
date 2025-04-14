@@ -36,3 +36,12 @@
 .bar:hover {
     background-color: #6256C7;
 }
+
+.pag{display:-webkit-box;display:-ms-flexbox;display:flex;padding-left:0;list-style:none} */
+.listjs-pag{margin-bottom:0;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;gap:8px}
+
+.active {
+    font-weight: bold;
+    color: blue;
+
+}

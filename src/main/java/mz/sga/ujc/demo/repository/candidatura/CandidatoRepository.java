@@ -26,4 +26,5 @@ public interface CandidatoRepository extends JpaRepository<Candidato, Integer> {
     @Query("select Date(c.createdAt) as date, (count(c.codigo)*100.0 / (select count(cc.codigo) from Candidato cc)) as totalPorDia from Candidato c group by Date(c.createdAt)")
     List<Tuple> countAllByCreatedAt();
 
+    List<Candidato> findByJuriIsNull();
 }

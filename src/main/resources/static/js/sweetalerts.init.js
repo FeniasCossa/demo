@@ -44,7 +44,7 @@ addEventListener("click",function(){
             '           <button class="btn btn-primary" type="submit">Efetuar o pagamento</button>\n' +
             '       </div>\n' +
             '   </div>\n' +
-            ' <input type="hidden" value="'+c+'" name="id.candidato.codigo"/> '+
+            ' <input type="hidden" value="'+c+'" name="candidato.codigo"/> '+
             '   <!--end col-->\n' +
             '</form>',
         imageUrl:"/img/ujc.png",

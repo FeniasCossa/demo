@@ -2,6 +2,7 @@ package mz.sga.ujc.demo.service.candidatuta;
 
 import mz.sga.ujc.demo.model.candidatura.*;
 import mz.sga.ujc.demo.repository.candidatura.DisciplinaCursoRepository;
+import mz.sga.ujc.demo.service.payment.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +12,16 @@ import java.util.*;
 public class SubjectCourseService {
 
     private final DisciplinaCursoRepository disciplinaCursoRepository;
-    List<TaxaTotalCurso> listTaxaByCursos;
+    private final List<TaxaTotalCurso> listTaxaByCursos;
     List<DisciplinaCurso> listaDisciplinaCurso;
 
+    private final PaymentService paymentService;
+
+
     @Autowired
-    public SubjectCourseService(DisciplinaCursoRepository disciplinaCursoRepository) {
+    public SubjectCourseService(DisciplinaCursoRepository disciplinaCursoRepository, PaymentService paymentService) {
         this.disciplinaCursoRepository = disciplinaCursoRepository;
+        this.paymentService = paymentService;
         this.listTaxaByCursos = new ArrayList<>();
     }
 
@@ -57,28 +62,36 @@ public class SubjectCourseService {
         return valor;
     }
 
-    public Factura getFactura(Pagamento pagamento) {
+    public Factura getFactura(CandidatoCurso candidatoCurso) {
         StringBuilder discipline = new StringBuilder();
         Factura factura = new Factura();
-        if(pagamento == null){
-            return factura;
-        }
-        factura.setNome(pagamento.getId().getCandidato().getNome()+ " "+ pagamento.getId().getCandidato().getApelido());
-        factura.setCodigo(pagamento.getId().getCandidato().getCodigo());
-        factura.setSexo(pagamento.getId().getCandidato().getGenero());
-        factura.setCurso(pagamento.getCurso().getNome());
+        Pagamento pagamento = paymentService.getPaymentByCandidate(candidatoCurso.getCandidato());
+        factura.setNome(candidatoCurso.getCandidato().getNome()+ " "+ candidatoCurso.getCandidato().getApelido());
+        factura.setCodigo(candidatoCurso.getCandidato().getCodigo());
+        factura.setSexo(candidatoCurso.getCandidato().getGenero());
+        factura.setCurso(candidatoCurso.getCurso().getNome());
         factura.setUniversidade("UJC");
         factura.setBank("BCI");
-        factura.setMetodo(pagamento.getMetodoPagamento());
-        factura.setDataPagamento(pagamento.getData_pagamento());
-        factura.setValor(pagamento.getValor());
+        if(pagamento==null){
+            factura.setMetodo("");
+            factura.setDataPagamento(null);
+            factura.setValor(getValor(candidatoCurso.getCurso()));
+            factura.setEstado("Não Pago");
+            factura.setData_registo((Date) candidatoCurso.getData_registo());
+        }else{
+            factura.setMetodo(pagamento.getMetodoPagamento());
+            factura.setDataPagamento(pagamento.getData_pagamento());
+            factura.setValor(pagamento.getValor());
+            factura.setEstado(pagamento.getEstado());
+            factura.setData_registo(candidatoCurso.getData_registo());
+        }
+
         factura.setEntidade("1000918249");
         factura.setReferencia("897167665455566");
-        factura.setEstado(pagamento.getEstado());
-        factura.setData_registo(pagamento.getCreatedAt());
+
         listaDisciplinaCurso = disciplinaCursoRepository.findAll();
         for (DisciplinaCurso disciplinaCurso : listaDisciplinaCurso)
-            if (Objects.equals(disciplinaCurso.getId().getCurso().getId(), pagamento.getCurso().getId()))
+            if (Objects.equals(disciplinaCurso.getId().getCurso().getId(), candidatoCurso.getCurso().getId()))
                 discipline.append(disciplinaCurso.getId().getDisciplina().getNome()).append(", ");
         discipline.deleteCharAt(discipline.lastIndexOf(", "));
          factura.setDisciplinas(discipline.toString());

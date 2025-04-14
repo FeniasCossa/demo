@@ -1,7 +1,7 @@
 package mz.sga.ujc.demo.model.exame;
 
 import lombok.*;
-import mz.sga.ujc.demo.model.restricoes.SalaPk;
+import mz.sga.ujc.demo.model.AbstractEntity;
 
 import javax.persistence.*;
 
@@ -11,12 +11,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "sala")
-public class Sala {
-
-    @EmbeddedId
-    private SalaPk id;
+public class Sala extends AbstractEntity<Long> {
 
     @Column(name = "nome")
     private String nome;
+
+    @Column(name = "capacidade")
+    private int capacidade; // Capacidade máxima de candidatos
+
+    @ManyToOne
+    @JoinColumn(name = "instituicao_id")
+    private Instituicao instituicao;
+
 }
