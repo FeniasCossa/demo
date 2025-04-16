@@ -71,9 +71,12 @@
                                         <div class="card-body">
                                             <div id="customerList">
                                                 <div class="row g-4 mb-3">
-                                                    <div class="col-sm-auto">
+                                                    <div class="col-sm-auto d-flex">
                                                         <div>
                                                            <button class="btn btn-soft-danger" onClick="deleteMultiple()">Limpar os itens selecionados <i class="ri-delete-bin-2-line"></i></button>
+                                                        </div>
+                                                        <div style="margin-right: 10px; margin-left: 20px;">
+                                                            <button class="btn btn-soft-primary" id="btnGerar" onclick="gerarJuris()"><i class="mdi-size-m bx bx-sync"></i> Gerar Juris</button>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm">
@@ -116,7 +119,7 @@
                                                                 <td class="email" th:text="${candidate.conta.email}">marycousar@velzon.com</td>
                                                                 <td class="phone" th:text="${candidate.conta.telefone}">580-464-4694</td>
                                                                 <td class="date" th:text="${candidate.getCreatedAt()}">06 Apr, 2021</td>
-                                                                <td class="status"><span class="badge badge-soft-success text-uppercase" th:text="${candidate.pagamento == null or candidate.pagamento.isEmpty()} ? 'Não Activo' : 'Activo'">Active</span></td>
+                                                                <td class="status"><span class="badge badge-soft-success text-uppercase" th:text="${candidate.pagamento == null} ? 'Não Activo' : 'Activo'">Active</span></td>
                                                             </tr>
                                                             </tbody>
                                                         </table>
@@ -166,6 +169,25 @@
 </div>
 <!-- END layout-wrapper -->
 
+
+<!-- Modal de progresso -->
+<div id="modalProgresso" style="display: none; position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 9999;
+    justify-content: center; align-items: center;">
+
+    <div style="background: white; padding: 30px; border-radius: 10px; width: 400px; text-align: center;">
+        <h3>Distribuindo Júris...</h3>
+        <img src="/img/loading.gif" style="text-align: center;"
+             width="200" height="200"
+             alt="A carregar...">
+        <p id="mensagem">Iniciando distribuição...</p>
+        <progress id="barra" value="0" max="100" style="width: 100%; height: 20px;"></progress>
+
+        <!-- Botão de fechar, visível só no fim -->
+        <button id="btnFecharModal" onclick="fecharModal()" style="display: none; margin-top: 20px;" class="btn btn-danger">Fechar</button>
+    </div>
+</div>
+
 <!--start back-to-top-->
 <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
     <i class="ri-arrow-up-line"></i>
@@ -192,5 +214,57 @@
 
 <!-- App js -->
 <script src="/assets/js/app.js"></script>>
+
+<script>
+    function gerarJuris() {
+        const btn = document.getElementById("btnGerar");
+        const modal = document.getElementById("modalProgresso");
+
+        btn.disabled = true;
+        modal.style.display = "flex";
+
+        fetch("/admin/gerarJuris", {
+            method: "POST"
+        }).then(() => {
+            // Espera 1 segundo para garantir que o progresso foi iniciado
+            setTimeout(atualizarProgresso, 1000);
+        });
+    }
+
+    function atualizarProgresso() {
+        fetch("/api/progresso")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Distribuição ainda não começou.");
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById("mensagem").innerText = data.mensagem;
+                const percent = (data.processados / data.total) * 100;
+                document.getElementById("barra").value = percent;
+                if (!data.concluido) {
+                    setTimeout(atualizarProgresso, 1000);
+                } else {
+                    document.getElementById("mensagem").innerText = "Distribuição concluída!";
+                    document.getElementById("btnFecharModal").style.display = "inline-block";
+                    document.getElementById("btnGerar").disabled = false;
+                }
+            })
+            .catch(error => {
+                console.log("Aguardando início da distribuição...");
+                document.getElementById("mensagem").innerText = "Distribuição concluída!";
+                document.getElementById("btnFecharModal").style.display = "inline-block";
+                document.getElementById("btnGerar").disabled = false;
+                setTimeout(atualizarProgresso, 1000);
+            });
+    }
+
+    function fecharModal() {
+        document.getElementById("modalProgresso").style.display = "none";
+        document.getElementById("btnGerar").disabled = false;
+    }
+</script>
+
 </body>
 </html>

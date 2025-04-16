@@ -3,7 +3,9 @@ package mz.sga.ujc.demo.controller.admin;
 import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.model.exame.Instituicao;
 import mz.sga.ujc.demo.repository.candidatura.InstituicaoRepository;
+import mz.sga.ujc.demo.repository.candidatura.PagamentoRepository;
 import mz.sga.ujc.demo.service.candidatuta.CandidateService;
+import mz.sga.ujc.demo.service.candidatuta.JuriService;
 import mz.sga.ujc.demo.service.paramentrization.ProvinceService;
 import mz.sga.ujc.demo.service.payment.PaymentService;
 import org.slf4j.Logger;
@@ -34,12 +36,16 @@ public class AdminController {
     private final PaymentService paymentService;
     private final InstituicaoRepository instituicaoRepo;
     private final ProvinceService provinceService;
+    private final JuriService juriService;
+    private final PagamentoRepository pagamentoRepository;
     @Autowired
-    public AdminController(CandidateService candidateService, PaymentService paymentService, InstituicaoRepository instituicaoRepo, ProvinceService provinceService) {
+    public AdminController(CandidateService candidateService, PaymentService paymentService, InstituicaoRepository instituicaoRepo, ProvinceService provinceService, JuriService juriService, PagamentoRepository pagamentoRepository) {
         this.candidateService = candidateService;
         this.paymentService = paymentService;
         this.instituicaoRepo = instituicaoRepo;
         this.provinceService = provinceService;
+        this.juriService = juriService;
+        this.pagamentoRepository = pagamentoRepository;
     }
 
     @RequestMapping(path = "/home/{codigo}", method = RequestMethod.GET)
@@ -64,7 +70,6 @@ public class AdminController {
 
     @RequestMapping(path = "/class", method = RequestMethod.GET)
     public String classAndSchool(Model model, @RequestParam(defaultValue = "0") int page) {
-
         Pageable pageable = PageRequest.of(page, 7, Sort.by("id").ascending());
         Page<Instituicao> institutes = instituicaoRepo.findAll(pageable);
         model.addAttribute("instituicoes",institutes);
@@ -88,6 +93,16 @@ public class AdminController {
         }
         instituicaoRepo.save(instituicao);
         return "redirect:/admin/class";
+    }
+
+    @RequestMapping(path = "/gerarJuris", method = RequestMethod.POST)
+    public ModelAndView gerarJuris(){
+        ModelAndView mv= new ModelAndView("admin/candidates/index");
+
+        LOGGER.info("Atribuindo os Juris em Segundo Plano");
+        Thread thread =new Thread(juriService);
+        thread.start();
+        return mv;
     }
 
 }

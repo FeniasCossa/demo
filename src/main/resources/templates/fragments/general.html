@@ -1,6 +1,6 @@
 <!DOCTYPE html>
  
-<html xmlns:th="http://www.thymeleaf.org"  xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns="http://www.w3.org/1999/xhtml" lang="pt pt">
     
 <header id="page-topbar" th:fragment="header">
     <div class="layout-width">
@@ -54,7 +54,7 @@
                  alt="logo light" height="50">
             <div class="mt-sm-5 mt-4">
                 <h6 class="text-muted text-uppercase fw-semibold">Endereco</h6>
-                <p class="text-muted mb-1" id="address-details" th:text="|Moçambique- ${provincia.nome}, ${distrito.nome}|">Maputo, Matola</p>
+                <p class="text-muted mb-1" id="address-details" th:text="|Moçambique- ${candidato.distrito.id.provincia.nome}, ${candidato.distrito.nome}|">Maputo, Matola</p>
             </div>
         </div>
         <div class="flex-shrink-0 mt-sm-0 mt-3">

@@ -1,10 +1,10 @@
 package mz.sga.ujc.demo.controller.candidate;
 
-import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.model.candidatura.CandidatoCurso;
 import mz.sga.ujc.demo.model.candidatura.Pagamento;
 import mz.sga.ujc.demo.model.restricoes.PagamentoPK;
 import mz.sga.ujc.demo.repository.candidatura.CandidatoCursoRepository;
+import mz.sga.ujc.demo.repository.candidatura.PagamentoRepository;
 import mz.sga.ujc.demo.service.Info.SmsSender;
 import mz.sga.ujc.demo.service.auth.AccountService;
 import mz.sga.ujc.demo.service.candidatuta.CandidateService;
@@ -31,53 +31,43 @@ public class PaymentController {
     private final CandidateService candidateService;
     private final PaymentService paymentService;
     private final CandidatoCursoRepository candidatoCursoRepo;
+    private final PagamentoRepository pagamentoRepo;
     private final SubjectCourseService subjectCourseService;
 
     private final AccountService accountService;
+
     @Autowired
-    public PaymentController(CandidateService candidateService, PaymentService paymentService, CandidatoCursoRepository candidatoCursoRepo, SubjectCourseService subjectCourseService, AccountService accountService) {
+    public PaymentController(CandidateService candidateService, PaymentService paymentService, CandidatoCursoRepository candidatoCursoRepo, PagamentoRepository pagamentoRepo, SubjectCourseService subjectCourseService, AccountService accountService) {
         this.candidateService = candidateService;
         this.paymentService = paymentService;
         this.candidatoCursoRepo = candidatoCursoRepo;
+        this.pagamentoRepo = pagamentoRepo;
         this.subjectCourseService = subjectCourseService;
         this.accountService = accountService;
         logger.info("Initializing PaymentController ...");
     }
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public ModelAndView payment(@RequestParam("redindn-00409-0000-Join") Integer id){
-        logger.info("getting payment details by "+id+" candidate number");
-        return candidateService.getData(id,new ModelAndView("candidate/payment"));
+    public ModelAndView payment(@RequestParam("redindn-00409-0000-Join") Integer id) {
+        logger.info("getting payment details by " + id + " candidate number");
+        return candidateService.getData(id, new ModelAndView("candidate/payment"));
     }
+
     @RequestMapping(path = "/save", method = RequestMethod.POST)
-    public ModelAndView payment(@Valid Pagamento pagamento, BindingResult result){
-       if(result.hasErrors()){
-           logger.info("failed to save payment detail ... by "+pagamento.getCandidato().getCodigo()+" name: "+pagamento.getCandidato().getNome());
-       }
-        logger.info("saving payment detail ... by "+pagamento.getCandidato().getCodigo()+" name: "+pagamento.getCandidato().getNome());
-        return getModelAndView(pagamento);
-    }
-
-    @RequestMapping(path = "/update", method = RequestMethod.POST)
-    public ModelAndView updatePayment(@Valid Pagamento pagamento, BindingResult result){
-        if(result.hasErrors()){
-            logger.info("failed to update payment detail ... by "+pagamento.getCandidato().getCodigo()+" name: "+pagamento.getCandidato().getNome());
+    public ModelAndView payment(@Valid Pagamento pagamento, BindingResult result) {
+        if (result.hasErrors()) {
+            System.out.println("Houve problemas");
         }
-        logger.info("updating payment detail ... by "+pagamento.getCandidato().getCodigo()+" name: "+pagamento.getCandidato().getNome());
-        pagamento.setEstado("Pago");
-        return getModelAndView(pagamento);
-    }
 
-    private ModelAndView getModelAndView(@Valid Pagamento pagamento) {
-        Candidato candidato = candidateService.getCandidateByCode(pagamento.getCandidato().getCodigo());
-        CandidatoCurso candidatoCurso= candidatoCursoRepo.getCandidatoCursoByIdCandidatoId(candidato.getCodigo());
-        pagamento.setId(new PagamentoPK(candidato.getCodigo(),candidatoCurso.getCurso().getId()));
+        CandidatoCurso candidatoCurso = candidatoCursoRepo.getCandidatoCursoByIdCandidatoId(pagamento.getId().getCandidatoId());
+        pagamento.setId(new PagamentoPK(candidatoCurso.getCandidato().getCodigo(), candidatoCurso.getCurso().getId()));
         pagamento.setValor(subjectCourseService.getValor(candidatoCurso.getCurso()));
-        pagamento.setCandidato(candidato);
+        pagamento.setCandidato(candidatoCurso.getCandidato());
         pagamento.setEstado("Pago");
-        paymentService.save(pagamento);
-        logger.info("sending sms to candidate ... "+ pagamento.getCandidato().getCodigo());
-        SmsSender sms= new SmsSender(Long.parseLong(accountService.getAccountByCode(pagamento.getCandidato().getCodigo()).getTelefone()),SUCCESSFULLYPAYMENT);
+        pagamento.setCurso(candidatoCurso.getCurso());
+        pagamentoRepo.save(pagamento);
+        logger.info("sending sms to candidate ... " + pagamento.getCandidato().getCodigo());
+        SmsSender sms = new SmsSender(Long.parseLong(accountService.getAccountByCode(pagamento.getCandidato().getCodigo()).getTelefone()), SUCCESSFULLYPAYMENT);
         Thread thread = new Thread(sms);
         thread.start();
         return payment(pagamento.getCandidato().getCodigo());

@@ -83,7 +83,7 @@ public class SubjectCourseService {
             factura.setDataPagamento(pagamento.getData_pagamento());
             factura.setValor(pagamento.getValor());
             factura.setEstado(pagamento.getEstado());
-            factura.setData_registo(candidatoCurso.getData_registo());
+            factura.setDataPagamento(pagamento.getData_pagamento());
         }
 
         factura.setEntidade("1000918249");

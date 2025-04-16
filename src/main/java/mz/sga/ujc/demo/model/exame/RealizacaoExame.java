@@ -5,12 +5,10 @@ import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.model.restricoes.RealizacaoExamePk;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -25,15 +23,18 @@ public class RealizacaoExame {
     private RealizacaoExamePk id;
 
     @ManyToOne
-    @MapsId("candidato")  // Mapeia a chave candidata no EmbeddedId
+    @MapsId("candidatoId")  // Mapeia a chave candidata no EmbeddedId
+    @JoinColumn(name = "candidato_id")
     private Candidato candidato;
 
     @ManyToOne
-    @MapsId("instituicao")
+    @MapsId("instituicaoId")
+    @JoinColumn(name = "instituicao_id")
     private Instituicao instituicao;
 
     @ManyToOne
-    @MapsId("exame")
+    @MapsId("exameId")
+    @JoinColumn(name = "exame_id")
     private Exame exame;
 
     @ManyToOne
@@ -44,12 +45,12 @@ public class RealizacaoExame {
     @JoinColumn(name = "sala_id")
     private Sala sala;
 
-    @DateTimeFormat(iso=ISO.DATE)
-    @Column(name = "data_realizacao", columnDefinition = "DATE")
-    private Date data;
 
-    @DateTimeFormat(iso=ISO.DATE)
-    @Column(name = "hora_inicio", columnDefinition = "DATE")
+    @Column(name = "data_realizacao", columnDefinition = "datetime")
+    private LocalDateTime data;
+
+
+    @Column(name = "hora_inicio", columnDefinition = "datetime")
     private LocalDateTime dataHoraInicio;
 
     @CreationTimestamp

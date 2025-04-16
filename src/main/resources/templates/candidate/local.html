@@ -75,6 +75,7 @@
                                     <div th:replace="fragments/general :: dadosCandidato"></div>
                                     <!--end card-header-->
                                 </div>
+                                <div th:if="${realizacaoExame!=null}">
                                 <div class="col-lg-11 t-5 m-3 l-4">
                                     <nav>
                                         <ul class="nav nav-tabs nav-tabs-custom nav-success" id="nav-tab" role="tablist">
@@ -90,35 +91,40 @@
                                                     <tbody>
                                                     <tr>
                                                         <th scope="row" style="width: 200px;">Local:</th>
-                                                        <td>Campos da UEM</td>
+                                                        <td th:text="${examesUnicos.instituicao.nome}">Campos da UEM</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Sala:</th>
-                                                        <td>Departamento da Filosofia, sala 13</td>
+                                                        <td th:text="${examesUnicos.sala.nome}">Departamento da Filosofia, sala 13</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Data:</th>
-                                                        <td> 01-05-2024 - 10:30</td>
+                                                        <td th:text="|${#temporals.format(examesUnicos.data, 'dd-MM-yyyy')}  as  ${#temporals.format(examesUnicos.dataHoraInicio, 'HH:mm')}|"></td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Endereço:</th>
-                                                        <td>Cidade de Maputo - Coop</td>
+                                                        <td th:text="${examesUnicos.instituicao.endereco}">Cidade de Maputo - Coop</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Curso:</th>
-                                                        <td>Engenharia de tecnologias e Sistemas de informação</td>
+                                                        <td th:text="${candidatoCurso.curso.nome}">Engenharia de tecnologias e Sistemas de informação</td>
                                                     </tr>
                                                     <tr>
-                                                        <th scope="row">Disciplinas:</th>
-                                                        <td>
-                                                            <span>Matematica</span><br>
-                                                            <span>Portugues</span>
+                                                        <th scope="col">Disciplinas:</th>
+                                                        <td class="d-flex flex-column" th:each="real : ${realizacaoExame}">
+                                                            <span th:text="${real.exame.disciplina.nome}" ></span>
                                                         </td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div th:if="${realizacaoExame==null}">
+                                    <div class="col-lg-11 t-5 m-3 l-4" style="text-align: center">
+                                    <h3 th:text="${mensagem}"></h3>
                                     </div>
                                 </div>
                                 <!--Leson Class -->

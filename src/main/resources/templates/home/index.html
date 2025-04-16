@@ -1,28 +1,30 @@
 <!doctype html>
-<html lang="pt" data-layout="vertical" data-layout-style="detached" data-sidebar="light" data-topbar="light" data-sidebar-size="lg" data-sidebar-image="none"
-	  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html data-layout="vertical" data-layout-style="detached" data-sidebar="light" data-sidebar-image="none"
+      data-sidebar-size="lg"
+      data-topbar="light" lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <!-- Mirrored from themesbrand.com/velzon/html/interactive/apps-invoices-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jun 2022 11:28:17 GMT -->
 <head>
 
-	<meta charset="utf-8" />
-	<title>Invoice Details | UJC</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-	<meta content="Themesbrand" name="Fenias Cossa" />
-	<!-- App favicon -->
-	<link rel="shortcut icon" href="/img/ujc.png">
+    <meta charset="utf-8"/>
+    <title>Home | UJC</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
+    <meta content="Themesbrand" name="Fenias Cossa"/>
+    <!-- App favicon -->
+    <link href="/img/ujc.png" rel="shortcut icon">
 
-	<!-- Layout config Js -->
-	<script src="/assets/js/layout.js"></script>
-	<!-- Bootstrap Css -->
-	<link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<!-- Icons Css -->
-	<link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-	<!-- App Css-->
-	<link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
-	<!-- custom Css-->
-	<link href="/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- Layout config Js -->
+    <script src="/assets/js/layout.js"></script>
+    <!-- Bootstrap Css -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!-- Icons Css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css"/>
+    <!-- App Css-->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css"/>
+    <!-- custom Css-->
+    <link href="/assets/css/custom.min.css" rel="stylesheet" type="text/css"/>
 
 
 </head>
@@ -32,185 +34,212 @@
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-	<!-- top bar-->
-	<div th:replace="home/fragment/topbar.html :: topbar"></div>
-	<!-- menu  -->
-	<div th:replace="home/fragment/menu.html :: menu"></div>
+    <!-- top bar-->
+    <div th:replace="home/fragment/topbar.html :: topbar"></div>
+    <!-- menu  -->
+    <div th:replace="home/fragment/menu.html :: menu"></div>
 
-	<!-- Left Sidebar End -->
-	<!-- Vertical Overlay-->
-	<div class="vertical-overlay"></div>
+    <!-- Left Sidebar End -->
+    <!-- Vertical Overlay-->
+    <div class="vertical-overlay"></div>
 
-	<!-- ============================================================== -->
-	<!-- Start right Content here -->
-	<!-- ============================================================== -->
-	<div class="main-content">
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
 
-		<div class="page-content">
-			<div class="container-fluid">
+        <div class="page-content">
+            <div class="container-fluid">
 
-				<!-- start page title -->
-				<div class="row">
-					<div class="col-12">
-						<div class="page-title-box d-sm-flex align-items-center justify-content-between">
-							<h4 class="mb-sm-0">Detalhes da conta</h4>
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0">Detalhes da conta</h4>
 
-							<div class="page-title-right">
-								<ol class="breadcrumb m-0">
-									<li class="breadcrumb-item"><a href="javascript: void(0);">Candidato</a></li>
-									<li class="breadcrumb-item active">Detalhes da conta</li>
-								</ol>
-							</div>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Candidato</a></li>
+                                    <li class="breadcrumb-item active">Detalhes da conta</li>
+                                </ol>
+                            </div>
 
-						</div>
-					</div>
-				</div>
-				<!-- end page title -->
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
 
-				<div class="row justify-content-center">
-					<div class="col-xxl-9">
-						<div class="card" id="demo">
-							<div class="row">
-								<div class="col-lg-12">
-									<div th:replace="fragments/general :: dadosCandidato"></div>
-									<!--end card-header-->
-								</div><!--end col-->
-								<div class="col-lg-12">
-									<div class="card-body p-4">
-										<div class="row g-3">
-											<div class="col-lg-3 col-6">
-												<p class="text-muted mb-2 text-uppercase fw-semibold">Factura No</p>
-												<h5 class="fs-15 mb-0">UJC - <span id="invoice-no">25000355</span></h5>
-											</div>
-											<!--end col-->
-											<div class="col-lg-3 col-6">
-												<p class="text-muted mb-2 text-uppercase fw-semibold">Data de registo</p>
-												<h5 class="fs-15 mb-0"><span id="invoice-date" th:text="${#dates.format(candidatoCurso.data_registo, 'dd-MM-yyyy')}" >23 Nov, 2021</span>
-													<small class="text-muted" id="invoice-time" th:text="${#dates.format(candidatoCurso.data_registo, 'HH:mm')}">02:36PM</small></h5>
-											</div>
-											<!--end col-->
-											<div class="col-lg-3 col-6">
-												<p class="text-muted mb-2 text-uppercase fw-semibold">Estado de pagamento</p>
-												<span class="badge badge-soft-success fs-11" id="payment-status" th:text="${fatura.estado}">Não Pa go</span>
-											</div>
-											<!--end col-->
-											<div class="col-lg-3 col-6">
-												<p class="text-muted mb-2 text-uppercase fw-semibold">Total Pago</p>
-												<h5 class="fs-15 mb-0" th:if="${fatura.estado}!='Nao Pago'"><span id="total-amount" th:text="${fatura.valor}">0.00</span> Mts</h5>
-												<h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'"><span id="total-amount">0.00</span> Mts</h5>
-											</div>
-											<!--end col-->
-										</div>
-										<!--end row-->
-									</div>
-									<!--end card-body-->
-								</div><!--end col-->
-								<div class="col-lg-12">
-									<div class="card-body p-4 border-top border-top-dashed">
-										<div class="row g-3">
-											<div class="col-6">
-												<h6 class="text-muted text-uppercase fw-semibold mb-3">Endereço da UJC</h6>
-												<p class="fw-medium mb-2" id="billing-name">Campos de Zimpeto</p>
-												<p class="text-muted mb-1" id="billing-address-line-1">Rua de Grande-Maputo</p>
-												<p class="text-muted mb-1"><span>Telefone: +</span><span id="billing-phone-no">(258) 86 456-7890</span></p>
-											</div>
-											<!--end col-->
-											<!--end col-->
-										</div>
-										<!--end row-->
-									</div>
-									<!--end card-body-->
-								</div><!--end col-->
-								<div class="col-lg-12">
-									<div class="card-body p-4">
-										<div class="table-responsive">
-											<table class="table table-borderless text-center table-nowrap align-middle mb-0">
-												<thead>
-												<tr class="table-active">
-													<th scope="col" style="width: 50px;">#</th>
-													<th scope="col">Curso</th>
-													<th scope="col">Disciplina</th>
-													<th scope="col" class="text-end">Valor</th>
-												</tr>
-												</thead>
-												<tbody id="products-list">
-												<tr>
-													<th scope="row">01</th>
-													<td class="text-start">
-														<span th:text="${candidatoCurso.curso.nome}">Engenharia de Tecnologias e Sistemas de Informacao</span>
-														<p class="text-muted mb-0" th:text="${candidatoCurso.periodo}">Laboral</p>
-													</td>
-													<td th:text="${fatura.getDisciplinas()}">Matematica, Portugues</td>
-													<td class="text-end" th:text="${fatura.valor}">1000.00 MTs</td>
-												</tr>
-												</tbody>
-											</table><!--end table-->
-										</div>
-										<div class="border-top border-top-dashed mt-2">
-											<table class="table table-borderless table-nowrap align-middle mb-0 ms-auto" style="width:250px">
-												<tbody>
-												<tr class="border-top border-top-dashed fs-15">
-													<th scope="row">Total</th>
-													<th class="text-end" th:text="${fatura.valor}">600.00 MTs</th>
-												</tr>
-												</tbody>
-											</table>
-											<!--end table-->
-										</div>
-										<div class="mt-3">
-											<h6 class="text-muted text-uppercase fw-semibold mb-3">Detalhes de pagamento:</h6>
-											<p class="text-muted mb-1">Metodo de Pagamento: Via <span class="fw-medium" id="payment-method" th:text="${fatura.metodo}">Deposito</span></p>
-											<p class="text-muted mb-1">Proprietario: <span class="fw-medium" id="card-holder-name"  th:text="|${candidato.nome} ${candidato.apelido}|">Fenias Cossa</span></p>
-											<p class="text-muted">Total Amount: <span class="fw-medium" id=""> </span><span id="card-total-amount" th:text="${fatura.valor}">600.00</span></p>
-										</div>
-										<h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'">
-										<div class="mt-4">
-											<div class="alert alert-info">
-												<p class="mb-0"><span class="fw-semibold">NOTES:</span>
-													<span id="note">All accounts are to be paid within 7 days from receipt of invoice. To be paid by cheque or
+                <div class="row justify-content-center">
+                    <div class="col-xxl-9">
+                        <div class="card" id="demo">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div th:replace="fragments/general :: dadosCandidato"></div>
+                                    <!--end card-header-->
+                                </div><!--end col-->
+                                <div class="col-lg-12">
+                                    <div class="card-body p-4">
+                                        <div class="row g-3">
+                                            <div class="col-lg-3 col-6">
+                                                <p class="text-muted mb-2 text-uppercase fw-semibold">Factura No</p>
+                                                <h5 class="fs-15 mb-0">UJC - <span id="invoice-no">25000355</span></h5>
+                                            </div>
+                                            <!--end col-->
+                                            <div class="col-lg-3 col-6">
+                                                <p class="text-muted mb-2 text-uppercase fw-semibold">Data de
+                                                    registo</p>
+                                                <h5 class="fs-15 mb-0"><span id="invoice-date"
+                                                                             th:text="${#dates.format(candidatoCurso.data_registo, 'dd-MM-yyyy')}">23 Nov, 2021</span>
+                                                    <small class="text-muted" id="invoice-time"
+                                                           th:text="${#dates.format(candidatoCurso.data_registo, 'HH:mm')}">02:36PM</small>
+                                                </h5>
+                                            </div>
+                                            <!--end col-->
+                                            <div class="col-lg-3 col-6">
+                                                <p class="text-muted mb-2 text-uppercase fw-semibold">Estado de
+                                                    pagamento</p>
+                                                <span class="badge badge-soft-success fs-11" id="payment-status"
+                                                      th:text="${fatura.estado}">Não Pa go</span>
+                                            </div>
+                                            <!--end col-->
+                                            <div class="col-lg-3 col-6">
+                                                <p class="text-muted mb-2 text-uppercase fw-semibold">Total Pago</p>
+                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}!='Nao Pago'"><span
+                                                        id="total-amount" th:text="${fatura.valor}">0.00</span> Mts</h5>
+                                                <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'"><span
+                                                        id="total-amount">0.00</span> Mts</h5>
+                                            </div>
+                                            <!--end col-->
+                                        </div>
+                                        <!--end row-->
+                                    </div>
+                                    <!--end card-body-->
+                                </div><!--end col-->
+                                <div class="col-lg-12">
+                                    <div class="card-body p-4 border-top border-top-dashed">
+                                        <div class="row g-3">
+                                            <div class="col-6">
+                                                <h6 class="text-muted text-uppercase fw-semibold mb-3">Endereço da
+                                                    UJC</h6>
+                                                <p class="fw-medium mb-2" id="billing-name">Campos de Zimpeto</p>
+                                                <p class="text-muted mb-1" id="billing-address-line-1">Rua de
+                                                    Grande-Maputo</p>
+                                                <p class="text-muted mb-1"><span>Telefone: +</span><span
+                                                        id="billing-phone-no">(258) 86 456-7890</span></p>
+                                            </div>
+                                            <!--end col-->
+                                            <!--end col-->
+                                        </div>
+                                        <!--end row-->
+                                    </div>
+                                    <!--end card-body-->
+                                </div><!--end col-->
+                                <div class="col-lg-12">
+                                    <div class="card-body p-4">
+                                        <div class="table-responsive">
+                                            <table class="table table-borderless text-center table-nowrap align-middle mb-0">
+                                                <thead>
+                                                <tr class="table-active">
+                                                    <th scope="col" style="width: 50px;">#</th>
+                                                    <th scope="col">Curso</th>
+                                                    <th scope="col">Disciplina</th>
+                                                    <th class="text-end" scope="col">Valor</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="products-list">
+                                                <tr>
+                                                    <th scope="row">01</th>
+                                                    <td class="text-start">
+                                                        <span th:text="${candidatoCurso.curso.nome}">Engenharia de Tecnologias e Sistemas de Informacao</span>
+                                                        <p class="text-muted mb-0" th:text="${candidatoCurso.periodo}">
+                                                            Laboral</p>
+                                                    </td>
+                                                    <td th:text="${fatura.getDisciplinas()}">Matematica, Portugues</td>
+                                                    <td class="text-end" th:text="${fatura.valor}">1000.00 MTs</td>
+                                                </tr>
+                                                </tbody>
+                                            </table><!--end table-->
+                                        </div>
+                                        <div class="border-top border-top-dashed mt-2">
+                                            <table class="table table-borderless table-nowrap align-middle mb-0 ms-auto"
+                                                   style="width:250px">
+                                                <tbody>
+                                                <tr class="border-top border-top-dashed fs-15">
+                                                    <th scope="row">Total</th>
+                                                    <th class="text-end" th:text="${fatura.valor}">600.00 MTs</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <!--end table-->
+                                        </div>
+                                        <div class="mt-3">
+                                            <h6 class="text-muted text-uppercase fw-semibold mb-3">Detalhes de
+                                                pagamento:</h6>
+                                            <p class="text-muted mb-1">Metodo de Pagamento: Via <span class="fw-medium"
+                                                                                                      id="payment-method"
+                                                                                                      th:text="${fatura.metodo}">Deposito</span>
+                                            </p>
+                                            <p class="text-muted mb-1">Proprietario: <span class="fw-medium"
+                                                                                           id="card-holder-name"
+                                                                                           th:text="|${candidato.nome} ${candidato.apelido}|">Fenias Cossa</span>
+                                            </p>
+                                            <p class="text-muted">Total Amount: <span class="fw-medium"
+                                                                                      id=""> </span><span
+                                                    id="card-total-amount" th:text="${fatura.valor}">600.00</span></p>
+                                        </div>
+                                        <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'">
+                                            <div class="mt-4">
+                                                <div class="alert alert-info">
+                                                    <p class="mb-0"><span class="fw-semibold">NOTES:</span>
+                                                        <span id="note">All accounts are to be paid within 7 days from receipt of invoice. To be paid by cheque or
                                                             credit card or direct payment online. If account is not paid within 7
                                                             days the credits details supplied as confirmation of work undertaken
                                                             will be charged the agreed quoted fee noted above.
                                                         </span>
-												</p>
-											</div>
-										</div>
-										</h5>
-										<div class="hstack gap-2 justify-content-end d-print-none mt-4">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </h5>
+                                        <div class="hstack gap-2 justify-content-end d-print-none mt-4">
 
-											<a href="javascript:window.print()" class="btn btn-info"><i class="ri-printer-line align-bottom me-1"></i> Imprimir</a>
-											<h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'">
-											<button href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i>Baixar Factura</button>
-											</h5>
-											<h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Pago'">
-												<button href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i>Baixar Comprovativo do pagamento</button>
-											</h5>
-										</div>
-									</div>
-									<!--end card-body-->
-								</div><!--end col-->
-							</div><!--end row-->
-						</div>
-						<!--end card-->
-					</div>
-					<!--end col-->
-				</div>
-				<!--end row-->
+                                            <a class="btn btn-info" href="javascript:window.print()"><i
+                                                    class="ri-printer-line align-bottom me-1"></i> Imprimir</a>
+                                            <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Nao Pago'">
+                                                <button class="btn btn-primary" href="javascript:void(0);"><i
+                                                        class="ri-download-2-line align-bottom me-1"></i>Baixar Factura
+                                                </button>
+                                            </h5>
+                                            <h5 class="fs-15 mb-0" th:if="${fatura.estado}=='Pago'">
+                                                <button class="btn btn-primary" href="javascript:void(0);"><i
+                                                        class="ri-download-2-line align-bottom me-1"></i>Baixar
+                                                    Comprovativo do pagamento
+                                                </button>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <!--end card-body-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <!--end col-->
+                </div>
+                <!--end row-->
 
-			</div><!-- container-fluid -->
-		</div><!-- End Page-content -->
+            </div><!-- container-fluid -->
+        </div><!-- End Page-content -->
 
-		<footer class="footer" th:replace="fragments/general.html :: footer"></footer>
-	</div><!-- end main content-->
+        <footer class="footer" th:replace="fragments/general.html :: footer"></footer>
+    </div><!-- end main content-->
 
 </div>
 <!-- END layout-wrapper -->
 
 
-
 <!--start back-to-top-->
-<button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
-	<i class="ri-arrow-up-line"></i>
+<button class="btn btn-danger btn-icon" id="back-to-top" onclick="topFunction()">
+    <i class="ri-arrow-up-line"></i>
 </button>
 <!--end back-to-top-->
 

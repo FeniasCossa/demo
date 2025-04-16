@@ -19,7 +19,7 @@ import java.time.LocalTime;
 @ToString
 @Entity
 @Table(name = "exame")
-public class Exame extends AbstractEntity<Integer>{
+public class  Exame extends AbstractEntity<Integer>{
 
     @ManyToOne
     @JoinColumn(name = "disciplina_id")

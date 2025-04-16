@@ -42,6 +42,7 @@ public class CandidateService {
     private final CandidatoCursoRepository candidatoCursoRepository;
     private final PaymentService paymentService;
     private final SubjectCourseService subjectCourseService;
+
     @Autowired
     public CandidateService(CandidatoRepository repository, AccountService accountService, CandidatoRepository candidatoRepository, DocumentoRepository documentoRepository, ProvinciaRepository provinciaRepository, ContaRepository contaRepository, EscolaRepostitory escolaRepostitory, DistritoRepository distritoRepository, CandidatoCursoRepository candidatoCursoRepository, PaymentService paymentService, SubjectCourseService subjectCourseService) {
         this.repository = repository;
@@ -62,7 +63,8 @@ public class CandidateService {
         candidato.setConta(accountService.getAccountByCode(code));
         repository.save(candidato);
     }
-    public List<Candidato> listCandidato(){
+
+    public List<Candidato> listCandidato() {
         return candidatoRepository.findAll();
     }
 
@@ -70,7 +72,7 @@ public class CandidateService {
         return candidatoRepository.ListNameAndQuantity();
     }
 
-    public long CountAll(){
+    public long CountAll() {
         return candidatoRepository.count();
     }
 
@@ -78,7 +80,7 @@ public class CandidateService {
         return repository.getCandidatoByCodigo(codigo);
     }
 
-    public List<Provenance> CountAllByDay(){
+    public List<Provenance> CountAllByDay() {
         return mapTuplesToProvenance(repository.countAllByCreatedAt());
     }
 
@@ -92,20 +94,19 @@ public class CandidateService {
     }
 
 
-    public ModelAndView getData(Integer id, ModelAndView mv){
-        CandidatoCurso candidatoCurso=candidatoCursoRepository.getCandidatoCursoByIdCandidatoId(id);
-        Factura factura = subjectCourseService.getFactura(candidatoCurso);
-
-        if(factura == null){
-            return new ModelAndView("redirect:/course/regist?id="+id);
+    public ModelAndView getData(Integer id, ModelAndView mv) {
+        CandidatoCurso candidatoCurso = candidatoCursoRepository.getCandidatoCursoByIdCandidatoId(id);
+        if (candidatoCurso == null) {
+            return new ModelAndView("redirect:/course/regist?id=" + id);
         }
+        Factura factura = subjectCourseService.getFactura(candidatoCurso);
         mv.addObject("candidatoCurso", candidatoCurso);
-        mv.addObject("fatura",factura );
+        mv.addObject("fatura", factura);
         mv.addObject("userlogado", accountService.getAccountByCode(id));
-        return previewDate(id,mv);
+        return previewDate(id, mv);
     }
 
-    public  ModelAndView previewDate(Integer id, ModelAndView mv){
+    public ModelAndView previewDate(Integer id, ModelAndView mv) {
         Provincia provincia = provinciaRepository.getReferenceById(
                 candidatoRepository.getReferenceById(id).getDistrito().getId().getProvincia().getId());
         Distrito distrito = distritoRepository.getReferenceById(
@@ -116,14 +117,14 @@ public class CandidateService {
         Conta conta = contaRepository.getReferenceByCodigo(candidatoRepository.getReferenceById(id).getCodigo());
         Documento documento = documentoRepository.getDocumentoByCandidato(candidatoRepository.getReferenceById(id));
         Candidato candidato = candidatoRepository.getCandidatoByCodigo(id);
-        Escola escola=escolaRepostitory.getReferenceByCandidato(candidatoRepository.getReferenceById(id));
-        if(conta== null){
-            return  new ModelAndView("redirect:/account/create");
+        Escola escola = escolaRepostitory.getReferenceByCandidato(candidatoRepository.getReferenceById(id));
+        if (conta == null) {
+            return new ModelAndView("redirect:/account/create");
         }
-        if(candidato == null){
-            return  new ModelAndView("redirect:/candidato/register?id="+id);
+        if (candidato == null) {
+            return new ModelAndView("redirect:/candidato/register?id=" + id);
         }
-        if(documento==null || escola == null) {
+        if (documento == null || escola == null) {
             return new ModelAndView("redirect:/document?id=" + id);
         }
         mv.addObject("candidato", candidato);

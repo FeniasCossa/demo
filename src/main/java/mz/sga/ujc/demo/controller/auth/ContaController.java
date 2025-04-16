@@ -1,11 +1,14 @@
 package mz.sga.ujc.demo.controller.auth;
 
 import mz.sga.ujc.demo.model.auth.Conta;
+import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.repository.auth.ContaRepository;
+import mz.sga.ujc.demo.repository.candidatura.CandidatoRepository;
 import mz.sga.ujc.demo.service.auth.AccountService;
 import mz.sga.ujc.demo.service.Info.SmsSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,10 +28,13 @@ public class ContaController {
 
     private final AccountService accountService;
     private final ContaRepository repository;
+
+    private final CandidatoRepository candidatoRepository;
     @Autowired
-    public ContaController(AccountService accountService,ContaRepository repository) {
+    public ContaController(AccountService accountService, ContaRepository repository, CandidatoRepository candidatoRepository) {
         this.accountService = accountService;
         this.repository=repository;
+        this.candidatoRepository = candidatoRepository;
     }
 
     @RequestMapping(path = "/create", method = RequestMethod.GET)
@@ -83,4 +89,15 @@ public class ContaController {
     public ModelAndView recover(){
         return new ModelAndView("/account/recover");
     }
+
+    @RequestMapping(path = "profile/{codigo}", method = RequestMethod.GET)
+    public String profile(@PathVariable("codigo") Integer codigo, Model model){
+        Candidato  candidato= candidatoRepository.getReferenceById(codigo);
+        model.addAttribute("conta", candidato);
+        model.addAttribute("candidato", candidato);
+        model.addAttribute("userlogado", repository.getReferenceByCodigo(codigo));
+
+        return "/account/profile";
+    }
+
 }

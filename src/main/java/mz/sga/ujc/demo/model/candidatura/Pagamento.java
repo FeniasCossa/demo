@@ -47,7 +47,11 @@ public class Pagamento {
     private Date createdAt;
 
     @UpdateTimestamp
-    @Column(name="data_pagamento", columnDefinition = "datetime", insertable = false)
+    @Column(name="updated_at", columnDefinition = "datetime")
+    private Date updated_at;
+
+    @CreationTimestamp
+    @Column(name="data_pagamento", columnDefinition = "datetime")
     private Date data_pagamento;
 
 

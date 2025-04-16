@@ -135,7 +135,7 @@
                                                         <form th:action="|@{/jasper-report/factura/pdf/}${fatura.getCodigo()}|" method="post" class="mx-2">
                                                             <button type="submit" href="javascript:void(0);" class="btn btn-info"><i class="ri-download-2-line align-bottom me-1"></i> Baixar factura</button>
                                                         </form>
-                                                        <button th:value="${pagamento.valor}" type="button" class="btn btn-primary getValue" id="custom-sa-community">
+                                                        <button th:value="${fatura.valor}" type="button" class="btn btn-primary getValue" id="custom-sa-community">
                                                             <i class="ri-bank-card-line align-bottom me-1"></i>Efectuar pagamento
                                                         </button>
                                                     </h5>
