@@ -31,7 +31,7 @@ public class Conta {
     private String senha;
 
     @Column(unique = true)
-    @Size(min = 11, max = 70)
+    @Size(min = 11, max = 70, message="O email deve ter entre {min}  e {max} caracteres")
     @Email(message = "insira um email valido")
     private String email;
 

@@ -61,9 +61,10 @@
                                     <div class="live-preview">
                                         <form class="row g-3 needs-validation" th:object="${conta}" th:action="@{/account/save}" method="post" novalidate>
                                             <div class="text-center pt-3 pb-4 mb-1">
-                                                <h5 th:if="${conta.email!=null}" class="alert alert-danger" th:text="${enailExist}"></h5>
-                                                <h5 th:if="${conta.email!=null}" class="alert alert-danger" th:text="${nuitExist}"></h5>
-                                                <h5 class="card-title mb-0" th:if="${conta.email}!=null"> <a th:href="@{/account/login/}">Clica aqui para fazer login</a></h5>
+                                                <h5 th:if="${emailExist!=null}" class="alert alert-danger" th:each="error : ${emailExist}">
+                                                    <span th:text="${emailExist}"></span>
+                                                </h5>
+                                                <h5 class="card-title mb-0" th:if="${emailExist}!=null"> <a th:href="@{/account/login/}">Clica aqui para fazer login</a></h5>
                                             </div>
                                             <div class="col-md-6 position-relative">
                                                 <label for="validationTooltip01" class="form-label">Nuit</label>
@@ -86,6 +87,7 @@
                                                             class="ri-mail-unread-line"></i></span>
                                                     <input type="email" class="form-control" th:field="*{email}" required>
                                                 </div>
+                                                <div th:if="${#fields.hasErrors('email')}" class="alert alert-danger" th:errors="*{email}"></div>
                                             </div>
                                             <div class="col-md-6 position-relative">
                                                 <label for="validationTooltipUsername" class="form-label">Senha</label>

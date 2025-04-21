@@ -3,9 +3,12 @@ package mz.sga.ujc.demo.controller.auth;
 import mz.sga.ujc.demo.model.auth.Conta;
 import mz.sga.ujc.demo.model.candidatura.Candidato;
 import mz.sga.ujc.demo.repository.auth.ContaRepository;
+import mz.sga.ujc.demo.repository.candidatura.CandidatoCursoRepository;
 import mz.sga.ujc.demo.repository.candidatura.CandidatoRepository;
-import mz.sga.ujc.demo.service.auth.AccountService;
 import mz.sga.ujc.demo.service.Info.SmsSender;
+import mz.sga.ujc.demo.service.auth.AccountService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,39 +22,56 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
-import static mz.sga.ujc.demo.utils.Utilities.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static mz.sga.ujc.demo.utils.Utilities.EMAILEXISTS;
+import static mz.sga.ujc.demo.utils.Utilities.NUITEXISTS;
 
 @Controller
 @RequestMapping("/account")
 public class ContaController {
 
+    private static final Logger logger= LoggerFactory.getLogger(ContaController.class);
 
     private final AccountService accountService;
     private final ContaRepository repository;
-
+    private final CandidatoCursoRepository candidatoCursoRepo;
     private final CandidatoRepository candidatoRepository;
     @Autowired
-    public ContaController(AccountService accountService, ContaRepository repository, CandidatoRepository candidatoRepository) {
+    public ContaController(AccountService accountService, ContaRepository repository, CandidatoCursoRepository candidatoCursoRepo, CandidatoRepository candidatoRepository) {
         this.accountService = accountService;
         this.repository=repository;
+        this.candidatoCursoRepo = candidatoCursoRepo;
         this.candidatoRepository = candidatoRepository;
     }
 
     @RequestMapping(path = "/create", method = RequestMethod.GET)
     public String createAccount(ModelMap model) {
+        logger.info("Renderizando a view Criar conta");
         model.addAttribute("conta", new Conta());
         return "account/create";
     }
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)
     public ModelAndView save(@Valid Conta conta, BindingResult result) {
+        ModelAndView mv= new ModelAndView();
         if (result.hasErrors()) {
-            return new ModelAndView("account/create");
+            logger.warn("Erros encontrados nos atributos, Devolvendo a pagina para a coreção --- ");
+            mv.setViewName("account/create");
+            mv.addObject("conta",conta);
+            return mv;
         }else {
+            List<String> error = new ArrayList<>();
             if (repository.existsByEmail(conta.getEmail())) {
-                return new ModelAndView("account/create","enailExist", EMAILEXISTS);
-            } else if(repository.existsByNuit(conta.getNuit())){
-                return new ModelAndView("account/create","enailExist", NUITEXISTS);
+                logger.warn("Email encotrado, não pode criar conta");
+                error.add(EMAILEXISTS);
+            } else if (repository.existsByNuit(conta.getNuit())) {
+                logger.warn("Nuit encotrado, não pode criar conta");
+                error.add(NUITEXISTS);
+            }
+            if (!error.isEmpty()){
+                return new ModelAndView("account/create", "emailExist", error);
             }else{
                 accountService.save(conta);
                 SmsSender smsSender = new SmsSender(Long.parseLong(conta.getTelefone()),"Teste pensa: "+conta.getCodigo());
@@ -96,6 +116,7 @@ public class ContaController {
         model.addAttribute("conta", candidato);
         model.addAttribute("candidato", candidato);
         model.addAttribute("userlogado", repository.getReferenceByCodigo(codigo));
+        model.addAttribute("user", candidatoCursoRepo.getCandidatoCursoByIdCandidatoId(codigo));
 
         return "/account/profile";
     }

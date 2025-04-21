@@ -23,6 +23,8 @@ public class Utilities {
     public static final String EMAILEXISTS = "Este email ja foi cadastrado, por favor faça login, verifique na caixa do email o codigo de candidatura.";
     public static final String NUITEXISTS = "Este Nuit ja foi cadastrado, por favor faça login, verifique na caixa do email o codigo de candidatura.";
     public static final String SUCCESSFULLYPAYMENT = "Pre-registo pago com sucesso, agora aguarde alguns dias, iremos informar o local brevemente";
+    public static final String MESSAGE_JURI_NOTFOUND="Ainda não foi alocado a nenhum juris, Aguarde Por favor";
+    public static final String MESSAGE_RESULT_NOTFOUND = "Ainda não ha Resultados disponiveis, Aguarde Por favor";
     public static final String IMG = "classpath:jasper/img/ujc.png";
 
     public byte[] loadImage(String imgPath) throws IOException {
